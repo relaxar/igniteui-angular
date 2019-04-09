@@ -13,7 +13,7 @@ import { DateRangeDescriptor, DateRangeType } from '../core/dates/dateRange';
 import { configureTestSuite } from '../test-utils/configure-suite';
 import { IgxDayItemComponent } from './days-view/day-item.component';
 
-describe('IgxCalendar', () => {
+fdescribe('IgxCalendar', () => {
     configureTestSuite();
     beforeEach(() => {
         TestBed.configureTestingModule({
@@ -1951,6 +1951,30 @@ describe('IgxCalendar', () => {
             date = calendar.daysView.dates.find(d => getDate(d).getTime() === new Date(2017, 5, 1).getTime());
             expect(date.nativeElement).toBe(document.activeElement);
         });
+    });
+
+    it('Should increment/decrement months continuously on mousedown.', async () => {
+        const fixture = TestBed.createComponent(IgxCalendarSampleComponent);
+        fixture.detectChanges();
+
+        const dom = fixture.debugElement;
+        const calendar = fixture.componentInstance.calendar;
+        const prev = dom.queryAll(By.css('.igx-calendar-picker__prev'))[0].nativeElement;
+        const next = dom.queryAll(By.css('.igx-calendar-picker__next'))[0].nativeElement;
+
+        expect(calendar.viewDate.getMonth()).toEqual(5);
+
+        UIInteractions.simulateMouseEvent('mousedown', prev, 0, 0);
+        await wait(800);
+        UIInteractions.simulateMouseEvent('mouseup', prev, 0, 0);
+        fixture.detectChanges();
+        expect(calendar.viewDate.getMonth()).toEqual(3);
+
+        UIInteractions.simulateMouseEvent('mousedown', next, 0, 0);
+        await wait(800);
+        UIInteractions.simulateMouseEvent('mouseup', next, 0, 0);
+        fixture.detectChanges();
+        expect(calendar.viewDate.getMonth()).toEqual(5);
     });
 });
 
