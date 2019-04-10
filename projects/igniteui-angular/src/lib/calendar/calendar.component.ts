@@ -363,6 +363,8 @@ export class IgxCalendarComponent extends IgxMonthPickerBase implements AfterVie
      * @hidden
      */
     public stopPrevNextMonthScroll(event) {
+        event.stopPropagation();
+
         this.daysView.stopMonthScroll$.next(true);
         this.daysView.stopMonthScroll$.complete();
 
@@ -568,8 +570,6 @@ export class IgxCalendarComponent extends IgxMonthPickerBase implements AfterVie
                 if (dayItem) { dayItem.nativeElement.focus(); }
             };
         }
-
-        // this.nextMonth(true);
     }
 
     /**
