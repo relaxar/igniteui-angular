@@ -4690,7 +4690,7 @@ export abstract class IgxGridBaseComponent extends DisplayDensityBase implements
             return;
         }
         this.rowEditPositioningStrategy.settings.target = targetRow.element.nativeElement;
-        this.toggleRowEditingOverlay(true);
+        // this.toggleRowEditingOverlay(true);
     }
 
     /**

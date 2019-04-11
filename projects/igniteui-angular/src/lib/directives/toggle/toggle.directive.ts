@@ -22,7 +22,8 @@ import {
     ScrollStrategy,
     OverlayRef,
     GlobalPositionStrategy as CDKGlobalPositionStrategy,
-    FlexibleConnectedPositionStrategy
+    FlexibleConnectedPositionStrategy,
+    OverlayContainer
 } from '@angular/cdk/overlay';
 import { IgxNavigationService, IToggleView } from '../../core/navigation';
 import { IgxOverlayService } from '../../services/overlay/overlay';
@@ -40,13 +41,21 @@ import {
 } from '../../services';
 import { filter, takeUntil } from 'rxjs/operators';
 import { Subscription, Subject, MonoTypeOperatorFunction, from } from 'rxjs';
-import { OverlayClosingEventArgs, VerticalAlignment, HorizontalAlignment, Point, OverlayAnimationEventArgs } from '../../services/overlay/utilities';
+import {
+    OverlayClosingEventArgs,
+    VerticalAlignment,
+    HorizontalAlignment,
+    Point,
+    OverlayAnimationEventArgs } from '../../services/overlay/utilities';
 import { CancelableEventArgs, CancelableBrowserEventArgs } from '../../core/utils';
 import { DeprecateProperty } from '../../core/deprecateDecorators';
 import { CdkPortal, TemplatePortal } from '@angular/cdk/portal';
 import { AnimationBuilder } from '@angular/animations';
 import { ScrollDispatchModule } from '@angular/cdk/scrolling';
-import { FlexibleConnectedPositionStrategyOrigin, ConnectedPosition } from '@angular/cdk/overlay/typings/position/flexible-connected-position-strategy';
+import {
+    FlexibleConnectedPositionStrategyOrigin,
+    ConnectedPosition } from '@angular/cdk/overlay/typings/position/flexible-connected-position-strategy';
+import { OutletOverlayContainer } from './outlet-overlay-container';
 
 @Directive({
     exportAs: 'toggle',
@@ -201,6 +210,7 @@ export class IgxToggleDirective implements IToggleView, OnInit, OnDestroy {
         private cdr?: ChangeDetectorRef,
         @Inject(IgxOverlayService) protected overlayService?: IgxOverlayService,
         public angularOverlay?: Overlay,
+        private overlayContainer?: OverlayContainer,
         private builder?: AnimationBuilder,
         private navigationService?: IgxNavigationService) {
     }
@@ -488,6 +498,10 @@ export class IgxToggleDirective implements IToggleView, OnInit, OnDestroy {
             overlayConfig.hasBackdrop = true;
         }
 
+        if (overlaySettings.outlet) {
+            (this.overlayContainer as OutletOverlayContainer).parentElement = overlaySettings.outlet.nativeElement;
+        }
+
         return overlayConfig;
     }
 
@@ -740,6 +754,10 @@ export class IgxOverlayOutletDirective {
 @NgModule({
     declarations: [IgxToggleDirective, IgxToggleActionDirective, IgxOverlayOutletDirective],
     exports: [IgxToggleDirective, IgxToggleActionDirective, IgxOverlayOutletDirective],
-    providers: [IgxNavigationService, Overlay]
+    providers: [
+        IgxNavigationService,
+        Overlay,
+        { provide: OverlayContainer, useFactory: () => new OutletOverlayContainer() }
+    ]
 })
 export class IgxToggleModule { }
