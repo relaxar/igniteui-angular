@@ -115,262 +115,262 @@ describe('IgxGrid - multi-row-layout', () => {
         expect(firstThreeCellsWidth).toEqual(lastCellWidth);
     });
 
-    // it('should initialize grid with 2 column groups', () => {
-    //     const fixture = TestBed.createComponent(ColumnLayoutTestComponent);
-    //     fixture.componentInstance.colGroups.push({
-    //         group: 'group2',
-    //         columns: [
-    //             { field: 'ContactName', rowStart: 2, colStart: 1, colEnd : 'span 3', rowEnd: 'span 2'},
-    //             { field: 'CompanyName', rowStart: 1, colStart: 1},
-    //             { field: 'PostalCode', rowStart: 1, colStart: 2},
-    //             { field: 'Fax', rowStart: 1, colStart: 3}
-    //         ]
-    //     });
-    //     fixture.detectChanges();
-    //     const grid = fixture.componentInstance.grid;
-    //     const gridFirstRow = grid.rowList.first;
-    //     const firstRowCells = gridFirstRow.cells.toArray();
-    //     const headerCells = grid.headerGroups.first.children.toArray();
+    it('should initialize grid with 2 column groups', () => {
+        const fixture = TestBed.createComponent(ColumnLayoutTestComponent);
+        fixture.componentInstance.colGroups.push({
+            group: 'group2',
+            columns: [
+                { field: 'ContactName', rowStart: 2, colStart: 1, colEnd : 'span 3', rowEnd: 'span 2'},
+                { field: 'CompanyName', rowStart: 1, colStart: 1},
+                { field: 'PostalCode', rowStart: 1, colStart: 2},
+                { field: 'Fax', rowStart: 1, colStart: 3}
+            ]
+        });
+        fixture.detectChanges();
+        const grid = fixture.componentInstance.grid;
+        const gridFirstRow = grid.rowList.first;
+        const firstRowCells = gridFirstRow.cells.toArray();
+        const headerCells = grid.headerGroups.first.children.toArray();
 
-    //      // headers are aligned to cells
-    //      verifyHeadersAreAligned(headerCells, firstRowCells);
+         // headers are aligned to cells
+         verifyHeadersAreAligned(headerCells, firstRowCells);
 
-    //      verifyDOMMatchesSettings(gridFirstRow, fixture.componentInstance.colGroups);
-    // });
+         verifyDOMMatchesSettings(gridFirstRow, fixture.componentInstance.colGroups);
+    });
 
-    // it('should not throw error when layout is incomplete and should render valid mrl block styles', () => {
-    //     const fixture = TestBed.createComponent(ColumnLayoutTestComponent);
-    //     // creating an incomplete layout
-    //     fixture.componentInstance.colGroups = [{
-    //         group: 'group1',
-    //         columns: [
-    //             { field: 'ContactName', rowStart: 2, colStart: 1, colEnd : 'span 3', rowEnd: 'span 1'},
-    //             { field: 'CompanyName', rowStart: 1, colStart: 1},
-    //             { field: 'PostalCode', rowStart: 1, colStart: 2},
-    //             // { field: 'Fax', rowStart: 1, colStart: 3},
-    //             { field: 'Country', rowStart: 3, colStart: 1},
-    //             // { field: 'Region', rowStart: 3, colStart: 2},
-    //             { field: 'Phone', rowStart: 3, colStart: 3}
-    //         ]
-    //     }];
-    //     fixture.componentInstance.grid.width = '617px';
-    //     fixture.detectChanges();
-    //     const grid = fixture.componentInstance.grid;
-    //     const gridFirstRow = grid.rowList.first;
-    //     const firstRowCells = gridFirstRow.cells.toArray();
-    //     const headerCells = grid.headerGroups.first.children.toArray();
-    //     // headers are aligned to cells
-    //     verifyHeadersAreAligned(headerCells, firstRowCells);
+    it('should not throw error when layout is incomplete and should render valid mrl block styles', () => {
+        const fixture = TestBed.createComponent(ColumnLayoutTestComponent);
+        // creating an incomplete layout
+        fixture.componentInstance.colGroups = [{
+            group: 'group1',
+            columns: [
+                { field: 'ContactName', rowStart: 2, colStart: 1, colEnd : 'span 3', rowEnd: 'span 1'},
+                { field: 'CompanyName', rowStart: 1, colStart: 1},
+                { field: 'PostalCode', rowStart: 1, colStart: 2},
+                // { field: 'Fax', rowStart: 1, colStart: 3},
+                { field: 'Country', rowStart: 3, colStart: 1},
+                // { field: 'Region', rowStart: 3, colStart: 2},
+                { field: 'Phone', rowStart: 3, colStart: 3}
+            ]
+        }];
+        fixture.componentInstance.grid.width = '617px';
+        fixture.detectChanges();
+        const grid = fixture.componentInstance.grid;
+        const gridFirstRow = grid.rowList.first;
+        const firstRowCells = gridFirstRow.cells.toArray();
+        const headerCells = grid.headerGroups.first.children.toArray();
+        // headers are aligned to cells
+        verifyHeadersAreAligned(headerCells, firstRowCells);
 
-    //     // verify block style
-    //     let groupHeaderBlocks = fixture.debugElement.query(By.css('.igx-grid__thead')).queryAll(By.css('.igx-grid__mrl_block'));
-    //     expect(groupHeaderBlocks[0].nativeElement.style.gridTemplateColumns).toBe('200px 200px 200px');
-    //     expect(groupHeaderBlocks[0].nativeElement.style.gridTemplateRows).toBe('1fr 1fr 1fr');
+        // verify block style
+        let groupHeaderBlocks = fixture.debugElement.query(By.css('.igx-grid__thead')).queryAll(By.css('.igx-grid__mrl_block'));
+        expect(groupHeaderBlocks[0].nativeElement.style.gridTemplateColumns).toBe('200px 200px 200px');
+        expect(groupHeaderBlocks[0].nativeElement.style.gridTemplateRows).toBe('1fr 1fr 1fr');
 
-    //     // creating an incomplete layout 2
-    //     fixture.componentInstance.colGroups = [{
-    //         group: 'group1',
-    //         columns: [
-    //             { field: 'ContactName', rowStart: 1, colStart: 1, colEnd : 'span 3', rowEnd: 'span 2'},
-    //             { field: 'CompanyName', rowStart: 3, colStart: 1},
-    //             // { field: 'PostalCode', rowStart: 1, colStart: 2},
-    //             { field: 'Fax', rowStart: 3, colStart: 3}
-    //         ]
-    //     }];
-    //     fixture.componentInstance.grid.width = '617px';
-    //     fixture.detectChanges();
+        // creating an incomplete layout 2
+        fixture.componentInstance.colGroups = [{
+            group: 'group1',
+            columns: [
+                { field: 'ContactName', rowStart: 1, colStart: 1, colEnd : 'span 3', rowEnd: 'span 2'},
+                { field: 'CompanyName', rowStart: 3, colStart: 1},
+                // { field: 'PostalCode', rowStart: 1, colStart: 2},
+                { field: 'Fax', rowStart: 3, colStart: 3}
+            ]
+        }];
+        fixture.componentInstance.grid.width = '617px';
+        fixture.detectChanges();
 
-    //     groupHeaderBlocks = fixture.debugElement.query(By.css('.igx-grid__thead')).queryAll(By.css('.igx-grid__mrl_block'));
-    //     expect(groupHeaderBlocks[0].nativeElement.style.gridTemplateColumns).toBe('200px 200px 200px');
-    //     expect(groupHeaderBlocks[0].nativeElement.style.gridTemplateRows).toBe('1fr 1fr 1fr');
+        groupHeaderBlocks = fixture.debugElement.query(By.css('.igx-grid__thead')).queryAll(By.css('.igx-grid__mrl_block'));
+        expect(groupHeaderBlocks[0].nativeElement.style.gridTemplateColumns).toBe('200px 200px 200px');
+        expect(groupHeaderBlocks[0].nativeElement.style.gridTemplateRows).toBe('1fr 1fr 1fr');
 
-    // });
-    // it('should initialize correctly when no column widths are set.', () => {
-    //     // test with single group
-    //     const fixture = TestBed.createComponent(ColumnLayoutTestComponent);
-    //     fixture.componentInstance.grid.width = '617px';
-    //     fixture.detectChanges();
-    //     const grid = fixture.componentInstance.grid;
-    //     // col span is 3 => columns should have grid width - scrollbarWitdh/3 width
-    //     // check columns
-    //     expect(grid.getCellByColumn(0, 'ID').nativeElement.offsetWidth).toBe(200);
-    //     expect(grid.getCellByColumn(0, 'CompanyName').nativeElement.offsetWidth).toBe(200);
-    //     expect(grid.getCellByColumn(0, 'ContactName').nativeElement.offsetWidth).toBe(200);
-    //     expect(grid.getCellByColumn(0, 'ContactTitle').nativeElement.offsetWidth).toBe(200 * 3);
+    });
+    it('should initialize correctly when no column widths are set.', () => {
+        // test with single group
+        const fixture = TestBed.createComponent(ColumnLayoutTestComponent);
+        fixture.componentInstance.grid.width = '617px';
+        fixture.detectChanges();
+        const grid = fixture.componentInstance.grid;
+        // col span is 3 => columns should have grid width - scrollbarWitdh/3 width
+        // check columns
+        expect(grid.getCellByColumn(0, 'ID').nativeElement.offsetWidth).toBe(200);
+        expect(grid.getCellByColumn(0, 'CompanyName').nativeElement.offsetWidth).toBe(200);
+        expect(grid.getCellByColumn(0, 'ContactName').nativeElement.offsetWidth).toBe(200);
+        expect(grid.getCellByColumn(0, 'ContactTitle').nativeElement.offsetWidth).toBe(200 * 3);
 
-    //     // check group blocks
-    //     let groupHeaderBlocks = fixture.debugElement.query(By.css('.igx-grid__thead')).queryAll(By.css('.igx-grid__mrl_block'));
-    //     expect(groupHeaderBlocks[0].nativeElement.clientWidth).toBe(200 * 3);
-    //     expect(groupHeaderBlocks[0].nativeElement.clientHeight).toBe(51 * 3);
+        // check group blocks
+        let groupHeaderBlocks = fixture.debugElement.query(By.css('.igx-grid__thead')).queryAll(By.css('.igx-grid__mrl_block'));
+        expect(groupHeaderBlocks[0].nativeElement.clientWidth).toBe(200 * 3);
+        expect(groupHeaderBlocks[0].nativeElement.clientHeight).toBe(51 * 3);
 
-    //     let firstRowCells = grid.rowList.first.cells.toArray();
-    //     let headerCells = grid.headerGroups.first.children.toArray();
-    //     verifyHeadersAreAligned(headerCells, firstRowCells);
+        let firstRowCells = grid.rowList.first.cells.toArray();
+        let headerCells = grid.headerGroups.first.children.toArray();
+        verifyHeadersAreAligned(headerCells, firstRowCells);
 
-    //     verifyDOMMatchesSettings(grid.rowList.first, fixture.componentInstance.colGroups);
+        verifyDOMMatchesSettings(grid.rowList.first, fixture.componentInstance.colGroups);
 
-    //     // test with 2 groups
-    //     fixture.componentInstance.colGroups.push({
-    //         group: 'group2',
-    //         columns: [
-    //             { field: 'Country', rowStart: 1, colStart: 1, colEnd : 'span 3', rowEnd: 'span 2'},
-    //             { field: 'Region', rowStart: 3, colStart: 1},
-    //             { field: 'PostalCode', rowStart: 3, colStart: 2},
-    //             { field: 'Fax', rowStart: 3, colStart: 3}
-    //         ]
-    //     });
-    //     fixture.componentInstance.grid.width = '917px';
-    //     fixture.detectChanges();
+        // test with 2 groups
+        fixture.componentInstance.colGroups.push({
+            group: 'group2',
+            columns: [
+                { field: 'Country', rowStart: 1, colStart: 1, colEnd : 'span 3', rowEnd: 'span 2'},
+                { field: 'Region', rowStart: 3, colStart: 1},
+                { field: 'PostalCode', rowStart: 3, colStart: 2},
+                { field: 'Fax', rowStart: 3, colStart: 3}
+            ]
+        });
+        fixture.componentInstance.grid.width = '917px';
+        fixture.detectChanges();
 
-    //     // col span is 6 => columns should have grid width - scrollbarWitdh/6 width
-    //     expect(grid.getCellByColumn(0, 'ID').nativeElement.offsetWidth).toBe(150);
-    //     expect(grid.getCellByColumn(0, 'CompanyName').nativeElement.offsetWidth).toBe(150);
-    //     expect(grid.getCellByColumn(0, 'ContactName').nativeElement.offsetWidth).toBe(150);
-    //     expect(grid.getCellByColumn(0, 'ContactTitle').nativeElement.offsetWidth).toBe(150 * 3);
+        // col span is 6 => columns should have grid width - scrollbarWitdh/6 width
+        expect(grid.getCellByColumn(0, 'ID').nativeElement.offsetWidth).toBe(150);
+        expect(grid.getCellByColumn(0, 'CompanyName').nativeElement.offsetWidth).toBe(150);
+        expect(grid.getCellByColumn(0, 'ContactName').nativeElement.offsetWidth).toBe(150);
+        expect(grid.getCellByColumn(0, 'ContactTitle').nativeElement.offsetWidth).toBe(150 * 3);
 
-    //     expect(grid.getCellByColumn(0, 'Fax').nativeElement.offsetWidth).toBe(150);
-    //     expect(grid.getCellByColumn(0, 'Region').nativeElement.offsetWidth).toBe(150);
-    //     expect(grid.getCellByColumn(0, 'PostalCode').nativeElement.offsetWidth).toBe(150);
-    //     expect(grid.getCellByColumn(0, 'Country').nativeElement.offsetWidth).toBe(150 * 3);
+        expect(grid.getCellByColumn(0, 'Fax').nativeElement.offsetWidth).toBe(150);
+        expect(grid.getCellByColumn(0, 'Region').nativeElement.offsetWidth).toBe(150);
+        expect(grid.getCellByColumn(0, 'PostalCode').nativeElement.offsetWidth).toBe(150);
+        expect(grid.getCellByColumn(0, 'Country').nativeElement.offsetWidth).toBe(150 * 3);
 
-    //      // check group blocks
-    //      groupHeaderBlocks = fixture.debugElement.query(By.css('.igx-grid__thead')).queryAll(By.css('.igx-grid__mrl_block'));
-    //      expect(groupHeaderBlocks[0].nativeElement.clientWidth).toBe(150 * 3);
-    //      expect(groupHeaderBlocks[0].nativeElement.clientHeight).toBe(51 * 3);
-    //      expect(groupHeaderBlocks[1].nativeElement.clientWidth).toBe(150 * 3);
-    //      expect(groupHeaderBlocks[1].nativeElement.clientHeight).toBe(51 * 3);
+         // check group blocks
+         groupHeaderBlocks = fixture.debugElement.query(By.css('.igx-grid__thead')).queryAll(By.css('.igx-grid__mrl_block'));
+         expect(groupHeaderBlocks[0].nativeElement.clientWidth).toBe(150 * 3);
+         expect(groupHeaderBlocks[0].nativeElement.clientHeight).toBe(51 * 3);
+         expect(groupHeaderBlocks[1].nativeElement.clientWidth).toBe(150 * 3);
+         expect(groupHeaderBlocks[1].nativeElement.clientHeight).toBe(51 * 3);
 
-    //     firstRowCells = grid.rowList.first.cells.toArray();
-    //     headerCells = grid.headerGroups.first.children.toArray();
+        firstRowCells = grid.rowList.first.cells.toArray();
+        headerCells = grid.headerGroups.first.children.toArray();
 
-    //     verifyHeadersAreAligned(headerCells, firstRowCells);
-    //     verifyDOMMatchesSettings(grid.rowList.first, fixture.componentInstance.colGroups);
+        verifyHeadersAreAligned(headerCells, firstRowCells);
+        verifyDOMMatchesSettings(grid.rowList.first, fixture.componentInstance.colGroups);
 
-    //      // test with 3 groups
-    //      fixture.componentInstance.colGroups.push({
-    //         group: 'group3',
-    //         columns: [
-    //             { field: 'Phone', rowStart: 1, colStart: 1, colEnd : 'span 2', rowEnd: 'span 3'}
-    //         ]
-    //     });
-    //     fixture.detectChanges();
+         // test with 3 groups
+         fixture.componentInstance.colGroups.push({
+            group: 'group3',
+            columns: [
+                { field: 'Phone', rowStart: 1, colStart: 1, colEnd : 'span 2', rowEnd: 'span 3'}
+            ]
+        });
+        fixture.detectChanges();
 
-    //     // col span is 8 => min-width exceeded should use 136px
-    //     expect(grid.getCellByColumn(0, 'ID').nativeElement.offsetWidth).toBe(136);
-    //     expect(grid.getCellByColumn(0, 'CompanyName').nativeElement.offsetWidth).toBe(136);
-    //     expect(grid.getCellByColumn(0, 'ContactName').nativeElement.offsetWidth).toBe(136);
-    //     expect(grid.getCellByColumn(0, 'ContactTitle').nativeElement.offsetWidth).toBe(136 * 3);
+        // col span is 8 => min-width exceeded should use 136px
+        expect(grid.getCellByColumn(0, 'ID').nativeElement.offsetWidth).toBe(136);
+        expect(grid.getCellByColumn(0, 'CompanyName').nativeElement.offsetWidth).toBe(136);
+        expect(grid.getCellByColumn(0, 'ContactName').nativeElement.offsetWidth).toBe(136);
+        expect(grid.getCellByColumn(0, 'ContactTitle').nativeElement.offsetWidth).toBe(136 * 3);
 
-    //     expect(grid.getCellByColumn(0, 'Fax').nativeElement.offsetWidth).toBe(136);
-    //     expect(grid.getCellByColumn(0, 'Region').nativeElement.offsetWidth).toBe(136);
-    //     expect(grid.getCellByColumn(0, 'PostalCode').nativeElement.offsetWidth).toBe(136);
-    //     expect(grid.getCellByColumn(0, 'Country').nativeElement.offsetWidth).toBe(136 * 3);
+        expect(grid.getCellByColumn(0, 'Fax').nativeElement.offsetWidth).toBe(136);
+        expect(grid.getCellByColumn(0, 'Region').nativeElement.offsetWidth).toBe(136);
+        expect(grid.getCellByColumn(0, 'PostalCode').nativeElement.offsetWidth).toBe(136);
+        expect(grid.getCellByColumn(0, 'Country').nativeElement.offsetWidth).toBe(136 * 3);
 
-    //     expect(grid.getCellByColumn(0, 'Phone').nativeElement.offsetWidth).toBe(136 * 2);
+        expect(grid.getCellByColumn(0, 'Phone').nativeElement.offsetWidth).toBe(136 * 2);
 
-    //     // check group blocks
-    //     groupHeaderBlocks = fixture.debugElement.query(By.css('.igx-grid__thead')).queryAll(By.css('.igx-grid__mrl_block'));
-    //     expect(groupHeaderBlocks[0].nativeElement.clientWidth).toBe(136 * 3);
-    //     expect(groupHeaderBlocks[0].nativeElement.clientHeight).toBe(51 * 3);
-    //     expect(groupHeaderBlocks[1].nativeElement.clientWidth).toBe(136 * 3);
-    //     expect(groupHeaderBlocks[1].nativeElement.clientHeight).toBe(51 * 3);
-    //     expect(groupHeaderBlocks[2].nativeElement.clientWidth).toBe(136 * 2);
-    //     // the following throws error because last colgroup row span in header does not fill content
-    //     // expect(groupHeaderBlocks[2].nativeElement.clientHeight).toBe(50 * 3);
+        // check group blocks
+        groupHeaderBlocks = fixture.debugElement.query(By.css('.igx-grid__thead')).queryAll(By.css('.igx-grid__mrl_block'));
+        expect(groupHeaderBlocks[0].nativeElement.clientWidth).toBe(136 * 3);
+        expect(groupHeaderBlocks[0].nativeElement.clientHeight).toBe(51 * 3);
+        expect(groupHeaderBlocks[1].nativeElement.clientWidth).toBe(136 * 3);
+        expect(groupHeaderBlocks[1].nativeElement.clientHeight).toBe(51 * 3);
+        expect(groupHeaderBlocks[2].nativeElement.clientWidth).toBe(136 * 2);
+        // the following throws error because last colgroup row span in header does not fill content
+        // expect(groupHeaderBlocks[2].nativeElement.clientHeight).toBe(50 * 3);
 
-    //     verifyHeadersAreAligned(headerCells, firstRowCells);
-    //     verifyDOMMatchesSettings(grid.rowList.first, fixture.componentInstance.colGroups);
-    // });
-    // it('should initialize correctly when widths are set in px.', () => {
-    //     // test with single group - all cols with colspan 1 have width
-    //     const fixture = TestBed.createComponent(ColumnLayoutTestComponent);
-    //     fixture.componentInstance.colGroups = [{
-    //         group: 'group1',
-    //         columns: [
-    //             { field: 'ID', rowStart: 1, colStart: 1, width: '100px'},
-    //             { field: 'CompanyName', rowStart: 1, colStart: 2, width: '200px'},
-    //             { field: 'ContactName', rowStart: 1, colStart: 3, width: '300px'},
-    //             { field: 'ContactTitle', rowStart: 2, colStart: 1, rowEnd: 'span 2', colEnd : 'span 3'},
-    //         ]
-    //     }];
-    //     fixture.detectChanges();
-    //     const grid = fixture.componentInstance.grid;
-    //     // check columns
-    //     expect(grid.getCellByColumn(0, 'ID').nativeElement.offsetWidth).toBe(100);
-    //     expect(grid.getCellByColumn(0, 'CompanyName').nativeElement.offsetWidth).toBe(200);
-    //     expect(grid.getCellByColumn(0, 'ContactName').nativeElement.offsetWidth).toBe(300);
-    //     expect(grid.getCellByColumn(0, 'ContactTitle').nativeElement.offsetWidth).toBe(600);
+        verifyHeadersAreAligned(headerCells, firstRowCells);
+        verifyDOMMatchesSettings(grid.rowList.first, fixture.componentInstance.colGroups);
+    });
+    it('should initialize correctly when widths are set in px.', () => {
+        // test with single group - all cols with colspan 1 have width
+        const fixture = TestBed.createComponent(ColumnLayoutTestComponent);
+        fixture.componentInstance.colGroups = [{
+            group: 'group1',
+            columns: [
+                { field: 'ID', rowStart: 1, colStart: 1, width: '100px'},
+                { field: 'CompanyName', rowStart: 1, colStart: 2, width: '200px'},
+                { field: 'ContactName', rowStart: 1, colStart: 3, width: '300px'},
+                { field: 'ContactTitle', rowStart: 2, colStart: 1, rowEnd: 'span 2', colEnd : 'span 3'},
+            ]
+        }];
+        fixture.detectChanges();
+        const grid = fixture.componentInstance.grid;
+        // check columns
+        expect(grid.getCellByColumn(0, 'ID').nativeElement.offsetWidth).toBe(100);
+        expect(grid.getCellByColumn(0, 'CompanyName').nativeElement.offsetWidth).toBe(200);
+        expect(grid.getCellByColumn(0, 'ContactName').nativeElement.offsetWidth).toBe(300);
+        expect(grid.getCellByColumn(0, 'ContactTitle').nativeElement.offsetWidth).toBe(600);
 
-    //     // check group blocks
-    //     let groupHeaderBlocks = fixture.debugElement.query(By.css('.igx-grid__thead')).queryAll(By.css('.igx-grid__mrl_block'));
-    //     expect(groupHeaderBlocks[0].nativeElement.clientWidth).toBe(600);
+        // check group blocks
+        let groupHeaderBlocks = fixture.debugElement.query(By.css('.igx-grid__thead')).queryAll(By.css('.igx-grid__mrl_block'));
+        expect(groupHeaderBlocks[0].nativeElement.clientWidth).toBe(600);
 
-    //     let firstRowCells = grid.rowList.first.cells.toArray();
-    //     let headerCells = grid.headerGroups.first.children.toArray();
-    //     verifyHeadersAreAligned(headerCells, firstRowCells);
-    //     verifyDOMMatchesSettings(grid.rowList.first, fixture.componentInstance.colGroups);
+        let firstRowCells = grid.rowList.first.cells.toArray();
+        let headerCells = grid.headerGroups.first.children.toArray();
+        verifyHeadersAreAligned(headerCells, firstRowCells);
+        verifyDOMMatchesSettings(grid.rowList.first, fixture.componentInstance.colGroups);
 
 
-    //     // test with 2 groups - only 2 columns with colspan1 have width
-    //     fixture.componentInstance.colGroups.push({
-    //         group: 'group2',
-    //         columns: [
-    //             { field: 'Country', rowStart: 1, colStart: 1, colEnd : 'span 3', rowEnd: 'span 2'},
-    //             { field: 'Region', rowStart: 3, colStart: 1, width: '100px'},
-    //             { field: 'PostalCode', rowStart: 3, colStart: 2},
-    //             { field: 'Fax', rowStart: 3, colStart: 3, width: '200px'}
-    //         ]
-    //     });
-    //     fixture.componentInstance.grid.width = '1117px';
-    //     fixture.detectChanges();
+        // test with 2 groups - only 2 columns with colspan1 have width
+        fixture.componentInstance.colGroups.push({
+            group: 'group2',
+            columns: [
+                { field: 'Country', rowStart: 1, colStart: 1, colEnd : 'span 3', rowEnd: 'span 2'},
+                { field: 'Region', rowStart: 3, colStart: 1, width: '100px'},
+                { field: 'PostalCode', rowStart: 3, colStart: 2},
+                { field: 'Fax', rowStart: 3, colStart: 3, width: '200px'}
+            ]
+        });
+        fixture.componentInstance.grid.width = '1117px';
+        fixture.detectChanges();
 
-    //     // first group takes 600px, 500px left for second group
-    //      // check columns
-    //      expect(grid.getCellByColumn(0, 'ID').nativeElement.offsetWidth).toBe(100);
-    //      expect(grid.getCellByColumn(0, 'CompanyName').nativeElement.offsetWidth).toBe(200);
-    //      expect(grid.getCellByColumn(0, 'ContactName').nativeElement.offsetWidth).toBe(300);
-    //      expect(grid.getCellByColumn(0, 'ContactTitle').nativeElement.offsetWidth).toBe(600);
+        // first group takes 600px, 500px left for second group
+         // check columns
+         expect(grid.getCellByColumn(0, 'ID').nativeElement.offsetWidth).toBe(100);
+         expect(grid.getCellByColumn(0, 'CompanyName').nativeElement.offsetWidth).toBe(200);
+         expect(grid.getCellByColumn(0, 'ContactName').nativeElement.offsetWidth).toBe(300);
+         expect(grid.getCellByColumn(0, 'ContactTitle').nativeElement.offsetWidth).toBe(600);
 
-    //      // This fails for unknown reasons only in travis with 2px difference
-    //     //  expect(grid.getCellByColumn(0, 'Country').nativeElement.offsetWidth).toBe(500);
-    //     //  expect(grid.getCellByColumn(0, 'Region').nativeElement.offsetWidth).toBe(100);
-    //     //  // postal code has no width - auto width should be assigned based on available space.
-    //     //  expect(grid.getCellByColumn(0, 'PostalCode').nativeElement.offsetWidth).toBe(200);
-    //     //  expect(grid.getCellByColumn(0, 'Fax').nativeElement.offsetWidth).toBe(200);
+         // This fails for unknown reasons only in travis with 2px difference
+        //  expect(grid.getCellByColumn(0, 'Country').nativeElement.offsetWidth).toBe(500);
+        //  expect(grid.getCellByColumn(0, 'Region').nativeElement.offsetWidth).toBe(100);
+        //  // postal code has no width - auto width should be assigned based on available space.
+        //  expect(grid.getCellByColumn(0, 'PostalCode').nativeElement.offsetWidth).toBe(200);
+        //  expect(grid.getCellByColumn(0, 'Fax').nativeElement.offsetWidth).toBe(200);
 
-    //     //  // check group blocks
-    //     //  groupHeaderBlocks = fixture.debugElement.query(By.css('.igx-grid__thead')).queryAll(By.css('.igx-grid__mrl_block'));
-    //     //  expect(groupHeaderBlocks[1].nativeElement.clientWidth).toBe(500);
+        //  // check group blocks
+        //  groupHeaderBlocks = fixture.debugElement.query(By.css('.igx-grid__thead')).queryAll(By.css('.igx-grid__mrl_block'));
+        //  expect(groupHeaderBlocks[1].nativeElement.clientWidth).toBe(500);
 
-    //      firstRowCells = grid.rowList.first.cells.toArray();
-    //      headerCells = grid.headerGroups.first.children.toArray();
-    //      verifyHeadersAreAligned(headerCells, firstRowCells);
-    //      verifyDOMMatchesSettings(grid.rowList.first, fixture.componentInstance.colGroups);
+         firstRowCells = grid.rowList.first.cells.toArray();
+         headerCells = grid.headerGroups.first.children.toArray();
+         verifyHeadersAreAligned(headerCells, firstRowCells);
+         verifyDOMMatchesSettings(grid.rowList.first, fixture.componentInstance.colGroups);
 
-    //     // test with 3 groups - only parent has width
-    //     fixture.componentInstance.colGroups.push({
-    //         group: 'group3',
-    //         columns: [
-    //             { field: 'Phone', rowStart: 1, colStart: 1, colEnd : 'span 2', width: '500px'},
-    //             { field: 'Phone1', rowStart: 2, colStart: 1, colEnd : 'span 1', rowSpan: 'span 2'},
-    //             { field: 'Phone2', rowStart: 2, colStart: 2, colEnd : 'span 1', rowSpan: 'span 2'}
-    //         ]
-    //     });
-    //     fixture.componentInstance.grid.width = '1617px';
-    //     fixture.detectChanges();
+        // test with 3 groups - only parent has width
+        fixture.componentInstance.colGroups.push({
+            group: 'group3',
+            columns: [
+                { field: 'Phone', rowStart: 1, colStart: 1, colEnd : 'span 2', width: '500px'},
+                { field: 'Phone1', rowStart: 2, colStart: 1, colEnd : 'span 1', rowSpan: 'span 2'},
+                { field: 'Phone2', rowStart: 2, colStart: 2, colEnd : 'span 1', rowSpan: 'span 2'}
+            ]
+        });
+        fixture.componentInstance.grid.width = '1617px';
+        fixture.detectChanges();
 
-    //     // check columns
-    //     expect(grid.getCellByColumn(0, 'Phone').nativeElement.offsetWidth).toBe(500);
-    //     expect(grid.getCellByColumn(0, 'Phone1').nativeElement.offsetWidth).toBe(250);
-    //     expect(grid.getCellByColumn(0, 'Phone2').nativeElement.offsetWidth).toBe(250);
+        // check columns
+        expect(grid.getCellByColumn(0, 'Phone').nativeElement.offsetWidth).toBe(500);
+        expect(grid.getCellByColumn(0, 'Phone1').nativeElement.offsetWidth).toBe(250);
+        expect(grid.getCellByColumn(0, 'Phone2').nativeElement.offsetWidth).toBe(250);
 
-    //     groupHeaderBlocks = fixture.debugElement.query(By.css('.igx-grid__thead')).queryAll(By.css('.igx-grid__mrl_block'));
-    //     expect(groupHeaderBlocks[2].nativeElement.clientWidth).toBe(500);
+        groupHeaderBlocks = fixture.debugElement.query(By.css('.igx-grid__thead')).queryAll(By.css('.igx-grid__mrl_block'));
+        expect(groupHeaderBlocks[2].nativeElement.clientWidth).toBe(500);
 
-    //     firstRowCells = grid.rowList.first.cells.toArray();
-    //     headerCells = grid.headerGroups.first.children.toArray();
-    //     verifyHeadersAreAligned(headerCells, firstRowCells);
-    // });
+        firstRowCells = grid.rowList.first.cells.toArray();
+        headerCells = grid.headerGroups.first.children.toArray();
+        verifyHeadersAreAligned(headerCells, firstRowCells);
+    });
     // it('should initialize correctly when widths are set in %.', () => {
     //     const fixture = TestBed.createComponent(ColumnLayoutTestComponent);
     //     const grid = fixture.componentInstance.grid;
@@ -714,54 +714,54 @@ describe('IgxGrid - multi-row-layout', () => {
     //     verifyDOMMatchesSettings(grid.rowList.first, fixture.componentInstance.colGroups);
     // });
 
-    // it('vertical virtualization should work as expected when there are multi-row layouts.', async() => {
-    //     const fixture = TestBed.createComponent(ColumnLayoutTestComponent);
-    //     const grid = fixture.componentInstance.grid;
-    //     fixture.componentInstance.colGroups = [{
-    //         group: 'group4',
-    //         // total rowspan 3
-    //         columns: [
-    //             { field: 'CompanyName', rowStart: 1, colStart: 1, colEnd: 'span 2'},
-    //             { field: 'Phone', rowStart: 1, colStart: 3, rowEnd: 'span 2'},
-    //             { field: 'Address', rowStart: 1, colStart: 4, rowEnd: 'span 3'},
-    //             { field: 'Region', rowStart: 2, colStart: 1},
-    //             { field: 'City', rowStart: 2, colStart: 2},
-    //             { field: 'ContactName', rowStart: 3, colStart: 1, colEnd: 'span 3'},
-    //         ]
-    //     }];
-    //     fixture.detectChanges();
+    it('vertical virtualization should work as expected when there are multi-row layouts.', async() => {
+        const fixture = TestBed.createComponent(ColumnLayoutTestComponent);
+        const grid = fixture.componentInstance.grid;
+        fixture.componentInstance.colGroups = [{
+            group: 'group4',
+            // total rowspan 3
+            columns: [
+                { field: 'CompanyName', rowStart: 1, colStart: 1, colEnd: 'span 2'},
+                { field: 'Phone', rowStart: 1, colStart: 3, rowEnd: 'span 2'},
+                { field: 'Address', rowStart: 1, colStart: 4, rowEnd: 'span 3'},
+                { field: 'Region', rowStart: 2, colStart: 1},
+                { field: 'City', rowStart: 2, colStart: 2},
+                { field: 'ContactName', rowStart: 3, colStart: 1, colEnd: 'span 3'},
+            ]
+        }];
+        fixture.detectChanges();
 
-    //     expect(grid.hasVerticalSroll()).toBeTruthy();
+        expect(grid.hasVerticalSroll()).toBeTruthy();
 
-    //     const verticalVirt = grid.verticalScrollContainer;
+        const verticalVirt = grid.verticalScrollContainer;
 
-    //     // scroll to bottom
-    //     const lastIndex = grid.data.length - 1;
-    //     verticalVirt.scrollTo(lastIndex);
-    //     await wait(100);
-    //     verticalVirt.scrollTo(lastIndex);
-    //     await wait(100);
-    //     fixture.detectChanges();
+        // scroll to bottom
+        const lastIndex = grid.data.length - 1;
+        verticalVirt.scrollTo(lastIndex);
+        await wait(100);
+        verticalVirt.scrollTo(lastIndex);
+        await wait(100);
+        fixture.detectChanges();
 
-    //     const dataRows = grid.dataRowList.toArray();
-    //     const lastRow = dataRows[dataRows.length - 1];
+        const dataRows = grid.dataRowList.toArray();
+        const lastRow = dataRows[dataRows.length - 1];
 
-    //     // check correct last row is rendered and is last in view
-    //     expect(lastRow.dataRowIndex).toBe(lastIndex);
-    //     expect(lastRow.rowData).toBe(grid.data[lastIndex]);
+        // check correct last row is rendered and is last in view
+        expect(lastRow.dataRowIndex).toBe(lastIndex);
+        expect(lastRow.rowData).toBe(grid.data[lastIndex]);
 
-    //     // last in tbody
-    //     expect(lastRow.element.nativeElement.getBoundingClientRect().bottom).toBe(grid.tbody.nativeElement.getBoundingClientRect().bottom);
+        // last in tbody
+        expect(lastRow.element.nativeElement.getBoundingClientRect().bottom).toBe(grid.tbody.nativeElement.getBoundingClientRect().bottom);
 
-    //     // check size is correct
-    //     expect(grid.verticalScrollContainer.getSizeAt(lastIndex)).toBe(151);
+        // check size is correct
+        expect(grid.verticalScrollContainer.getSizeAt(lastIndex)).toBe(151);
 
-    //     // check DOM
-    //     const lastRowCells = lastRow.cells.toArray();
-    //     const headerCells = grid.headerGroups.first.children.toArray();
-    //     verifyHeadersAreAligned(headerCells, lastRowCells);
-    //     verifyDOMMatchesSettings(lastRow, fixture.componentInstance.colGroups);
-    // });
+        // check DOM
+        const lastRowCells = lastRow.cells.toArray();
+        const headerCells = grid.headerGroups.first.children.toArray();
+        verifyHeadersAreAligned(headerCells, lastRowCells);
+        verifyDOMMatchesSettings(lastRow, fixture.componentInstance.colGroups);
+    });
 
 });
 
