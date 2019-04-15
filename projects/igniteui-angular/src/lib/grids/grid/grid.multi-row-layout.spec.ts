@@ -371,149 +371,149 @@ describe('IgxGrid - multi-row-layout', () => {
         headerCells = grid.headerGroups.first.children.toArray();
         verifyHeadersAreAligned(headerCells, firstRowCells);
     });
-    // it('should initialize correctly when widths are set in %.', () => {
-    //     const fixture = TestBed.createComponent(ColumnLayoutTestComponent);
-    //     const grid = fixture.componentInstance.grid;
-    //     fixture.componentInstance.colGroups = [{
-    //         group: 'group1',
-    //         columns: [
-    //             { field: 'ID', rowStart: 1, colStart: 1, width: '10%'},
-    //             { field: 'CompanyName', rowStart: 1, colStart: 2, width: '20%'},
-    //             { field: 'ContactName', rowStart: 1, colStart: 3, width: '30%'},
-    //             { field: 'ContactTitle', rowStart: 2, colStart: 1, rowEnd: 'span 2', colEnd : 'span 3'},
-    //         ]
-    //     }];
-    //     fixture.componentInstance.grid.width = '1017px';
-    //     fixture.detectChanges();
+    it('should initialize correctly when widths are set in %.', () => {
+        const fixture = TestBed.createComponent(ColumnLayoutTestComponent);
+        const grid = fixture.componentInstance.grid;
+        fixture.componentInstance.colGroups = [{
+            group: 'group1',
+            columns: [
+                { field: 'ID', rowStart: 1, colStart: 1, width: '10%'},
+                { field: 'CompanyName', rowStart: 1, colStart: 2, width: '20%'},
+                { field: 'ContactName', rowStart: 1, colStart: 3, width: '30%'},
+                { field: 'ContactTitle', rowStart: 2, colStart: 1, rowEnd: 'span 2', colEnd : 'span 3'},
+            ]
+        }];
+        fixture.componentInstance.grid.width = '1017px';
+        fixture.detectChanges();
 
-    //     // check columns
-    //     expect(grid.getCellByColumn(0, 'ID').nativeElement.offsetWidth).toBe(100);
-    //     expect(grid.getCellByColumn(0, 'CompanyName').nativeElement.offsetWidth).toBe(200);
-    //     expect(grid.getCellByColumn(0, 'ContactName').nativeElement.offsetWidth).toBe(300);
-    //     expect(grid.getCellByColumn(0, 'ContactTitle').nativeElement.offsetWidth).toBe(600);
+        // check columns
+        expect(grid.getCellByColumn(0, 'ID').nativeElement.offsetWidth).toBe(100);
+        expect(grid.getCellByColumn(0, 'CompanyName').nativeElement.offsetWidth).toBe(200);
+        expect(grid.getCellByColumn(0, 'ContactName').nativeElement.offsetWidth).toBe(300);
+        expect(grid.getCellByColumn(0, 'ContactTitle').nativeElement.offsetWidth).toBe(600);
 
-    //       // check group blocks
-    //     let groupHeaderBlocks = fixture.debugElement.query(By.css('.igx-grid__thead')).queryAll(By.css('.igx-grid__mrl_block'));
-    //     expect(groupHeaderBlocks[0].nativeElement.clientWidth).toBe(600);
+          // check group blocks
+        let groupHeaderBlocks = fixture.debugElement.query(By.css('.igx-grid__thead')).queryAll(By.css('.igx-grid__mrl_block'));
+        expect(groupHeaderBlocks[0].nativeElement.clientWidth).toBe(600);
 
-    //     let firstRowCells = grid.rowList.first.cells.toArray();
-    //     let headerCells = grid.headerGroups.first.children.toArray();
-    //     verifyHeadersAreAligned(headerCells, firstRowCells);
-    //     verifyDOMMatchesSettings(grid.rowList.first, fixture.componentInstance.colGroups);
+        let firstRowCells = grid.rowList.first.cells.toArray();
+        let headerCells = grid.headerGroups.first.children.toArray();
+        verifyHeadersAreAligned(headerCells, firstRowCells);
+        verifyDOMMatchesSettings(grid.rowList.first, fixture.componentInstance.colGroups);
 
-    //     fixture.componentInstance.colGroups.push({
-    //         group: 'group2',
-    //         columns: [
-    //             { field: 'Country', rowStart: 1, colStart: 1, colEnd : 'span 3', rowEnd: 'span 2'},
-    //             { field: 'Region', rowStart: 3, colStart: 1, width: '10%'},
-    //             { field: 'PostalCode', rowStart: 3, colStart: 2},
-    //             { field: 'Fax', rowStart: 3, colStart: 3, width: '20%'}
-    //         ]
-    //     });
-    //     fixture.detectChanges();
+        fixture.componentInstance.colGroups.push({
+            group: 'group2',
+            columns: [
+                { field: 'Country', rowStart: 1, colStart: 1, colEnd : 'span 3', rowEnd: 'span 2'},
+                { field: 'Region', rowStart: 3, colStart: 1, width: '10%'},
+                { field: 'PostalCode', rowStart: 3, colStart: 2},
+                { field: 'Fax', rowStart: 3, colStart: 3, width: '20%'}
+            ]
+        });
+        fixture.detectChanges();
 
-    //     // check columns
-    //     expect(grid.getCellByColumn(0, 'Country').nativeElement.offsetWidth).toBe(100 + 200 + 136);
-    //     expect(grid.getCellByColumn(0, 'Region').nativeElement.offsetWidth).toBe(100);
-    //     expect(grid.getCellByColumn(0, 'PostalCode').nativeElement.offsetWidth).toBe(136);
-    //     expect(grid.getCellByColumn(0, 'Fax').nativeElement.offsetWidth).toBe(200);
+        // check columns
+        expect(grid.getCellByColumn(0, 'Country').nativeElement.offsetWidth).toBe(100 + 200 + 136);
+        expect(grid.getCellByColumn(0, 'Region').nativeElement.offsetWidth).toBe(100);
+        expect(grid.getCellByColumn(0, 'PostalCode').nativeElement.offsetWidth).toBe(136);
+        expect(grid.getCellByColumn(0, 'Fax').nativeElement.offsetWidth).toBe(200);
 
-    //     // check group blocks
-    //     groupHeaderBlocks = fixture.debugElement.query(By.css('.igx-grid__thead')).queryAll(By.css('.igx-grid__mrl_block'));
-    //     expect(groupHeaderBlocks[1].nativeElement.clientWidth).toBe(436);
+        // check group blocks
+        groupHeaderBlocks = fixture.debugElement.query(By.css('.igx-grid__thead')).queryAll(By.css('.igx-grid__mrl_block'));
+        expect(groupHeaderBlocks[1].nativeElement.clientWidth).toBe(436);
 
-    //     firstRowCells = grid.rowList.first.cells.toArray();
-    //     headerCells = grid.headerGroups.first.children.toArray();
-    //     verifyHeadersAreAligned(headerCells, firstRowCells);
-    //     verifyDOMMatchesSettings(grid.rowList.first, fixture.componentInstance.colGroups);
+        firstRowCells = grid.rowList.first.cells.toArray();
+        headerCells = grid.headerGroups.first.children.toArray();
+        verifyHeadersAreAligned(headerCells, firstRowCells);
+        verifyDOMMatchesSettings(grid.rowList.first, fixture.componentInstance.colGroups);
 
-    //     fixture.componentInstance.colGroups = [{
-    //         group: 'group1',
-    //         columns: [
-    //             { field: 'ID', rowStart: 1, colStart: 1},
-    //             { field: 'CompanyName', rowStart: 1, colStart: 2},
-    //             { field: 'ContactName', rowStart: 1, colStart: 3},
-    //             { field: 'Country', rowStart: 2, colStart: 1, colEnd : 'span 2'},
-    //             { field: 'Region', rowStart: 2, colStart: 3},
-    //             { field: 'ContactTitle', rowStart: 3, colStart: 1, rowEnd: 'span 2', colEnd : 'span 3', width: '60%'},
-    //         ]
-    //     }];
-    //     fixture.detectChanges();
+        fixture.componentInstance.colGroups = [{
+            group: 'group1',
+            columns: [
+                { field: 'ID', rowStart: 1, colStart: 1},
+                { field: 'CompanyName', rowStart: 1, colStart: 2},
+                { field: 'ContactName', rowStart: 1, colStart: 3},
+                { field: 'Country', rowStart: 2, colStart: 1, colEnd : 'span 2'},
+                { field: 'Region', rowStart: 2, colStart: 3},
+                { field: 'ContactTitle', rowStart: 3, colStart: 1, rowEnd: 'span 2', colEnd : 'span 3', width: '60%'},
+            ]
+        }];
+        fixture.detectChanges();
 
-    //     // check columns
-    //     expect(grid.getCellByColumn(0, 'ID').nativeElement.offsetWidth).toBe(200);
-    //     expect(grid.getCellByColumn(0, 'CompanyName').nativeElement.offsetWidth).toBe(200);
-    //     expect(grid.getCellByColumn(0, 'ContactName').nativeElement.offsetWidth).toBe(200);
-    //     expect(grid.getCellByColumn(0, 'ContactTitle').nativeElement.offsetWidth).toBe(600);
-    //     expect(grid.getCellByColumn(0, 'Country').nativeElement.offsetWidth).toBe(400);
-    //     expect(grid.getCellByColumn(0, 'Region').nativeElement.offsetWidth).toBe(200);
+        // check columns
+        expect(grid.getCellByColumn(0, 'ID').nativeElement.offsetWidth).toBe(200);
+        expect(grid.getCellByColumn(0, 'CompanyName').nativeElement.offsetWidth).toBe(200);
+        expect(grid.getCellByColumn(0, 'ContactName').nativeElement.offsetWidth).toBe(200);
+        expect(grid.getCellByColumn(0, 'ContactTitle').nativeElement.offsetWidth).toBe(600);
+        expect(grid.getCellByColumn(0, 'Country').nativeElement.offsetWidth).toBe(400);
+        expect(grid.getCellByColumn(0, 'Region').nativeElement.offsetWidth).toBe(200);
 
-    //     // check group blocks
-    //     groupHeaderBlocks = fixture.debugElement.query(By.css('.igx-grid__thead')).queryAll(By.css('.igx-grid__mrl_block'));
-    //     expect(groupHeaderBlocks[0].nativeElement.clientWidth).toBe(600);
+        // check group blocks
+        groupHeaderBlocks = fixture.debugElement.query(By.css('.igx-grid__thead')).queryAll(By.css('.igx-grid__mrl_block'));
+        expect(groupHeaderBlocks[0].nativeElement.clientWidth).toBe(600);
 
-    //     firstRowCells = grid.rowList.first.cells.toArray();
-    //     headerCells = grid.headerGroups.first.children.toArray();
-    //     verifyHeadersAreAligned(headerCells, firstRowCells);
-    //     verifyDOMMatchesSettings(grid.rowList.first, fixture.componentInstance.colGroups);
-    // });
-    // it('should initialize correctly when grid width is in % and no widths are set for columns.', () => {
-    //     const fixture = TestBed.createComponent(ColumnLayoutTestComponent);
-    //     const grid = fixture.componentInstance.grid;
-    //     fixture.componentInstance.colGroups = [{
-    //         group: 'group1',
-    //         columns: [
-    //             { field: 'ID', rowStart: 1, colStart: 1 },
-    //             { field: 'CompanyName', rowStart: 1, colStart: 2 },
-    //             { field: 'ContactName', rowStart: 1, colStart: 3, colEnd : 'span 2' },
-    //             { field: 'ContactTitle', rowStart: 2, colStart: 1, rowEnd: 'span 2', colEnd : 'span 3'},
-    //         ]
-    //     }];
-    //     fixture.componentInstance.grid.width = '100%';
-    //     fixture.detectChanges();
+        firstRowCells = grid.rowList.first.cells.toArray();
+        headerCells = grid.headerGroups.first.children.toArray();
+        verifyHeadersAreAligned(headerCells, firstRowCells);
+        verifyDOMMatchesSettings(grid.rowList.first, fixture.componentInstance.colGroups);
+    });
+    it('should initialize correctly when grid width is in % and no widths are set for columns.', () => {
+        const fixture = TestBed.createComponent(ColumnLayoutTestComponent);
+        const grid = fixture.componentInstance.grid;
+        fixture.componentInstance.colGroups = [{
+            group: 'group1',
+            columns: [
+                { field: 'ID', rowStart: 1, colStart: 1 },
+                { field: 'CompanyName', rowStart: 1, colStart: 2 },
+                { field: 'ContactName', rowStart: 1, colStart: 3, colEnd : 'span 2' },
+                { field: 'ContactTitle', rowStart: 2, colStart: 1, rowEnd: 'span 2', colEnd : 'span 3'},
+            ]
+        }];
+        fixture.componentInstance.grid.width = '100%';
+        fixture.detectChanges();
 
-    //       // check group blocks
-    //     const groupHeaderBlocks = fixture.debugElement.query(By.css('.igx-grid__thead')).queryAll(By.css('.igx-grid__mrl_block'));
-    //     expect(groupHeaderBlocks[0].nativeElement.clientWidth).toBe(groupHeaderBlocks[0].nativeElement.parentNode.clientWidth);
+          // check group blocks
+        const groupHeaderBlocks = fixture.debugElement.query(By.css('.igx-grid__thead')).queryAll(By.css('.igx-grid__mrl_block'));
+        expect(groupHeaderBlocks[0].nativeElement.clientWidth).toBe(groupHeaderBlocks[0].nativeElement.parentNode.clientWidth);
 
-    //     const firstRowCells = grid.rowList.first.cells.toArray();
-    //     const headerCells = grid.headerGroups.first.children.toArray();
-    //     verifyHeadersAreAligned(headerCells, firstRowCells);
-    //     verifyDOMMatchesSettings(grid.rowList.first, fixture.componentInstance.colGroups);
-    // });
+        const firstRowCells = grid.rowList.first.cells.toArray();
+        const headerCells = grid.headerGroups.first.children.toArray();
+        verifyHeadersAreAligned(headerCells, firstRowCells);
+        verifyDOMMatchesSettings(grid.rowList.first, fixture.componentInstance.colGroups);
+    });
 
-    // it('should use columns with the smallest col spans when determining the column group’s column widths.', () => {
-    //     const fixture = TestBed.createComponent(ColumnLayoutTestComponent);
-    //     fixture.componentInstance.colGroups = [{
-    //         group: 'group2',
-    //         columns: [
-    //             { field: 'ContactName', rowStart: 2, colStart: 1, colEnd : 'span 3', rowEnd: 'span 2', width: '500px'},
-    //             { field: 'CompanyName', rowStart: 1, colStart: 1, width: '100px'},
-    //             { field: 'PostalCode', rowStart: 1, colStart: 2, width: '200px'},
-    //             { field: 'Fax', rowStart: 1, colStart: 3, width: '100px'}
-    //         ]
-    //     }];
-    //     fixture.detectChanges();
+    it('should use columns with the smallest col spans when determining the column group’s column widths.', () => {
+        const fixture = TestBed.createComponent(ColumnLayoutTestComponent);
+        fixture.componentInstance.colGroups = [{
+            group: 'group2',
+            columns: [
+                { field: 'ContactName', rowStart: 2, colStart: 1, colEnd : 'span 3', rowEnd: 'span 2', width: '500px'},
+                { field: 'CompanyName', rowStart: 1, colStart: 1, width: '100px'},
+                { field: 'PostalCode', rowStart: 1, colStart: 2, width: '200px'},
+                { field: 'Fax', rowStart: 1, colStart: 3, width: '100px'}
+            ]
+        }];
+        fixture.detectChanges();
 
-    //       // check group blocks
-    //       let groupHeaderBlocks = fixture.debugElement.query(By.css('.igx-grid__thead')).queryAll(By.css('.igx-grid__mrl_block'));
-    //       expect(groupHeaderBlocks[0].nativeElement.clientWidth).toBe(400);
-    //       expect(groupHeaderBlocks[0].nativeElement.style.gridTemplateColumns).toBe('100px 200px 100px');
-    //       fixture.componentInstance.colGroups = [{
-    //           group: 'group2',
-    //           columns: [
-    //               { field: 'ContactName', rowStart: 1, colStart: 1, colEnd : 'span 3', rowEnd: 'span 1', width: '500px'},
-    //               { field: 'CompanyName', rowStart: 2, colStart: 1, width: '100px'},
-    //               { field: 'PostalCode', rowStart: 2, colStart: 2, width: '200px'},
-    //               { field: 'Fax', rowStart: 2, colStart: 3, width: '100px'}
-    //           ]
-    //       }];
-    //       fixture.detectChanges();
-    //     // check group blocks
-    //     groupHeaderBlocks = fixture.debugElement.query(By.css('.igx-grid__thead')).queryAll(By.css('.igx-grid__mrl_block'));
-    //     expect(groupHeaderBlocks[0].nativeElement.clientWidth).toBe(400);
-    //     expect(groupHeaderBlocks[0].nativeElement.style.gridTemplateColumns).toBe('100px 200px 100px');
-    // });
+          // check group blocks
+          let groupHeaderBlocks = fixture.debugElement.query(By.css('.igx-grid__thead')).queryAll(By.css('.igx-grid__mrl_block'));
+          expect(groupHeaderBlocks[0].nativeElement.clientWidth).toBe(400);
+          expect(groupHeaderBlocks[0].nativeElement.style.gridTemplateColumns).toBe('100px 200px 100px');
+          fixture.componentInstance.colGroups = [{
+              group: 'group2',
+              columns: [
+                  { field: 'ContactName', rowStart: 1, colStart: 1, colEnd : 'span 3', rowEnd: 'span 1', width: '500px'},
+                  { field: 'CompanyName', rowStart: 2, colStart: 1, width: '100px'},
+                  { field: 'PostalCode', rowStart: 2, colStart: 2, width: '200px'},
+                  { field: 'Fax', rowStart: 2, colStart: 3, width: '100px'}
+              ]
+          }];
+          fixture.detectChanges();
+        // check group blocks
+        groupHeaderBlocks = fixture.debugElement.query(By.css('.igx-grid__thead')).queryAll(By.css('.igx-grid__mrl_block'));
+        expect(groupHeaderBlocks[0].nativeElement.clientWidth).toBe(400);
+        expect(groupHeaderBlocks[0].nativeElement.style.gridTemplateColumns).toBe('100px 200px 100px');
+    });
 
     // it('should disregard column groups if multi-column layouts are also defined.', () => {
     //     const fixture = TestBed.createComponent(ColumnLayoutAndGroupsTestComponent);
