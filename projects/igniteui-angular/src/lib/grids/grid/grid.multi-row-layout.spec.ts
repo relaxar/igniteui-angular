@@ -515,120 +515,120 @@ describe('IgxGrid - multi-row-layout', () => {
         expect(groupHeaderBlocks[0].nativeElement.style.gridTemplateColumns).toBe('100px 200px 100px');
     });
 
-    // it('should disregard column groups if multi-column layouts are also defined.', () => {
-    //     const fixture = TestBed.createComponent(ColumnLayoutAndGroupsTestComponent);
-    //     fixture.detectChanges();
-    //     const grid = fixture.componentInstance.grid;
+    it('should disregard column groups if multi-column layouts are also defined.', () => {
+        const fixture = TestBed.createComponent(ColumnLayoutAndGroupsTestComponent);
+        fixture.detectChanges();
+        const grid = fixture.componentInstance.grid;
 
-    //     // check grid's columns collection
-    //     // 5 in total
-    //     expect(grid.columnList.toArray().length).toBe(5);
-    //     // 1 column layout
-    //     expect(grid.columnList.filter(x => x.columnLayout).length).toBe(1);
-    //     // 4 normal columns
-    //     expect(grid.columnList.filter(x => !x.columnLayout && ! x.columnGroup).length).toBe(4);
+        // check grid's columns collection
+        // 5 in total
+        expect(grid.columnList.toArray().length).toBe(5);
+        // 1 column layout
+        expect(grid.columnList.filter(x => x.columnLayout).length).toBe(1);
+        // 4 normal columns
+        expect(grid.columnList.filter(x => !x.columnLayout && ! x.columnGroup).length).toBe(4);
 
-    //     // check header
-    //     expect(document.querySelectorAll('igx-grid-header-group').length).toEqual(5);
-    //     expect(document.querySelectorAll(GRID_COL_THEAD_CLASS).length).toEqual(4);
-    // });
+        // check header
+        expect(document.querySelectorAll('igx-grid-header-group').length).toEqual(5);
+        expect(document.querySelectorAll(GRID_COL_THEAD_CLASS).length).toEqual(4);
+    });
 
     // // Virtualization
 
-    it('should apply horizontal virtualization based on the group blocks.', async() => {
-        const fixture = TestBed.createComponent(ColumnLayoutTestComponent);
-        const grid = fixture.componentInstance.grid;
-        const uniqueGroups = [
-            {
-            group: 'group1',
-            // total colspan 3
-            columns: [
-                { field: 'Address', rowStart: 1, colStart: 1, colEnd : 'span 3', rowEnd: 'span 2'},
-                { field: 'County', rowStart: 3, colStart: 1},
-                { field: 'Region', rowStart: 3, colStart: 2},
-                { field: 'City', rowStart: 3, colStart: 3}
-            ]
-        },
-        {
-            group: 'group2',
-              // total colspan 2
-            columns: [
-                { field: 'CompanyName', rowStart: 1, colStart: 1},
-                { field: 'Address', rowStart: 1, colStart: 2},
-                { field: 'ContactName', rowStart: 2, colStart: 1, colEnd : 'span 2', rowEnd: 'span 2'}
-            ]
-        },
-        {
-            group: 'group3',
-              // total colspan 1
-            columns: [
-                { field: 'Phone', rowStart: 1, colStart: 1},
-                { field: 'Fax', rowStart: 2, colStart: 1, rowEnd: 'span 2'}
-            ]
-        },
-        {
-            group: 'group4',
-            // total colspan 4
-            columns: [
-                { field: 'CompanyName', rowStart: 1, colStart: 1, colEnd: 'span 2'},
-                { field: 'Phone', rowStart: 1, colStart: 3, rowEnd: 'span 2'},
-                { field: 'Address', rowStart: 1, colStart: 4, rowEnd: 'span 3'},
-                { field: 'Region', rowStart: 2, colStart: 1},
-                { field: 'City', rowStart: 2, colStart: 2},
-                { field: 'ContactName', rowStart: 3, colStart: 1, colEnd: 'span 3'},
-            ]
-        }
-        ];
-        fixture.componentInstance.colGroups = [];
-        for (let i = 0; i < 3; i++) {
-            fixture.componentInstance.colGroups = fixture.componentInstance.colGroups.concat(uniqueGroups);
-        }
-        grid.columnWidth = '200px';
-        fixture.componentInstance.grid.width = '600px';
-        fixture.detectChanges();
+    // it('should apply horizontal virtualization based on the group blocks.', async() => {
+    //     const fixture = TestBed.createComponent(ColumnLayoutTestComponent);
+    //     const grid = fixture.componentInstance.grid;
+    //     const uniqueGroups = [
+    //         {
+    //         group: 'group1',
+    //         // total colspan 3
+    //         columns: [
+    //             { field: 'Address', rowStart: 1, colStart: 1, colEnd : 'span 3', rowEnd: 'span 2'},
+    //             { field: 'County', rowStart: 3, colStart: 1},
+    //             { field: 'Region', rowStart: 3, colStart: 2},
+    //             { field: 'City', rowStart: 3, colStart: 3}
+    //         ]
+    //     },
+    //     {
+    //         group: 'group2',
+    //           // total colspan 2
+    //         columns: [
+    //             { field: 'CompanyName', rowStart: 1, colStart: 1},
+    //             { field: 'Address', rowStart: 1, colStart: 2},
+    //             { field: 'ContactName', rowStart: 2, colStart: 1, colEnd : 'span 2', rowEnd: 'span 2'}
+    //         ]
+    //     },
+    //     {
+    //         group: 'group3',
+    //           // total colspan 1
+    //         columns: [
+    //             { field: 'Phone', rowStart: 1, colStart: 1},
+    //             { field: 'Fax', rowStart: 2, colStart: 1, rowEnd: 'span 2'}
+    //         ]
+    //     },
+    //     {
+    //         group: 'group4',
+    //         // total colspan 4
+    //         columns: [
+    //             { field: 'CompanyName', rowStart: 1, colStart: 1, colEnd: 'span 2'},
+    //             { field: 'Phone', rowStart: 1, colStart: 3, rowEnd: 'span 2'},
+    //             { field: 'Address', rowStart: 1, colStart: 4, rowEnd: 'span 3'},
+    //             { field: 'Region', rowStart: 2, colStart: 1},
+    //             { field: 'City', rowStart: 2, colStart: 2},
+    //             { field: 'ContactName', rowStart: 3, colStart: 1, colEnd: 'span 3'},
+    //         ]
+    //     }
+    //     ];
+    //     fixture.componentInstance.colGroups = [];
+    //     for (let i = 0; i < 3; i++) {
+    //         fixture.componentInstance.colGroups = fixture.componentInstance.colGroups.concat(uniqueGroups);
+    //     }
+    //     grid.columnWidth = '200px';
+    //     fixture.componentInstance.grid.width = '600px';
+    //     fixture.detectChanges();
 
-        // 12 groups in total
-        const horizontalVirtualization = grid.rowList.first.virtDirRow;
-        expect(grid.hasHorizontalScroll()).toBeTruthy();
-        expect(horizontalVirtualization.igxForOf.length).toBe(12);
+    //     // 12 groups in total
+    //     const horizontalVirtualization = grid.rowList.first.virtDirRow;
+    //     expect(grid.hasHorizontalScroll()).toBeTruthy();
+    //     expect(horizontalVirtualization.igxForOf.length).toBe(12);
 
-        // check chunk size is correct
-        expect(horizontalVirtualization.state.chunkSize).toBe(3);
-        // check passed instances to igxFor are the groups
-        expect(horizontalVirtualization.igxForOf[0] instanceof IgxColumnLayoutComponent).toBeTruthy();
-        // check their sizes are correct
-        expect(horizontalVirtualization.getSizeAt(0)).toBe(3 * 200);
-        expect(horizontalVirtualization.getSizeAt(1)).toBe(2 * 200);
-        expect(horizontalVirtualization.getSizeAt(2)).toBe(200);
-        expect(horizontalVirtualization.getSizeAt(3)).toBe(4 * 200);
+    //     // check chunk size is correct
+    //     expect(horizontalVirtualization.state.chunkSize).toBe(3);
+    //     // check passed instances to igxFor are the groups
+    //     expect(horizontalVirtualization.igxForOf[0] instanceof IgxColumnLayoutComponent).toBeTruthy();
+    //     // check their sizes are correct
+    //     expect(horizontalVirtualization.getSizeAt(0)).toBe(3 * 200);
+    //     expect(horizontalVirtualization.getSizeAt(1)).toBe(2 * 200);
+    //     expect(horizontalVirtualization.getSizeAt(2)).toBe(200);
+    //     expect(horizontalVirtualization.getSizeAt(3)).toBe(4 * 200);
 
-        // check total widths sum - unique col groups col span 10 in total * 200px default witdth * 3 times repeated
-        const horizonatalScrElem = horizontalVirtualization.getHorizontalScroll();
-        const totalExpected = 10 * 200 * 3;
-        expect(parseInt(horizonatalScrElem.children[0].style.width, 10)).toBe(totalExpected);
-        // check groups are rendered correctly
+    //     // check total widths sum - unique col groups col span 10 in total * 200px default witdth * 3 times repeated
+    //     const horizonatalScrElem = horizontalVirtualization.getHorizontalScroll();
+    //     const totalExpected = 10 * 200 * 3;
+    //     expect(parseInt(horizonatalScrElem.children[0].style.width, 10)).toBe(totalExpected);
+    //     // check groups are rendered correctly
 
-        let firstRowCells = grid.rowList.first.cells.toArray();
-        let headerCells = grid.headerGroups.first.children.toArray();
-        verifyHeadersAreAligned(headerCells, firstRowCells);
-        verifyDOMMatchesSettings(grid.rowList.first,
-             fixture.componentInstance.colGroups.slice(0, horizontalVirtualization.state.chunkSize));
+    //     let firstRowCells = grid.rowList.first.cells.toArray();
+    //     let headerCells = grid.headerGroups.first.children.toArray();
+    //     verifyHeadersAreAligned(headerCells, firstRowCells);
+    //     verifyDOMMatchesSettings(grid.rowList.first,
+    //          fixture.componentInstance.colGroups.slice(0, horizontalVirtualization.state.chunkSize));
 
-        // check last column group can be scrolled in view
-        horizontalVirtualization.scrollTo(11);
-        await wait(100);
-        fixture.detectChanges();
+    //     // check last column group can be scrolled in view
+    //     horizontalVirtualization.scrollTo(11);
+    //     await wait(100);
+    //     fixture.detectChanges();
 
-        // last 3 blocks should be rendered
-        firstRowCells = grid.rowList.first.cells.toArray();
-        headerCells = grid.headerGroups.first.children.toArray();
-        verifyHeadersAreAligned(headerCells, firstRowCells);
-        verifyDOMMatchesSettings(grid.rowList.first,
-             fixture.componentInstance.colGroups.slice(
-                 horizontalVirtualization.state.startIndex,
-                 horizontalVirtualization.state.startIndex + horizontalVirtualization.state.chunkSize));
+    //     // last 3 blocks should be rendered
+    //     firstRowCells = grid.rowList.first.cells.toArray();
+    //     headerCells = grid.headerGroups.first.children.toArray();
+    //     verifyHeadersAreAligned(headerCells, firstRowCells);
+    //     verifyDOMMatchesSettings(grid.rowList.first,
+    //          fixture.componentInstance.colGroups.slice(
+    //              horizontalVirtualization.state.startIndex,
+    //              horizontalVirtualization.state.startIndex + horizontalVirtualization.state.chunkSize));
 
-    });
+    // });
 
     it('should apply horizontal virtualization correctly for widths in px, % and no-width columns.', () => {
         const fixture = TestBed.createComponent(ColumnLayoutTestComponent);
