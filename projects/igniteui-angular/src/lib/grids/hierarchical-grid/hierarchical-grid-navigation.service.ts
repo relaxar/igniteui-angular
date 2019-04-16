@@ -127,19 +127,15 @@ export class IgxHierarchicalGridNavigationService extends IgxGridNavigationServi
     public navigateTop(visibleColumnIndex) {
         if (this.grid.parent !== null) {
             // navigating in child
-            const verticalScroll = this.grid.verticalScrollContainer.getVerticalScroll();
-            const cellSelector = this.getCellSelector(visibleColumnIndex);
-
+            const verticalScroll = this.grid.verticalScrollContainer.getVerticalScroll();            
             if (verticalScroll.scrollTop === 0) {
-                this._focusScrollCellInView(visibleColumnIndex);
+                const row = this.grid.getRowByIndex(0).nativeElement
+                this.focusPrevRow(row, visibleColumnIndex,this.grid, true, false);
             } else {
                 this.scrollGrid(this.grid, 'top',
                 () => {
-                    const cells = this.grid.nativeElement.querySelectorAll(
-                        `${cellSelector}[data-visibleIndex="${visibleColumnIndex}"]`);
-                    if (cells.length > 0) {
-                        this._focusScrollCellInView(visibleColumnIndex);
-                     }
+                    const row = this.grid.getRowByIndex(0).nativeElement
+                    this.focusPrevRow(row, visibleColumnIndex,this.grid, true, false);
                 });
             }
 
