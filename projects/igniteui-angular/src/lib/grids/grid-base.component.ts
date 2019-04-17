@@ -3871,6 +3871,11 @@ export abstract class IgxGridBaseComponent extends DisplayDensityBase implements
             this.paging ? Math.min(allItems, this.perPage) : allItems);
     }
 
+    public get totalRowSpan() {
+        // TODO - get max row span from all column definitions in the grid
+        return this.hasColumnLayouts ? 3 : 1;
+    }
+
     /**
      * @hidden
      * Sets TBODY height i.e. this.calcHeight
@@ -3886,13 +3891,13 @@ export abstract class IgxGridBaseComponent extends DisplayDensityBase implements
         if (!this._height) {
             this.calcHeight = null;
             if (this.hasSummarizedColumns && this.rootSummariesEnabled) {
-                this.summariesHeight = this.summaryService.calcMaxSummaryHeight();
+                this.summariesHeight = this.summaryService.calcMaxSummaryHeight() * this.totalRowSpan;
             }
             return;
         }
 
         if (this.hasSummarizedColumns && this.rootSummariesEnabled) {
-            this.summariesHeight = this.summaryService.calcMaxSummaryHeight();
+            this.summariesHeight = this.summaryService.calcMaxSummaryHeight() * this.totalRowSpan;
         }
 
         this.calcHeight = this._calculateGridBodyHeight();
