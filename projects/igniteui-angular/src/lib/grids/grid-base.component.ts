@@ -47,7 +47,7 @@ import { IgxCheckboxComponent } from './../checkbox/checkbox.component';
 import { GridBaseAPIService } from './api.service';
 import { IgxGridCellComponent } from './cell.component';
 import { IColumnVisibilityChangedEventArgs } from './column-hiding-item.directive';
-import { IgxColumnComponent } from './column.component';
+import { IgxColumnComponent, IgxColumnLayoutComponent } from './column.component';
 import { ISummaryExpression } from './summaries/grid-summary';
 import { DropPosition, ContainerPositioningStrategy, IgxDecimalPipeComponent, IgxDatePipeComponent } from './grid.common';
 import { IgxGridToolbarComponent } from './grid-toolbar.component';
@@ -3871,9 +3871,20 @@ export abstract class IgxGridBaseComponent extends DisplayDensityBase implements
             this.paging ? Math.min(allItems, this.perPage) : allItems);
     }
 
+    /**
+     * @hidden
+    */
     public get totalRowSpan() {
-        // TODO - get max row span from all column definitions in the grid
-        return this.hasColumnLayouts ? 3 : 1;
+        // get max row span from all column definitions in the grid
+        if (!this.hasColumnLayouts) {
+            return 1;
+        }
+        const colLayouts = this.columnList.toArray().filter(x => x.columnLayout);
+        let count = 1;
+        colLayouts.forEach(layout => {
+            count = Math.max((layout as IgxColumnLayoutComponent).totalRowSpan, count);
+        });
+        return count;
     }
 
     /**
@@ -3891,13 +3902,13 @@ export abstract class IgxGridBaseComponent extends DisplayDensityBase implements
         if (!this._height) {
             this.calcHeight = null;
             if (this.hasSummarizedColumns && this.rootSummariesEnabled) {
-                this.summariesHeight = this.summaryService.calcMaxSummaryHeight() * this.totalRowSpan;
+                this.summariesHeight = this.summaryService.calcMaxSummaryHeight();
             }
             return;
         }
 
         if (this.hasSummarizedColumns && this.rootSummariesEnabled) {
-            this.summariesHeight = this.summaryService.calcMaxSummaryHeight() * this.totalRowSpan;
+            this.summariesHeight = this.summaryService.calcMaxSummaryHeight();
         }
 
         this.calcHeight = this._calculateGridBodyHeight();

@@ -122,6 +122,15 @@ export class IgxSummaryCellComponent {
         return this.column.getCellWidth();
     }
 
+    @HostBinding('style.min-height')
+    get minHeight() {
+        if (!this.grid.hasColumnLayouts) {
+            return null;
+        }
+        const getCurrentSummaryColumn = this.column.summaries.operate([]).length;
+        return getCurrentSummaryColumn * this.grid.defaultRowHeight + 'px';
+    }
+
     get nativeElement(): any {
         return this.element.nativeElement;
     }

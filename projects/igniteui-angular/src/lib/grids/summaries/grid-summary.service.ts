@@ -89,17 +89,39 @@ export class IgxGridSummaryService {
             return this.summaryHeight;
         }
         if (!this.grid.data) {return this.summaryHeight = 0; }
-        let maxSummaryLength = 0;
-        this.grid.columnList.filter((col) => col.hasSummary && !col.hidden).forEach((column) => {
+        if (!this.grid.hasColumnLayouts) {
+            let maxSummaryLength = 0;
+            this.grid.columnList.filter((col) => col.hasSummary && !col.hidden).forEach((column) => {
             const getCurrentSummaryColumn = column.summaries.operate([]).length;
             if (getCurrentSummaryColumn) {
                 if (maxSummaryLength < getCurrentSummaryColumn) {
                     maxSummaryLength = getCurrentSummaryColumn;
                 }
             }
-        });
-        this.maxSummariesLenght = maxSummaryLength;
-        this.summaryHeight =  maxSummaryLength * this.grid.defaultRowHeight;
+            });
+
+            this.maxSummariesLenght = maxSummaryLength;
+            this.summaryHeight =  maxSummaryLength * this.grid.defaultRowHeight;
+        } else {
+            this.maxSummariesLenght = 0;
+            // get per row start and sum
+            for (let start = 1; start <= this.grid.totalRowSpan; start++) {
+                let currMaxSummaryLength = 0;
+                this.grid.columnList
+                .filter((col) => col.hasSummary && !col.hidden && col.rowStart === start)
+                .forEach((column) => {
+                    const getCurrentSummaryColumn = column.summaries.operate([]).length;
+                    if (getCurrentSummaryColumn) {
+                        if (currMaxSummaryLength < getCurrentSummaryColumn) {
+                            currMaxSummaryLength = getCurrentSummaryColumn;
+                        }
+                    }
+
+            });
+            this.maxSummariesLenght += currMaxSummaryLength;
+            }
+            this.summaryHeight = this.maxSummariesLenght * this.grid.defaultRowHeight;
+        }
         return this.summaryHeight;
     }
 
