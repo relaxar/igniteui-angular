@@ -577,7 +577,7 @@ describe('IgxHierarchicalGrid Template Changing Scenarios', () => {
         hierarchicalGrid = fixture.componentInstance.hgrid;
     }));
 
-    it('should render correct columns when setting columns for child in AfterViewInit using ngFor', fakeAsync(() => {
+    xit('should render correct columns when setting columns for child in AfterViewInit using ngFor', fakeAsync(() => {
         const gridHead = fixture.debugElement.query(By.css(THEAD_CLASS));
         const colHeaders = gridHead.queryAll(By.css('igx-grid-header'));
         expect(colHeaders.length).toEqual(2);
