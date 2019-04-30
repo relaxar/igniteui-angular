@@ -513,7 +513,7 @@ describe('IgxHierarchicalGrid Remote Scenarios', () => {
         fixture.detectChanges();
     }));
 
-    it('should render loading indicator when loading and autoGenerate are enabled', fakeAsync(() => {
+    it('should render loading indicator when loading and autoGenerate are enabled', async() => {
         fixture.detectChanges();
 
         const grid = fixture.componentInstance.instance;
@@ -530,16 +530,15 @@ describe('IgxHierarchicalGrid Remote Scenarios', () => {
         grid.shouldGenerate = true;
         fixture.componentInstance.bind();
         fixture.detectChanges();
-        tick(1000);
+        await wait(1000);
 
         loadingIndicator = gridBody.query(By.css('.igx-grid__loading'));
         colHeaders = gridHead.queryAll(By.css('igx-grid-header'));
         expect(colHeaders.length).toBeGreaterThan(0);
         expect(loadingIndicator).toBeNull();
-    }));
+    });
 
-    it('should render disabled collapse all icon for child grid even when it has no data but with child row island',
-    fakeAsync(/** row toggle rAF */() => {
+    it('should render disabled collapse all icon for child grid even when it has no data but with child row island', async() => {
         const hierarchicalGrid = fixture.componentInstance.instance;
 
         fixture.componentInstance.bind();
@@ -555,7 +554,7 @@ describe('IgxHierarchicalGrid Remote Scenarios', () => {
         const iconTxt = headerExpanderElem.query(By.css('igx-icon')).nativeElement.textContent.toLowerCase();
         expect(iconTxt).toBe('unfold_less');
         expect(icon.getActive).toBe(false);
-    }));
+    });
 });
 
 describe('IgxHierarchicalGrid Template Changing Scenarios', () => {
