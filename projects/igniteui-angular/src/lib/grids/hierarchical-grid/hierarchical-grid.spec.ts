@@ -488,7 +488,7 @@ describe('IgxHierarchicalGrid Row Islands', () => {
         expect(child2._destroyed).toBeFalsy();
 
         // destroy hgrid
-        fixture.destroy();
+        fixture.componentInstance.hgrid.destroy();
 
         expect(child1._destroyed).toBeTruthy();
         expect(child2._destroyed).toBeTruthy();
