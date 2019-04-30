@@ -508,7 +508,9 @@ describe('IgxHierarchicalGrid Remote Scenarios', () => {
             imports: [
                 NoopAnimationsModule, IgxHierarchicalGridModule]
         }).compileComponents();
+    }));
 
+    beforeEach(async(() => {
         fixture = TestBed.createComponent(IgxHGridRemoteOnDemandComponent);
         fixture.detectChanges();
     }));
