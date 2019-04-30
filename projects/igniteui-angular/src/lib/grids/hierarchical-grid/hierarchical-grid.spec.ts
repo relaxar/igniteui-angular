@@ -571,13 +571,15 @@ describe('IgxHierarchicalGrid Template Changing Scenarios', () => {
             imports: [
                 NoopAnimationsModule, IgxHierarchicalGridModule]
         }).compileComponents();
+    }));
 
+    beforeEach(async(() => {
         fixture = TestBed.createComponent(IgxHierarchicalGridColumnsUpdateComponent);
         fixture.detectChanges();
         hierarchicalGrid = fixture.componentInstance.hgrid;
     }));
 
-    xit('should render correct columns when setting columns for child in AfterViewInit using ngFor', fakeAsync(() => {
+    it('should render correct columns when setting columns for child in AfterViewInit using ngFor', fakeAsync(() => {
         const gridHead = fixture.debugElement.query(By.css(THEAD_CLASS));
         const colHeaders = gridHead.queryAll(By.css('igx-grid-header'));
         expect(colHeaders.length).toEqual(2);
