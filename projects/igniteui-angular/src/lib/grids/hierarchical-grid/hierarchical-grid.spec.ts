@@ -587,6 +587,7 @@ describe('IgxHierarchicalGrid Template Changing Scenarios', () => {
         const row = hierarchicalGrid.getRowByIndex(0) as IgxHierarchicalRowComponent;
         UIInteractions.clickElement(row.expander);
         fixture.detectChanges();
+        tick(100);
 
         const child1Grids =  fixture.debugElement.queryAll(By.css('igx-child-grid-row'));
         const child1Grid = child1Grids[0].query(By.css('igx-hierarchical-grid'));
@@ -602,6 +603,7 @@ describe('IgxHierarchicalGrid Template Changing Scenarios', () => {
         const row1 = child1Grid.componentInstance.getRowByIndex(0) as IgxHierarchicalRowComponent;
         UIInteractions.clickElement(row1.expander);
         fixture.detectChanges();
+        tick(100);
 
         const child2Grids =  child1Grid.queryAll(By.css('igx-child-grid-row'));
         const child2Grid = child2Grids[0].query(By.css('igx-hierarchical-grid'));
@@ -624,6 +626,7 @@ describe('IgxHierarchicalGrid Template Changing Scenarios', () => {
         const row1 = child1Grid.componentInstance.getRowByIndex(0) as IgxHierarchicalRowComponent;
         UIInteractions.clickElement(row1.expander);
         fixture.detectChanges();
+        tick(100);
 
         const child2Grids =  child1Grid.queryAll(By.css('igx-child-grid-row'));
         const child2Grid = child2Grids[0].query(By.css('igx-hierarchical-grid'));
@@ -670,6 +673,7 @@ describe('IgxHierarchicalGrid Template Changing Scenarios', () => {
         const row1 = child1Grid.componentInstance.getRowByIndex(0) as IgxHierarchicalRowComponent;
         UIInteractions.clickElement(row1.expander);
         fixture.detectChanges();
+        tick(100);
 
         const child2Grids =  child1Grid.queryAll(By.css('igx-child-grid-row'));
         const child2Grid = child2Grids[0].query(By.css('igx-hierarchical-grid'));
@@ -681,12 +685,14 @@ describe('IgxHierarchicalGrid Template Changing Scenarios', () => {
         expect(child2Headers[2].nativeElement.innerText).toEqual('Col1');
 
         UIInteractions.clickElement(row1.expander);
+        tick(100);
         fixture.detectChanges();
 
         fixture.componentInstance.islandCols2.push('Col2');
         fixture.detectChanges();
 
         UIInteractions.clickElement(row1.expander);
+        tick(100);
         fixture.detectChanges();
 
         child2Headers = child2Grid.queryAll(By.css('igx-grid-header'));
