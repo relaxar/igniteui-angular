@@ -578,7 +578,7 @@ describe('IgxHierarchicalGrid Template Changing Scenarios', () => {
         hierarchicalGrid = fixture.componentInstance.hgrid;
     }));
 
-    it('should render correct columns when setting columns for child in AfterViewInit using ngFor', () => {
+    it('should render correct columns when setting columns for child in AfterViewInit using ngFor', fakeAsync(() => {
         const gridHead = fixture.debugElement.query(By.css(THEAD_CLASS));
         const colHeaders = gridHead.queryAll(By.css('igx-grid-header'));
         expect(colHeaders.length).toEqual(2);
@@ -612,9 +612,9 @@ describe('IgxHierarchicalGrid Template Changing Scenarios', () => {
         expect(child2Headers[0].nativeElement.innerText).toEqual('ID');
         expect(child2Headers[1].nativeElement.innerText).toEqual('ProductName');
         expect(child2Headers[2].nativeElement.innerText).toEqual('Col1');
-    });
+    }));
 
-    it('should update columns for expanded child when adding column to row island', () => {
+    it('should update columns for expanded child when adding column to row island', fakeAsync(() => {
         const row = hierarchicalGrid.getRowByIndex(0) as IgxHierarchicalRowComponent;
         UIInteractions.clickElement(row.expander);
         fixture.detectChanges();
@@ -658,9 +658,9 @@ describe('IgxHierarchicalGrid Template Changing Scenarios', () => {
         expect(colHeaders.length).toEqual(2);
         expect(colHeaders[0].nativeElement.innerText).toEqual('ID');
         expect(colHeaders[1].nativeElement.innerText).toEqual('ProductName');
-    });
+    }));
 
-    it('should update columns for rendered child that is collapsed when adding column to row island', () => {
+    it('should update columns for rendered child that is collapsed when adding column to row island', fakeAsync(() => {
         const row = hierarchicalGrid.getRowByIndex(0) as IgxHierarchicalRowComponent;
         UIInteractions.clickElement(row.expander);
         fixture.detectChanges();
@@ -696,7 +696,7 @@ describe('IgxHierarchicalGrid Template Changing Scenarios', () => {
         expect(child2Headers[1].nativeElement.innerText).toEqual('ProductName');
         expect(child2Headers[2].nativeElement.innerText).toEqual('Col1');
         expect(child2Headers[3].nativeElement.innerText).toEqual('Col2');
-    });
+    }));
 });
 
 @Component({
