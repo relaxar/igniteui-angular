@@ -474,10 +474,10 @@ export class IgxGridCellComponent implements OnInit, OnChanges, OnDestroy {
     @HostBinding('class.igx-grid__td--active')
     public focused = false;
 
-    @ViewChild('defaultCell', { read: TemplateRef })
+    @ViewChild('defaultCell', { read: TemplateRef, static: true })
     protected defaultCellTemplate: TemplateRef<any>;
 
-    @ViewChild('inlineEditor', { read: TemplateRef })
+    @ViewChild('inlineEditor', { read: TemplateRef, static: true })
     protected inlineEditorTemplate: TemplateRef<any>;
 
     @ViewChild(IgxTextHighlightDirective, { read: IgxTextHighlightDirective })

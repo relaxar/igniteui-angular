@@ -461,10 +461,10 @@ export class IgxGridRowDraggableComponent extends DataParent {
     public width = '800px';
     public height = null;
 
-    @ViewChild(IgxGridComponent, { read: IgxGridComponent })
+    @ViewChild(IgxGridComponent, /* TODO: add static flag */ { read: IgxGridComponent })
     public instance: IgxGridComponent;
 
-    @ViewChild('dropArea', { read: IgxDropDirective })
+    @ViewChild('dropArea', /* TODO: add static flag */ { read: IgxDropDirective })
     public dropArea: IgxDropDirective;
 
     public enableSorting = false;
@@ -513,9 +513,9 @@ export class IgxGridRowDraggableComponent extends DataParent {
     `
 })
 export class IgxGridFeaturesRowDragComponent extends DataParent {
-    @ViewChild('dragGrid', { read: IgxGridComponent })
+    @ViewChild('dragGrid', /* TODO: add static flag */ { read: IgxGridComponent })
     public dragGrid: IgxGridComponent;
-    @ViewChild('dropGrid', { read: IgxGridComponent })
+    @ViewChild('dropGrid', /* TODO: add static flag */ { read: IgxGridComponent })
     public dropGrid: IgxGridComponent;
     newData = [];
     public enableSorting = false;

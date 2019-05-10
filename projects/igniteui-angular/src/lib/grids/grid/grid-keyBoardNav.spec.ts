@@ -1345,7 +1345,7 @@ export class DefaultGridComponent {
     public selectedCell: IgxGridCellComponent;
     public clickedCell: IgxGridCellComponent;
 
-    @ViewChild(IgxGridComponent, { read: IgxGridComponent })
+    @ViewChild(IgxGridComponent, /* TODO: add static flag */ { read: IgxGridComponent })
     public instance: IgxGridComponent;
 
     public cellSelected(event: IGridCellEventArgs) {
@@ -1379,7 +1379,7 @@ export class CtrlKeyKeyboardNagivationComponent {
 
     public selectedCell: IgxGridCellComponent;
 
-    @ViewChild(IgxGridComponent, { read: IgxGridComponent })
+    @ViewChild(IgxGridComponent, /* TODO: add static flag */ { read: IgxGridComponent })
     public instance: IgxGridComponent;
 
     public cellSelected(event: IGridCellEventArgs) {
@@ -1404,10 +1404,10 @@ export class DefaultGroupBYGridComponent extends DataParent {
     public width = '800px';
     public height = null;
 
-    @ViewChild(IgxGridComponent, { read: IgxGridComponent })
+    @ViewChild(IgxGridComponent, /* TODO: add static flag */ { read: IgxGridComponent })
     public grid: IgxGridComponent;
 
-    @ViewChild('dropArea', { read: TemplateRef })
+    @ViewChild('dropArea', /* TODO: add static flag */ { read: TemplateRef })
     public dropAreaTemplate: TemplateRef<any>;
 
     public enableSorting = false;

@@ -29,7 +29,7 @@ export class IgxExcelStyleSearchComponent {
     @Input()
     public column: IgxColumnComponent;
 
-    @ViewChild('input', { read: IgxInputDirective })
+    @ViewChild('input', { read: IgxInputDirective, static: true })
     public searchInput: IgxInputDirective;
 
     @Input()

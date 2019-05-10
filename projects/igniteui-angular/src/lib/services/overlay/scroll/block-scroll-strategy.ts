@@ -1,4 +1,3 @@
-import { IgxOverlayService } from '../overlay';
 import { ScrollStrategy } from './scroll-strategy';
 
 /**
@@ -16,7 +15,7 @@ export class BlockScrollStrategy extends ScrollStrategy {
     }
 
     /** @inheritdoc */
-    public initialize(document: Document, overlayService: IgxOverlayService, id: string) {
+    public initialize(document: Document) {
         if (this._initialized) {
             return;
         }
@@ -44,7 +43,7 @@ export class BlockScrollStrategy extends ScrollStrategy {
     private onScroll = (ev: Event) => {
         ev.preventDefault();
         if (!this._sourceElement || this._sourceElement !== ev.srcElement) {
-            this._sourceElement = ev.srcElement;
+            this._sourceElement = <Element>ev.srcElement;
             this._initialScrollTop = this._sourceElement.scrollTop;
             this._initialScrollLeft = this._sourceElement.scrollLeft;
         }
