@@ -1,5 +1,4 @@
-import { Component, Injectable, ViewChild, OnInit } from '@angular/core';
-import { Http } from '@angular/http';
+import { Component, ViewChild, OnInit } from '@angular/core';
 import { IgxGridComponent } from 'igniteui-angular';
 
 @Component({
@@ -14,14 +13,14 @@ export class GridColumnMovingSampleComponent implements OnInit {
     public data: Array<any>;
     public columns: Array<any>;
 
+    public density = 'comfortable';
+    public displayDensities;
+
     @ViewChild('grid1') public grid1: IgxGridComponent;
 
     log(event) {
         console.log(event);
     }
-
-    public density = 'comfortable';
-    public displayDensities;
 
     public ngOnInit(): void {
         this.displayDensities = [
