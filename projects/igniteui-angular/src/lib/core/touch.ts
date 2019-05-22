@@ -1,5 +1,6 @@
 import { Inject, Injectable, NgZone } from '@angular/core';
-import { ɵgetDOM as getDOM } from '@angular/platform-browser';import { DOCUMENT } from "@angular/common";
+import { ɵgetDOM as getDOM } from '@angular/platform-browser';
+import { DOCUMENT } from '@angular/common';
 
 const EVENT_SUFFIX = 'precise';
 
