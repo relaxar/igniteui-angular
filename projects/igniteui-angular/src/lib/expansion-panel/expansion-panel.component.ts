@@ -8,6 +8,7 @@ import {
     Output,
     ContentChild,
     forwardRef,
+    AfterContentInit,
 } from '@angular/core';
 import { AnimationBuilder, AnimationReferenceMetadata, useAnimation, AnimationAnimateRefMetadata } from '@angular/animations';
 import { growVerOut, growVerIn } from '../animations/main';
@@ -26,8 +27,7 @@ export interface AnimationSettings {
     templateUrl: 'expansion-panel.component.html',
     providers: [{ provide: IGX_EXPANSION_PANEL_COMPONENT, useExisting: IgxExpansionPanelComponent }]
 })
-export class IgxExpansionPanelComponent implements IgxExpansionPanelBase {
-
+export class IgxExpansionPanelComponent implements IgxExpansionPanelBase, AfterContentInit {
     /**
      * Sets/gets the animation settings of the expansion panel component
      * Open and Close animation should be passed
@@ -140,22 +140,31 @@ export class IgxExpansionPanelComponent implements IgxExpansionPanelBase {
     public get headerId() {
         return this.header ? `${this.id}-header` : '';
     }
-    constructor(private cdr: ChangeDetectorRef, private builder: AnimationBuilder) { }
 
     /**
      * @hidden
      */
     @ContentChild(forwardRef(() => IgxExpansionPanelBodyComponent),
-        { read: forwardRef(() => IgxExpansionPanelBodyComponent), static: true })
+        { read: forwardRef(() => IgxExpansionPanelBodyComponent), static: false })
     public body: IgxExpansionPanelBodyComponent;
 
     /**
      * @hidden
      */
     @ContentChild(forwardRef(() => IgxExpansionPanelHeaderComponent),
-        { read: forwardRef(() => IgxExpansionPanelHeaderComponent), static: true })
+        { read: forwardRef(() => IgxExpansionPanelHeaderComponent), static: false })
     public header: IgxExpansionPanelHeaderComponent;
 
+    constructor(private cdr: ChangeDetectorRef, private builder: AnimationBuilder) { }
+
+    /** @hidden */
+    ngAfterContentInit(): void {
+        if (this.body && this.header) {
+            this.body.labelledBy = this.body.labelledBy || this.headerId;
+            this.body.label = this.body.label || this.id + '-region';
+            this.body.cdr.detectChanges();
+        }
+    }
 
     private playOpenAnimation(cb: () => void) {
         if (!this.body) { // if not body element is passed, there is nothing to animate

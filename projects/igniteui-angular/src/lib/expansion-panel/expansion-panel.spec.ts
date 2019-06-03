@@ -27,7 +27,7 @@ const enum IconPositionClass {
     NONE = 'igx-expansion-panel__header-icon--none',
 }
 
-describe('igxExpansionPanel', () => {
+fdescribe('igxExpansionPanel', () => {
     configureTestSuite();
     beforeEach(async(() => {
         TestBed.configureTestingModule({
