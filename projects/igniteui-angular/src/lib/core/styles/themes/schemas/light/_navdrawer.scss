@@ -1,3 +1,5 @@
+@import '../shape/navdrawer';
+
 ////
 /// @group schemas
 /// @access private
@@ -23,12 +25,10 @@
 ///
 /// @see $default-palette
 
-$_light-navdrawer: (
+$_light-navdrawer: extend((
     background: (
         igx-color: 'surface'
     ),
-
-    border-radius: 0,
 
     border-color: rgba(0, 0, 0, .14),
 
@@ -82,4 +82,4 @@ $_light-navdrawer: (
     ),
 
     elevation: 16
-);
+), $_default-shape-navdrawer);

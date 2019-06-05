@@ -1,3 +1,5 @@
+@import '../shape/grid';
+
 ////
 /// @group schemas
 /// @access private
@@ -65,7 +67,7 @@
 /// @prop {number} grid-elevation [2] - The elevation used for the grid.
 /// @prop {number} drag-elevation [5] - The elevation used for movable elements (ex. column header).
 /// @see $default-palette
-$_light-grid: (
+$_light-grid:extend((
     header-background: (
         igx-color: ('grays', 100),
         hexrgba: #fff
@@ -293,4 +295,4 @@ $_light-grid: (
     row-drag-color: (
         igx-color: ('grays', 200)
     )
-);
+), $_default-shape-grid);

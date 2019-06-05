@@ -1,0 +1,13 @@
+$_default-shape-input-group: (
+    box-border-radius: .2 .2 0 0,
+    border-border-radius: .2,
+    search-border-radius: .2,
+);
+
+$_round-shape-input-group: ();
+
+$_square-shape-input-group: (
+    box-border-radius: 0px,
+    border-border-radius: 0px,
+    search-border-radius: 0px,
+);

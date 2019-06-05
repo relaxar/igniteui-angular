@@ -1,0 +1,17 @@
+$_default-shape-button: (
+    flat-border-radius: .2,
+    raised-border-radius: .2,
+    outlined-border-radius: .2,
+    fab-border-radius: 1,
+    icon-border-radius: 1,
+);
+
+$_round-shape-button: ();
+
+$_square-shape-button: (
+    flat-border-radius: 0px,
+    raised-border-radius: 0px,
+    outlined-border-radius: 0px,
+    fab-border-radius: 0px,
+    icon-border-radius: 0px,
+);
