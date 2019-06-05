@@ -2,6 +2,10 @@
 
 All notable changes for each version of this project will be documented in this file.
 
+## 7.2.x
+### New feature
+- **igxSlider** - exposing new `labels` property accepting a collection of literal values that become equally spread over the slider, by placing each element as a thumb label.
+ 
 ## 7.2.9
 - `Pager`
     - **Behavioral Change** - The pager is now hidden when there are no records in the grid.
