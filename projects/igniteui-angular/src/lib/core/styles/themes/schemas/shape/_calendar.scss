@@ -2,8 +2,10 @@ $_default-shape-calendar: (
     border-radius: .2,
 );
 
-$_round-shape-calendar: ();
+$_round-shape-calendar: (
+    border-radius: 1
+);
 
 $_square-shape-calendar: (
-    border-radius: 0px,
+    border-radius: 0%,
 );

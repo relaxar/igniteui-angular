@@ -6,12 +6,18 @@ $_default-shape-button: (
     icon-border-radius: 1,
 );
 
-$_round-shape-button: ();
+$_round-shape-button: (
+    flat-border-radius: 1,
+    raised-border-radius: 1,
+    outlined-border-radius: 1,
+    fab-border-radius: 1,
+    icon-border-radius: 1,
+);
 
 $_square-shape-button: (
-    flat-border-radius: 0px,
-    raised-border-radius: 0px,
-    outlined-border-radius: 0px,
-    fab-border-radius: 0px,
-    icon-border-radius: 0px,
+    flat-border-radius: 0%,
+    raised-border-radius: 0%,
+    outlined-border-radius: 0%,
+    fab-border-radius: 0%,
+    icon-border-radius: 0%,
 );

@@ -2,8 +2,10 @@ $_default-shape-tooltip: (
     border-radius: .25,
 );
 
-$_round-shape-tooltip: ();
+$_round-shape-tooltip: (
+    border-radius: 1,
+);
 
 $_square-shape-tooltip: (
-    border-radius: 0px,
+    border-radius: 0%,
 );

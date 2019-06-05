@@ -2,8 +2,10 @@ $_default-shape-button-group: (
     border-radius: .2,
 );
 
-$_round-shape-button-group: ();
+$_round-shape-button-group: (
+    border-radius: 1,
+);
 
 $_square-shape-button-group: (
-    border-radius: 0px,
+    border-radius: 0%,
 );

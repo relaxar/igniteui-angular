@@ -3,9 +3,12 @@ $_default-shape-list: (
     item-border-radius: 0,
 );
 
-$_round-shape-list: ();
+$_round-shape-list: (
+    border-radius: 1,
+    item-border-radius: 1,
+);
 
 $_square-shape-list: (
-    border-radius: 0px,
-    item-border-radius: 0px,
+    border-radius: 0%,
+    item-border-radius: 0%,
 );

@@ -2,8 +2,10 @@ $_default-shape-snackbar: (
     border-radius: .17,
 );
 
-$_round-shape-snackbar: ();
+$_round-shape-snackbar: (
+    border-radius: 1
+);
 
 $_square-shape-snackbar: (
-    border-radius: 0px,
+    border-radius: 0%,
 );
