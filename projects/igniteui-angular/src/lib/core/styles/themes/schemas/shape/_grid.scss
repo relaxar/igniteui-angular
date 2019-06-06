@@ -1,3 +1,9 @@
-$_default-shape-grid: ();
+$_default-shape-grid: (
+    drop-area-border-radius: 16px
+);
+
 $_round-shape-grid: ();
-$_square-shape-grid: ();
+
+$_square-shape-grid: (
+    drop-area-border-radius: 0
+);

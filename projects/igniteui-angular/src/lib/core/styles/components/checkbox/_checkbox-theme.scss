@@ -31,6 +31,7 @@
     $palette: $default-palette,
     $schema: $light-schema,
 
+    $border-radius: null,
     $label-color: null,
     $empty-color: null,
     $fill-color: null,
@@ -38,7 +39,12 @@
     $disabled-color: null
 ) {
     $name: 'igx-checkbox';
-    $theme: apply-palette(map-get($schema, $name), $palette);
+    $checkbox-schema: map-get($schema, $name);
+    $theme: apply-palette($checkbox-schema, $palette);
+
+    $border-radius: round-borders(
+        if($border-radius, $border-radius, map-get($checkbox-schema, 'border-radius')),0 ,10px
+    );
 
     @return extend($theme, (
         name: $name,
@@ -47,7 +53,8 @@
         empty-color: $empty-color,
         fill-color: $fill-color,
         tick-color: $tick-color,
-        disabled-color: $disabled-color
+        disabled-color: $disabled-color,
+        border-radius: $border-radius
     ));
 }
 
@@ -113,7 +120,7 @@
         border-width: $border-width;
         border-style: solid;
         border-color: --var($theme, 'empty-color');
-        border-radius: $radius;
+        border-radius: --var($theme, 'border-radius');
         -webkit-tap-highlight-color: transparent;
         transition: border-color .2s $ease-out-quad;
 
