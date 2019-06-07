@@ -16,6 +16,7 @@
 /// @param {Color} $fill-color [null] - The checked border and fill colors.
 /// @param {Color} $tick-color [null] - The checked mark color.
 /// @param {Color} $disabled-color [null] - The disabled border and fill colors.
+/// @param {border-radius} $border-radius [null] - The border radius used for checkbox component.
 /// Set to light when the surrounding area is dark.
 ///
 /// @requires $default-palette
