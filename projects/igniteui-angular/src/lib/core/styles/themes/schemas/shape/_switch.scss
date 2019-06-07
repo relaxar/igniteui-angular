@@ -1,3 +1,14 @@
-$_default-shape-switch: ();
-$_round-shape-switch: ();
-$_square-shape-switch: ();
+$_default-shape-switch: (
+    border-radius-track: 1,
+    border-radius-thumb: 1
+);
+
+$_round-shape-switch: (
+    border-radius-track: 1,
+    border-radius-thumb: 1
+);
+
+$_square-shape-switch: (
+    border-radius-track: 0%,
+    border-radius-thumb: 0%
+);
