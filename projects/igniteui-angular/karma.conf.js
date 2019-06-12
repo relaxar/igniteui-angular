@@ -38,7 +38,15 @@ module.exports = function (config) {
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: true,
-    browsers: ['Chrome'],
-    singleRun: false
+    browsers: ['Chrome_custom'],
+    singleRun: false,
+    customLaunchers: {
+        Chrome_custom: {
+            base: 'Chrome',
+            flags: [
+                '--js-flags=--expose-gc'
+            ],
+          }
+    }
   });
 };
