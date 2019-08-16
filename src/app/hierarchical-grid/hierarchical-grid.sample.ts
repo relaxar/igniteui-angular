@@ -96,4 +96,8 @@ export class HierarchicalGridSampleComponent {
     selectDensity(event) {
         this.density = this.displayDensities[event.index].label;
     }
+
+    cellClick($evt) {
+        console.log('Cell Click', $evt);
+    }
 }
