@@ -1,0 +1,500 @@
+{
+    "igx-avatar": {
+        "parameters": {
+            "theme": {
+                "description": [
+                    "<p>The theme used to style the component.</p>",
+                    ""
+                ]
+            }
+        }
+    },
+    "igx-badge": {
+        "parameters": {
+            "theme": {
+                "description": [
+                    "<p>The theme used to style the component.</p>",
+                    ""
+                ]
+            }
+        }
+    },
+    "igx-banner": {
+        "parameters": {
+            "theme": {
+                "description": [
+                    "<p>The theme used to style the component.</p>",
+                    ""
+                ]
+            }
+        }
+    },
+    "igx-bottom-nav": {
+        "parameters": {
+            "theme": {
+                "description": [
+                    "<p>The theme used to style the component.</p>",
+                    ""
+                ]
+            }
+        }
+    },
+    "igx-button-group": {
+        "parameters": {
+            "theme": {
+                "description": [
+                    "<p>The theme used to style the component.</p>",
+                    ""
+                ]
+            }
+        }
+    },
+    "igx-button": {
+        "parameters": {
+            "theme": {
+                "description": [
+                    "<p>The theme used to style the component.</p>",
+                    ""
+                ]
+            }
+        }
+    },
+    "igx-calendar": {
+        "parameters": {
+            "theme": {
+                "description": [
+                    "<p>The theme used to style the component.</p>",
+                    ""
+                ]
+            }
+        }
+    },
+    "igx-card": {
+        "description": [
+            "<p>Card Component</p>",
+            ""
+        ],
+        "parameters": {
+            "theme": {
+                "description": [
+                    "<p>The theme used to style the component.</p>",
+                    ""
+                ]
+            }
+        }
+    },
+    "igx-carousel": {
+        "parameters": {
+            "theme": {
+                "description": [
+                    "<p>The theme used to style the component.</p>",
+                    ""
+                ]
+            }
+        }
+    },
+    "igx-checkbox": {
+        "parameters": {
+            "theme": {
+                "description": [
+                    "<p>The theme used to style the component.</p>",
+                    ""
+                ]
+            }
+        }
+    },
+    "igx-chip": {
+        "parameters": {
+            "theme": {
+                "description": [
+                    "<p>The theme used to style the component.</p>",
+                    ""
+                ]
+            }
+        }
+    },
+    "igx-column-hiding": {
+        "parameters": {
+            "theme": {
+                "description": [
+                    "<p>The theme used to style the component.</p>",
+                    ""
+                ]
+            }
+        }
+    },
+    "igx-combo": {
+        "parameters": {
+            "theme": {
+                "description": [
+                    "<p>The theme used to style the component.</p>",
+                    ""
+                ]
+            }
+        }
+    },
+    "igx-date-picker": {
+        "parameters": {
+            "theme": {
+                "description": [
+                    "<p>The calendar theme used to style the component.</p>",
+                    ""
+                ]
+            }
+        }
+    },
+    "igx-dialog": {
+        "parameters": {
+            "theme": {
+                "description": [
+                    "<p>The theme used to style the component.</p>",
+                    ""
+                ]
+            }
+        }
+    },
+    "igx-divider": {
+        "parameters": {
+            "theme": {
+                "description": [
+                    "<p>The theme used to style the component.</p>",
+                    ""
+                ]
+            }
+        }
+    },
+    "igx-drop-down": {
+        "parameters": {
+            "theme": {
+                "description": [
+                    "<p>The theme used to style the component.</p>",
+                    ""
+                ]
+            }
+        }
+    },
+    "igx-expansion-panel": {
+        "parameters": {
+            "theme": {
+                "description": [
+                    "<p>The theme used to style the component.</p>",
+                    ""
+                ]
+            }
+        }
+    },
+    "igx-grid-paginator": {
+        "parameters": {
+            "theme": {
+                "description": [
+                    "<p>The theme used to style the component.</p>",
+                    ""
+                ]
+            }
+        }
+    },
+    "igx-grid-summary": {
+        "parameters": {
+            "theme": {
+                "description": [
+                    "<p>The theme used to style the component.</p>",
+                    ""
+                ]
+            }
+        }
+    },
+    "igx-grid-toolbar": {
+        "parameters": {
+            "theme": {
+                "description": [
+                    "<p>The theme used to style the component.</p>",
+                    ""
+                ]
+            }
+        }
+    },
+    "_excel-filtering": {
+        "parameters": {
+            "theme": {
+                "description": [
+                    "<p>The grid theme used to style the component.</p>",
+                    ""
+                ]
+            },
+            "palette": {
+                "description": [
+                    "<p>The palette map used as base for the component.</p>",
+                    ""
+                ]
+            }
+        }
+    },
+    "igx-grid": {
+        "parameters": {
+            "theme": {
+                "description": [
+                    "<p>The theme used to style the component.</p>",
+                    ""
+                ]
+            }
+        }
+    },
+    "igx-icon": {
+        "parameters": {
+            "theme": {
+                "description": [
+                    "<p>The theme used to style the component.</p>",
+                    ""
+                ]
+            }
+        }
+    },
+    "igx-input-group": {
+        "parameters": {
+            "theme": {
+                "description": [
+                    "<p>The theme used to style the component.</p>",
+                    ""
+                ]
+            }
+        }
+    },
+    "igx-list": {
+        "parameters": {
+            "theme": {
+                "description": [
+                    "<p>The theme used to style the component.</p>",
+                    ""
+                ]
+            }
+        }
+    },
+    "igx-navbar": {
+        "parameters": {
+            "theme": {
+                "description": [
+                    "<p>The theme used to style the component.</p>",
+                    ""
+                ]
+            }
+        }
+    },
+    "igx-navdrawer": {
+        "parameters": {
+            "theme": {
+                "description": [
+                    "<p>The theme used to style the component.</p>",
+                    ""
+                ]
+            }
+        }
+    },
+    "igx-overlay": {
+        "parameters": {
+            "theme": {
+                "description": [
+                    "<p>The theme used to style the component.</p>",
+                    ""
+                ]
+            }
+        }
+    },
+    "igx-progress-linear": {
+        "parameters": {
+            "theme": {
+                "description": [
+                    "<p>The theme used to style the component.</p>",
+                    ""
+                ]
+            }
+        }
+    },
+    "igx-progress-circular": {
+        "parameters": {
+            "theme": {
+                "description": [
+                    "<p>The theme used to style the component.</p>",
+                    ""
+                ]
+            }
+        }
+    },
+    "igx-radio": {
+        "parameters": {
+            "theme": {
+                "description": [
+                    "<p>The theme used to style the component.</p>",
+                    ""
+                ]
+            }
+        }
+    },
+    "igx-ripple": {
+        "parameters": {
+            "theme": {
+                "description": [
+                    "<p>The theme used to style the component.</p>",
+                    ""
+                ]
+            }
+        }
+    },
+    "igx-slider": {
+        "parameters": {
+            "theme": {
+                "description": [
+                    "<p>The theme used to style the component.</p>",
+                    ""
+                ]
+            }
+        }
+    },
+    "igx-snackbar": {
+        "parameters": {
+            "theme": {
+                "description": [
+                    "<p>The theme used to style the component.</p>",
+                    ""
+                ]
+            }
+        }
+    },
+    "igx-switch": {
+        "parameters": {
+            "theme": {
+                "description": [
+                    "<p>The theme used to style the component.</p>",
+                    ""
+                ]
+            }
+        }
+    },
+    "igx-tabs": {
+        "parameters": {
+            "theme": {
+                "description": [
+                    "<p>The theme used to style the component.</p>",
+                    ""
+                ]
+            }
+        }
+    },
+    "igx-time-picker": {
+        "parameters": {
+            "theme": {
+                "description": [
+                    "<p>The theme used to style the component.</p>",
+                    ""
+                ]
+            }
+        }
+    },
+    "igx-toast": {
+        "description": [
+            "<p>Toast Component</p>",
+            ""
+        ],
+        "parameters": {
+            "theme": {
+                "description": [
+                    "<p>The theme used to style the component.</p>",
+                    ""
+                ]
+            }
+        }
+    },
+    "igx-tooltip": {
+        "parameters": {
+            "theme": {
+                "description": [
+                    "<p>The theme used to style the component.</p>",
+                    ""
+                ]
+            }
+        }
+    },
+    "igx-theme": {
+        "description": [
+            "<p>Generates an Ignite UI for Angular global theme.</p>",
+            ""
+        ],
+        "parameters": {
+            "palette": {
+                "description": [
+                    "<p>An igx-palette to be used by the global theme.</p>",
+                    ""
+                ]
+            },
+            "schema": {
+                "description": [
+                    "<p>The schema used as basis for styling the components.</p>",
+                    ""
+                ]
+            },
+            "exclude": {
+                "description": [
+                    "<p>A list of igx components to be excluded from the global theme styles.</p>",
+                    ""
+                ]
+            },
+            "legacy-support": {
+                "description": [
+                    "<p>Turn off support for IE11, allowing you to use css variables to style components.</p>",
+                    ""
+                ]
+            }
+        }
+    },
+    "igx-light-theme": {
+        "description": [
+            "<p>Creates a global theme that can be used with light backgrounds.</p>",
+            ""
+        ],
+        "parameters": {
+            "palette": {
+                "description": [
+                    "<p>An igx-palette to be used by the global theme.</p>",
+                    ""
+                ]
+            },
+            "exclude": {
+                "description": [
+                    "<p>A list of igx components to be excluded from the global theme styles.</p>",
+                    ""
+                ]
+            },
+            "legacy-support": {
+                "description": [
+                    "<p>Turn off support for IE11, allowing you to use css variables to style components.</p>",
+                    ""
+                ]
+            }
+        }
+    },
+    "igx-dark-theme": {
+        "description": [
+            "<p>Creates a global theme that can be used with dark backgrounds.</p>",
+            ""
+        ],
+        "parameters": {
+            "palette": {
+                "description": [
+                    "<p>An igx-palette to be used by the global theme.</p>",
+                    ""
+                ]
+            },
+            "exclude": {
+                "description": [
+                    "<p>A list of igx components to be excluded from the global theme styles.</p>",
+                    ""
+                ]
+            },
+            "legacy-support": {
+                "description": [
+                    "<p>Turn off support for IE11, allowing you to use css variables to style components.</p>",
+                    ""
+                ]
+            }
+        }
+    }
+}

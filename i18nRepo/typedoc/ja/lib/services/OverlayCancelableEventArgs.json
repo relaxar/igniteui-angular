@@ -1,0 +1,22 @@
+{
+    "OverlayCancelableEventArgs": {
+        "properties": {
+            "id": {
+                "comment": {
+                    "shortText": "`Attach()` メソッドで生成されたオーバーレイの id。"
+                }
+            },
+            "componentRef": {
+                "comment": {
+                    "shortText": "`Type<T>` が `attach()` メソッドに提供された場合に利用可能で、作成されたコンポーネント インスタンスへのアクセスを許可します。"
+                }
+            },
+            "cancel": {
+                "comment": {
+                    "shortText": "イベントをキャンセルする機能を提供します。"
+                }
+            }
+        },
+        "methods": {}
+    }
+}

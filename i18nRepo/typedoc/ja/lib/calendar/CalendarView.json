@@ -1,0 +1,8 @@
+{
+    "CalendarView": {
+        "comment": {
+            "shortText": "カレンダー ビューを年、月または日に設定します。"
+        },
+        "members": {}
+    }
+}

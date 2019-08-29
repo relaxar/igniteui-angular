@@ -1,0 +1,25 @@
+{
+    "IDragStartEventArgs": {
+        "properties": {
+            "cancel": {
+                "comment": {
+                    "shortText": "ドラッグをキャンセルするかどうかを設定します。"
+                }
+            },
+            "originalEvent": {
+                "comment": {
+                    "shortText": [
+                        "要素との操作を引き起こした元のイベントへの参照。",
+                        "PointerEvent、TouchEvent、または MouseEvent にすることができます。"
+                    ]
+                }
+            },
+            "owner": {
+                "comment": {
+                    "shortText": "このイベントをトリガしーたオーナーの igxDrag ディレクティブ。"
+                }
+            }
+        },
+        "methods": {}
+    }
+}

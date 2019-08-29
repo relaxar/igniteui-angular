@@ -1,0 +1,27 @@
+{
+    "AutocompleteItemSelectionEventArgs": {
+        "comment": {
+            "tags": {
+                "export": {
+                    "comment": {
+                        "tagName": "エクスポート"
+                    }
+                }
+            },
+            "shortText": "onItemSelection イベント引数をカプセル化するインターフェイス - 新しい値と選択のキャンセル。"
+        },
+        "properties": {
+            "value": {
+                "comment": {
+                    "shortText": "ドロップダウンから選択された新しい値。"
+                }
+            },
+            "cancel": {
+                "comment": {
+                    "shortText": "イベントをキャンセルする機能を提供します。"
+                }
+            }
+        },
+        "methods": {}
+    }
+}

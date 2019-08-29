@@ -1,0 +1,16 @@
+{
+    "IDropDownNavigationDirective": {
+        "comment": {
+            "tags": {
+                "export": {
+                    "comment": {
+                        "tagName": "エクスポート"
+                    }
+                }
+            },
+            "shortText": "IgxDropDownNavigationDirective のインスタンスのためのインターフェイス。"
+        },
+        "properties": {},
+        "methods": {}
+    }
+}

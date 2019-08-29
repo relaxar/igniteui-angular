@@ -1,0 +1,13 @@
+{
+    "IgxToastPosition": {
+        "comment": {
+            "shortText": [
+                "トースト位置に使用できる列挙体:",
+                "Bottom",
+                "Middle",
+                "Top"
+            ]
+        },
+        "members": {}
+    }
+}

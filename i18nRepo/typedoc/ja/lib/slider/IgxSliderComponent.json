@@ -1,0 +1,472 @@
+{
+    "IgxSliderComponent": {
+        "comment": {
+            "text": [
+                "Ignite UI Slider を使用すると、つまみをトラックで移動して指定した範囲内で値選択を許可します。",
+                "トラックを連続またはステップに定義でき、単一または範囲によってスライダーのタイプを選択できます。",
+                "例:",
+                "```html",
+                "<igx-slider id=\"slider\"",
+                "           [minValue]=\"0\" [maxValue]=\"100\"",
+                "           [continuous]=true [(ngModel)]=\"volume\">",
+                "</igx-slider>",
+                "```"
+            ],
+            "shortText": [
+                "**Ignite UI for Angular Slider** -",
+                "[ヘルプ](https://jp.infragistics.com/products/ignite-ui-angular/angular/components/slider.html)"
+            ]
+        },
+        "properties": {
+            "id": {
+                "comment": {
+                    "shortText": [
+                        "`id` 属性の値を設定する @Input プロパティ。",
+                        "提供されていない場合、自動的に生成されます。",
+                        "```html",
+                        "<igx-slider [id]=\"'igx-slider-32'\" [(ngModel)]=\"task.percentCompleted\" [step]=\"5\" [lowerBound]=\"20\">",
+                        "```"
+                    ]
+                }
+            },
+            "thumbLabelVisibilityDuration": {
+                "comment": {
+                    "shortText": [
+                        "つまみのラベルの表示期間を設定する @Input プロパティ。デフォルト値は 750 ミリ秒です。",
+                        "```html",
+                        "<igx-slider #slider [thumbLabelVisibilityDuration]=\"3000\" [(ngModel)]=\"task.percentCompleted\" [step]=\"5\">",
+                        "```"
+                    ]
+                }
+            },
+            "onValueChange": {
+                "comment": {
+                    "shortText": [
+                        "このイベントは、ユーザーがつまみ操作を中止して値が変更されたときに発生されます。",
+                        "```typescript",
+                        "public change(event){",
+                        "   alert(\"The value has been changed!\");",
+                        "}",
+                        "```",
+                        "```html",
+                        "<igx-slider (onValueChange)=\"change($event)\" #slider [(ngModel)]=\"task.percentCompleted\" [step]=\"5\">",
+                        "```"
+                    ]
+                }
+            }
+        },
+        "methods": {},
+        "accessors": {
+            "type": {
+                "getter": {
+                    "comment": {
+                        "shortText": [
+                            "`IgxSliderComponent` のタイプを取得する @Input プロパティ。スライダーを SliderType.SLIDER (デフォルト値) または SliderType.RANGE に設定できます。",
+                            "```typescript",
+                            "@ViewChild(\"slider2\")",
+                            "public slider: IgxSliderComponent;",
+                            "ngAfterViewInit(){",
+                            "    let type = this.slider.type;",
+                            "}"
+                        ]
+                    }
+                },
+                "setter": {
+                    "comment": {
+                        "shortText": [
+                            "An @Input property that sets the type of the `IgxSliderComponent`. The slider can be SliderType.SLIDER(default) or SliderType.RANGE.",
+                            "```typescript",
+                            "sliderType: SliderType = SliderType.RANGE;",
+                            "```",
+                            "```html",
+                            "<igx-slider #slider2 [type]=\"sliderType\" [(ngModel)]=\"rangeValue\" [minValue]=\"0\" [maxValue]=\"100\">",
+                            "```"
+                        ]
+                    }
+                }
+            },
+            "labels": {
+                "getter": {
+                    "comment": {
+                        "shortText": [
+                            "複数の要素を持つプリミティブ値のコレクションを受け入れることによって、`labelView` を有効にします。",
+                            "各要素はスライダー上に均等に広がり、サムラベルとして機能します。",
+                            "プロパティが設定されると、{@link maxValue}、{@link minValue}、{@link step} よりも優先されます。",
+                            "つまり、これらのプロパティに対する操作は許可されません。"
+                        ]
+                    }
+                },
+                "setter": {
+                    "comment": {
+                        "shortText": [
+                            "複数の要素を持つプリミティブ値のコレクションを受け入れることによって、`labelView` を有効にします。",
+                            "各要素はスライダー上に均等に広がり、サムラベルとして機能します。",
+                            "プロパティが設定されると、{@link maxValue}、{@link minValue}、{@link step} よりも優先されます。",
+                            "つまり、これらのプロパティに対する操作は許可されません。"
+                        ]
+                    }
+                }
+            },
+            "context": {
+                "getter": {
+                    "comment": {
+                        "text": [
+                            "return {",
+                            " $implicit: {@link value},",
+                            " labels: {@link labels}",
+                            "}",
+                            "```"
+                        ],
+                        "shortText": [
+                            "{@link IgxThumbFromTemplateDirective} および {@link IgxThumbToTemplateDirective} テンプレートに対応するテンプレートコンテキストを返します。"
+                        ]
+                    }
+                }
+            },
+            "step": {
+                "setter": {
+                "comment": {
+                    "shortText": [
+                        "つまみドラッグ時の値を増加/減少する段階を設定する @Input プロパティ。",
+                        "デフォルトの段階は 1 です。段階を 0 以下に設定しないでください。",
+                        "```html",
+                        "<igx-slider #slider [(ngModel)]=\"task.percentCompleted\" [step]=\"5\">",
+                        "```"
+                    ]
+                }
+            },
+            "getter": {
+                "comment": {
+                    "shortText": [
+                        "Returns the incremental/decremental dragging step of the {@link IgxSliderComponent}.",
+                        "```typescript",
+                        "@ViewChild(\"slider2\")",
+                        "public slider: IgxSliderComponent;",
+                        "ngAfterViewInit(){",
+                        "    let step = this.slider.step;",
+                        "}",
+                        "```"
+                    ]
+                }
+            }
+        },
+        "disabled": {
+            "getter": {
+                "comment": {
+                    "shortText": [
+                        "{@link IgxSliderComponent} が無効かどうかを返します。",
+                        "```typescript",
+                        "@ViewChild(\"slider2\")",
+                        "public slider: IgxSliderComponent;",
+                        "ngAfterViewInit(){",
+                        "    let isDisabled = this.slider.disabled;",
+                        "}",
+                        "```"
+                    ]
+                }
+            },
+            "setter": {
+                "comment": {
+                    "shortText": [
+                        "UI 操作を無効または有効にする @Input プロパティ。",
+                        "```html",
+                        "<igx-slider #slider [disabled]=\"'true'\" [(ngModel)]=\"task.percentCompleted\" [step]=\"5\" [lowerBound]=\"20\">",
+                        "```"
+                    ]
+                }
+            }
+        },
+        "continuous": {
+            "getter": {
+                "comment": {
+                    "shortText": [
+                        "{@link IgxSliderComponent} が連続として設定されているかどうかを返します。",
+                        "```typescript",
+                        "@ViewChild(\"slider2\")",
+                        "public slider: IgxSliderComponent;",
+                        "ngAfterViewInit(){",
+                        "    let continuous = this.slider.continuous;",
+                        "}",
+                        "```"
+                    ]
+                }
+            },
+            "setter": {
+                "comment": {
+                    "shortText": [
+                        "{@link IgxSliderComponent} を連続としてて設定する @Input プロパティ。",
+                        "{@link IgxSliderComponent} はデフォルトで不連続です。",
+                        "不連続 {@link IgxSliderComponent} には目盛がなく、値にバブル ラベルを表示しません。",
+                        "```html",
+                        "<igx-slider #slider [continuous]=\"'true'\" [(ngModel)]=\"task.percentCompleted\" [step]=\"5\" [lowerBound]=\"20\">",
+                        "```"
+                    ]
+                }
+            }
+        },
+        "maxValue": {
+            "getter": {
+                "comment": {
+                    "shortText": [
+                        "{@link IgxSliderComponent} の最大値を返します。",
+                        "```typescript",
+                        "@ViewChild(\"slider\")",
+                        "public slider: IgxSliderComponent;",
+                        "ngAfterViewInit(){",
+                        "   let sliderMax = this.slider.maxValue;",
+                        "}",
+                        "```"
+                    ]
+                }
+            },
+                "setter": {
+                    "comment": {
+                        "shortText": [
+                            "`IgxSliderComponent` の最大値を設定します。",
+                            "デフォルトの最大値は 100 です。",
+                            "```html",
+                            "<igx-slider [type]=\"sliderType\" [minValue]=\"56\" [maxValue]=\"256\">",
+                            "```"
+                        ]
+                    }
+                }
+            },
+            "minValue": {
+                "getter": {
+                    "comment": {
+                        "shortText": [
+                            "`IgxSliderComponent` の最小値を返します。",
+                            "```typescript",
+                            "@ViewChild(\"slider2\")",
+                            "public slider: IgxSliderComponent;",
+                            "ngAfterViewInit(){",
+                            "   let sliderMin = this.slider.minValue;",
+                            "}",
+                            "```"
+                        ]
+                    }
+                },
+                "setter": {
+                    "comment": {
+                        "shortText": [
+                            "`IgxSliderComponent` の最小値を設定します。",
+                            "デフォルトの最小値は 0 です。",
+                            "```html",
+                            "<igx-slider [type]=\"sliderType\" [minValue]=\"56\" [maxValue]=\"100\">",
+                            "```"
+                        ]
+                    }
+                }
+            },
+            "lowerBound": {
+                "getter": {
+                    "comment": {
+                        "shortText": [
+                            "`IgxSliderComponent` の下限を返します。",
+                            "```typescript",
+                            "@ViewChild(\"slider\")",
+                            "public slider: IgxSliderComponent;",
+                            "ngAfterViewInit(){",
+                            "   let sliderLowBound = this.slider.lowerBound;",
+                            "}",
+                            "```"
+                        ]
+                    }
+                },
+                "setter": {
+                    "comment": {
+                        "shortText": [
+                            "`IgxSliderComponent` の下限を設定します。",
+                            "設定しない場合は、最小値と同じです。",
+                            "```html",
+                            "<igx-slider [step]=\"5\" [lowerBound]=\"20\">",
+                            "```"
+                        ]
+                    }
+                }
+            },
+            "upperBound": {
+                "getter": {
+                    "comment": {
+                        "shortText": [
+                            "`IgxSliderComponent` の上限を返します。",
+                            "```typescript",
+                            "@ViewChild(\"slider\")",
+                            "public slider: IgxSliderComponent;",
+                            "ngAfterViewInit(){",
+                            "   let sliderUpBound = this.slider.upperBound;",
+                            "}",
+                            "```"
+                        ]
+                    }
+                },
+                "setter": {
+                    "comment": {
+                        "shortText": [
+                            "`IgxSliderComponent` の上限を設定します。",
+                            "設定しない場合は、最大値と同じです。",
+                            "```html",
+                            "<igx-slider [step]=\"5\" [upperBound]=\"20\">",
+                            "```"
+                        ]
+                    }
+                }
+            },
+            "value": {
+                "getter": {
+                    "comment": {
+                        "shortText": [
+                            "スライダーの値を返します。スライダーのタイプが {@link SliderType.SLIDER} の場合、返された値は数値です。",
+                            "スライダーのタイプが {@link SliderType.RANGE} の場合、戻り値は {@link lowerValue} と {@link upperValue} のオブジェクトを表します。",
+                            "```typescript",
+                            "@ViewChild(\"slider2\")",
+                            "public slider: IgxSliderComponent;",
+                            "public sliderValue(event){",
+                            "   let sliderVal = this.slider.value;",
+                            "}",
+                            "```"
+                        ]
+                    }
+                },
+                "setter": {
+                    "comment": {
+                        "shortText": [
+                            "スライダーの値を設定します。",
+                            "スライダーのタイプが {@link SliderType.SLIDER} の場合、引数は数値です。デフォルトで {@link value} は {@link lowerBound} を取得します。",
+                            "スライダー タイプが {@link SliderType.RANGE} の場合、引数は {@link lowerValue} および {@link upperValue} プロパティのオブジェクトを表します。",
+                            "デフォルトでは、オブジェクトは {@link lowerBound} および {@link upperBound} プロパティ値に関連付けられています。",
+                            "```typescript",
+                            "rangeValue = {",
+                            "  lower: 30,",
+                            "  upper: 60",
+                            "};",
+                            "```",
+                            "```html",
+                            "<igx-slider [type]=\"sliderType\" [(ngModel)]=\"rangeValue\" [minValue]=\"56\" [maxValue]=\"256\">",
+                            "```"
+                        ]
+                    }
+                }
+            },
+            "isRange": {
+                "getter": {
+                    "comment": {
+                        "shortText": [
+                            "`IgxSliderComponent` の type が RANGE かどうかを返します。",
+                            "```typescript",
+                            "@ViewChild(\"slider\")",
+                            "public slider: IgxSliderComponent;",
+                            "ngAfterViewInit(){",
+                            "   let sliderRange = this.slider.isRange;",
+                            "}",
+                            "```"
+                        ]
+                    }
+                }
+            },
+            "lowerValue": {
+                "getter": {
+                    "comment": {
+                        "shortText": [
+                            "`IgxSliderComponent` の下値を返します。",
+                            "```typescript",
+                            "@ViewChild(\"slider\")",
+                            "public slider: IgxSliderComponent;",
+                            "public lowValue(event){",
+                            "   let sliderLowValue = this.slider.lowerValue;",
+                            "}",
+                            "```"
+                        ]
+                    }
+                },
+                "setter": {
+                    "comment": {
+                        "shortText": [
+                            "`IgxSliderComponent` の下値を設定します。",
+                            "```typescript",
+                            "@ViewChild(\"slider2\")",
+                            "public slider: IgxSliderComponent;",
+                            "public lowValue(event){",
+                            "   this.slider.lowerValue = 120;",
+                            "}",
+                            "```"
+                        ]
+                    }
+                }
+            },
+            "upperValue": {
+                "getter": {
+                    "comment": {
+                        "shortText": [
+                            "`IgxSliderComponent` の上値を返します。",
+                            "```typescript",
+                            "@ViewChild(\"slider2\")",
+                            "public slider: IgxSliderComponent;",
+                            "public upperValue(event){",
+                            "   let upperValue = this.slider.upperValue;",
+                            "}",
+                            "```"
+                        ]
+                    }
+                },
+                "setter": {
+                    "comment": {
+                        "shortText": [
+                            "`IgxSliderComponent` の上値を設定します。",
+                            "```typescript",
+                            "@ViewChild(\"slider2\")",
+                            "public slider: IgxSliderComponent;",
+                            "public upperValue(event){",
+                            "   this.slider.upperValue = 120;",
+                            "}",
+                            "```"
+                        ]
+                    }
+                }
+            },
+            "lowerLabel": {
+                "getter": {
+                    "comment": {
+                        "shortText": [
+                            "下位ラベルに対応する値を返します。",
+                            "```typescript",
+                            "@ViewChild(\"slider\")",
+                            "public slider: IgxSliderComponent;",
+                            "let label = this.slider.lowerLabel;",
+                            "```"
+                        ]
+                    }
+                }
+            },
+            "upperLabel": {
+                "getter": {
+                    "comment": {
+                        "shortText": [
+                            "上位ラベルに対応する値を返します。",
+                            "```typescript",
+                            "@ViewChild(\"slider\")",
+                            "public slider: IgxSliderComponent;",
+                            "let label = this.slider.upperLabel;",
+                            "```"
+                        ]
+                    }
+                }
+            },
+            "labelsViewEnabled": {
+                "getter": {
+                    "comment": {
+                        "shortText": [
+                            "ラベルが有効かどうかを返します。",
+                            "{@link labels} が設定されていると、ビューは自動的にアクティブになります。",
+                            "```typescript",
+                            "@ViewChild(\"slider\")",
+                            "public slider: IgxSliderComponent;",
+                            "let labelView = this.slider.labelsViewEnabled;",
+                            "```"
+                        ]
+                    }
+                }
+            }
+        }
+    }
+}
