@@ -7,7 +7,8 @@ import {
     ChangeDetectorRef,
     ViewChildren,
     QueryList,
-    ViewChild
+    ViewChild,
+    TemplateRef
 } from '@angular/core';
 import { IgxHierarchicalGridComponent } from './hierarchical-grid.component';
 import { IgxRowComponent } from '../row.component';
@@ -36,6 +37,24 @@ export class IgxHierarchicalRowComponent extends IgxRowComponent<IgxHierarchical
 
     @ViewChild('expander', { read: ElementRef, static: false })
     public expander: ElementRef;
+
+    /**
+    * @hidden
+    */
+   @ViewChild('defaultExpandedTemplate', { read: TemplateRef, static: true })
+   protected defaultExpandedTemplate: TemplateRef<any>;
+
+    /**
+    * @hidden
+    */
+   @ViewChild('defaultEmptyTemplate', { read: TemplateRef, static: true })
+   protected defaultEmptyTemplate: TemplateRef<any>;
+
+    /**
+    * @hidden
+    */
+   @ViewChild('defaultCollapsedTemplate', { read: TemplateRef, static: true })
+   protected defaultCollapsedTemplate: TemplateRef<any>;
 
     /**
      * @hidden
@@ -104,6 +123,18 @@ export class IgxHierarchicalRowComponent extends IgxRowComponent<IgxHierarchical
      */
     public deselect = () => {
         this.grid.deselectRows([this.rowID]);
+    }
+
+
+    public get iconTemplate() {
+        let expandable = true;
+        if (this.grid.hasChildrenKey) {
+            expandable = this.rowData[this.grid.hasChildrenKey];
+        }
+        if (!expandable) {
+            return this.defaultEmptyTemplate;
+        }
+        return this.expanded ? this.defaultExpandedTemplate : this.defaultCollapsedTemplate;
     }
 
     private endEdit(grid: IgxHierarchicalGridComponent) {
