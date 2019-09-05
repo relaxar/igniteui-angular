@@ -1,4 +1,5 @@
 import { IFilteringOperation } from './filtering-condition';
+import { IFilteringStrategy } from './filtering-strategy';
 
 export enum FilteringLogic {
     And,
@@ -13,4 +14,5 @@ export declare interface IFilteringExpression {
     condition: IFilteringOperation;
     searchVal?: any;
     ignoreCase?: boolean;
+    strategy?: IFilteringStrategy;
 }

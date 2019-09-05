@@ -39,6 +39,7 @@ import { DeprecateProperty } from '../core/deprecateDecorators';
 import { MRLColumnSizeInfo, MRLResizeColumnInfo } from '../data-operations/multi-row-layout.interfaces';
 import { DisplayDensity } from '../core/displayDensity';
 import { notifyChanges } from './watch-changes';
+import { IFilteringStrategy, FilteringStrategy } from '../data-operations/filtering-strategy';
 
 /**
  * **Ignite UI for Angular Column** -
@@ -595,6 +596,33 @@ export class IgxColumnComponent implements AfterContentInit {
     public set sortStrategy(classRef: ISortingStrategy) {
         this._sortStrategy = classRef;
     }
+
+    /**
+     * Returns the filtering strategy.
+     * ```typescript
+     * let filterStrategy = this.column.filterStrategy
+     * ```
+     * @memberof IgxColumnComponent
+     */
+    @Input()
+    public get filterStrategy(): IFilteringStrategy {
+        return this._filterStrategy;
+    }
+
+    /**
+     * Sets the filtering strategy per column.
+     * ```typescript
+     * this.column.filterStrategy = new CustomFilteringStrategy()
+     *
+     * class CustomFilteringStrategy extends FilteringStrategy {
+     * ...
+     * }
+     * ```
+     * @memberof IgxColumnComponent
+     */
+    public set filterStrategy(classRef: IFilteringStrategy) {
+        this._filterStrategy = classRef;
+    }
     /**
     * Gets the function that compares values for grouping.
     * ```typescript
@@ -1012,6 +1040,11 @@ export class IgxColumnComponent implements AfterContentInit {
      *@hidden
      */
     protected _sortStrategy: ISortingStrategy = DefaultSortingStrategy.instance();
+
+    /**
+     *@hidden
+     */
+    protected _filterStrategy: IFilteringStrategy = FilteringStrategy.instance();
     /**
      *@hidden
      */

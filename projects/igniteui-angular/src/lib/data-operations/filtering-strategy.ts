@@ -3,6 +3,7 @@ import { FilteringExpressionsTree, IFilteringExpressionsTree } from './filtering
 
 export interface IFilteringStrategy {
     filter(data: any[], expressionsTree: IFilteringExpressionsTree): any[];
+    findMatchByExpression(rec: object, expr: IFilteringExpression): boolean;
 }
 
 export abstract class BaseFilteringStrategy implements IFilteringStrategy  {
@@ -45,7 +46,8 @@ export abstract class BaseFilteringStrategy implements IFilteringStrategy  {
                 return true;
             } else {
                 const expression = expressions as IFilteringExpression;
-                return this.findMatchByExpression(rec, expression);
+                return expression.strategy ? expression.strategy.findMatchByExpression(rec, expression) :
+                    this.findMatchByExpression(rec, expression);
             }
         }
 
@@ -54,11 +56,22 @@ export abstract class BaseFilteringStrategy implements IFilteringStrategy  {
 }
 
 export class FilteringStrategy extends BaseFilteringStrategy {
+    private static _instance: FilteringStrategy = null;
+
+    public constructor() {
+        super();
+    }
+
+    public static instance() : FilteringStrategy {
+        return this._instance || (this._instance = new this());
+    }
+
     public filter<T>(data: T[], expressionsTree: IFilteringExpressionsTree): T[] {
         let i;
         let rec;
         const len = data.length;
         const res: T[] = [];
+
         if (!expressionsTree || !expressionsTree.filteringOperands || expressionsTree.filteringOperands.length === 0 || !len) {
             return data;
         }

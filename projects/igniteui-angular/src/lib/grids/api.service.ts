@@ -360,7 +360,7 @@ export class GridBaseAPIService <T extends IgxGridBaseComponent & IGridDataBinda
             conditionOrExpressionsTree as IFilteringExpressionsTree : null;
         const condition = conditionOrExpressionsTree instanceof FilteringExpressionsTree ?
             null : conditionOrExpressionsTree as IFilteringOperation;
-        const newExpression: IFilteringExpression = { fieldName, searchVal, condition, ignoreCase };
+            const newExpression: IFilteringExpression = { fieldName, searchVal, condition, ignoreCase };
 
         if (oldExpressionsTreeIndex === -1) {
             // no expressions tree found for this field
@@ -446,6 +446,11 @@ export class GridBaseAPIService <T extends IgxGridBaseComponent & IGridDataBinda
     protected getSortStrategyPerColumn(fieldName: string) {
         return this.get_column_by_name(fieldName) ?
             this.get_column_by_name(fieldName).sortStrategy : undefined;
+    }
+
+    protected getFilterStrategyPerColumn(fieldName: string) {
+        return this.get_column_by_name(fieldName) ?
+            this.get_column_by_name(fieldName).filterStrategy : undefined;
     }
 
     public addRowToData(rowData: any) {

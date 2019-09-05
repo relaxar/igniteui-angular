@@ -294,6 +294,11 @@ export class IgxFilteringService implements OnDestroy {
                 continue;
             }
 
+            const columnFilterStrategy = this.grid.getColumnByName(columnId).filterStrategy;
+            if (columnFilterStrategy) {
+                currExpressionUI.expression.strategy = columnFilterStrategy;
+            }
+
             if ((currExpressionUI.beforeOperator === undefined || currExpressionUI.beforeOperator === null ||
                  currExpressionUI.beforeOperator === FilteringLogic.Or) &&
                 currExpressionUI.afterOperator === FilteringLogic.And) {
