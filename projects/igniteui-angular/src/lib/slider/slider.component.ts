@@ -81,6 +81,7 @@ export class IgxSliderComponent implements
     private _continuous = false;
     private _disabled = false;
     private _step = 1;
+    public labelsEnabled = false;
 
     private _labels = new Array<number|string|boolean|null|undefined>();
     private _type = SliderType.SLIDER;
@@ -1060,8 +1061,10 @@ export class IgxSliderComponent implements
         }
 
         const positionLeft = `${this.valueToFraction(position) * 100}%`;
+        if (labelHandle) {
+            labelHandle.nativeElement.style.left = positionLeft;
+        }
         thumbHandle.nativeElement.style.left = positionLeft;
-        labelHandle.nativeElement.style.left = positionLeft;
     }
 
     private positionHandlesAndUpdateTrack() {
@@ -1092,6 +1095,8 @@ export class IgxSliderComponent implements
         }
     }
 
+    private ticksFlag = false;
+
     private setTickInterval(labels) {
         let interval;
         const trackProgress = 100;
@@ -1103,6 +1108,10 @@ export class IgxSliderComponent implements
             interval = this.step > 1 ?
                 (trackProgress / ((trackRange / this.step)) * 10) / 10
                 : null;
+        }
+
+        if (!this.ticksFlag) {
+            interval = null;
         }
 
         const renderCallbackExecution = !this.continuous ? this.generateTickMarks('white', interval) : null;
@@ -1120,7 +1129,9 @@ private showSliderIndicators() {
         }
 
         this.thumbTo.showThumbIndicators();
-        this.labelTo.active = true;
+        if (this.labelTo) {
+            this.labelTo.active = true;
+        }
         if (this.thumbFrom) {
             this.thumbFrom.showThumbIndicators();
         }
@@ -1139,7 +1150,9 @@ private showSliderIndicators() {
         this._indicatorsTimer = timer(this.thumbLabelVisibilityDuration);
         this._indicatorsTimer.pipe(takeUntil(this._indicatorsDestroyer$)).subscribe(() => {
             this.thumbTo.hideThumbIndicators();
-            this.labelTo.active = false;
+            if (this.labelTo) {
+                this.labelTo.active = false;
+            }
             if (this.thumbFrom) {
                 this.thumbFrom.hideThumbIndicators();
             }

@@ -4,7 +4,7 @@
 </div>
 <div class="igx-slider__thumbs">
     <igx-thumb-label
-        *ngIf="isRange"
+        *ngIf="isRange && labelsEnabled"
         [type]="0"
         [value]="value"
         [templateRef]="thumbFromTemplateRef"
@@ -26,7 +26,7 @@
         (onHoverChange)="onHoverChange($event)"
         [thumbLabelVisibilityDuration]="thumbLabelVisibilityDuration"></igx-thumb>
 
-    <igx-thumb-label
+    <igx-thumb-label *ngIf="labelsEnabled"
         [value]="value"
         [type]="1"
         [templateRef]="thumbToTemplateRef"
