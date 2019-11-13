@@ -1,4 +1,4 @@
-import { TestBed, getTestBed, ComponentFixture } from '@angular/core/testing';
+import { TestBed, getTestBed, ComponentFixture, TestModuleMetadata, TestBedStatic } from '@angular/core/testing';
 import { resizeObserverIgnoreError } from './helper-utils.spec';
 
 /**
@@ -8,27 +8,36 @@ import { resizeObserverIgnoreError } from './helper-utils.spec';
  */
 export const configureTestSuite = () => {
 
-  beforeAll(() => {
-    resizeObserverIgnoreError();
-  });
-  return;
-
-  let originReset;
+  let originReset: () => TestBedStatic;
+  let originalConfigure: (moduleDef: TestModuleMetadata) => TestBedStatic;
+  let configured = false;
   beforeAll(() => {
     originReset = TestBed.resetTestingModule;
     // TestBed.resetTestingModule();
     TestBed.resetTestingModule = () => TestBed;
+    originalConfigure = TestBed.configureTestingModule;
+    TestBed.configureTestingModule = (moduleDef) => {
+      const testBedApi: any = getTestBed();
+      // allow once configure (this beforeAll runs first) and skip consecutive calls
+      if (!configured) {
+        originalConfigure.call(testBedApi, moduleDef);
+        configured = true;
+        return testBedApi;
+      }
+      return { compileComponents: () => Promise.resolve() };
+    };
     resizeObserverIgnoreError();
   });
 
   afterEach(() => {
     const testBedApi: any = getTestBed();
-    testBedApi._activeFixtures.forEach((fixture: ComponentFixture<any>) => fixture.destroy());
-    testBedApi._instantiated = false;
+    testBedApi.destroyActiveFixtures();
   });
 
   afterAll(() => {
+    configured = false;
     TestBed.resetTestingModule = originReset;
+    TestBed.configureTestingModule = originalConfigure;
     TestBed.resetTestingModule();
   });
 };
