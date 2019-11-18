@@ -1,5 +1,6 @@
 import { TestBed, getTestBed, ComponentFixture, TestModuleMetadata, TestBedStatic } from '@angular/core/testing';
 import { resizeObserverIgnoreError } from './helper-utils.spec';
+import { NgZone } from '@angular/core';
 
 /**
  * Per https://github.com/angular/angular/issues/12409#issuecomment-391087831
@@ -11,6 +12,7 @@ export const configureTestSuite = () => {
   let originReset: () => TestBedStatic;
   let originalConfigure: (moduleDef: TestModuleMetadata) => TestBedStatic;
   let configured = false;
+
   beforeAll(() => {
     originReset = TestBed.resetTestingModule;
     // TestBed.resetTestingModule();
@@ -22,9 +24,12 @@ export const configureTestSuite = () => {
       if (!configured) {
         originalConfigure.call(testBedApi, moduleDef);
         configured = true;
-        return testBedApi;
+      } else {
+        // replace stale zone:
+        testBedApi.testModuleRef.injector._r3Injector.records.set(NgZone, { value: new NgZone({enableLongStackTrace: true})});
       }
-      return { compileComponents: () => Promise.resolve() };
+      return testBedApi;
+      // return { compileComponents: () => Promise.resolve() };
     };
     resizeObserverIgnoreError();
   });
