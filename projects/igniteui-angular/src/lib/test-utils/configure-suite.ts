@@ -1,6 +1,7 @@
 import { TestBed, getTestBed, ComponentFixture, TestModuleMetadata, TestBedStatic } from '@angular/core/testing';
 import { resizeObserverIgnoreError } from './helper-utils.spec';
-import { NgZone } from '@angular/core';
+import {
+  NgZone, PlatformRef, ɵcreateInjector as createInjector, NgModuleRef, ComponentFactoryResolver, StaticProvider } from '@angular/core';
 
 /**
  * Per https://github.com/angular/angular/issues/12409#issuecomment-391087831
@@ -25,7 +26,22 @@ export const configureTestSuite = () => {
         originalConfigure.call(testBedApi, moduleDef);
         configured = true;
       } else {
-        // replace stale zone:
+        const parentInjector = testBedApi.get(PlatformRef).injector;
+        const additionalProviders: StaticProvider[] = [
+          {
+              provide: NgModuleRef,
+              useValue: testBedApi.testModuleRef,
+          },
+          {
+            deps: [NgModuleRef],
+            provide: ComponentFactoryResolver,
+            useValue: testBedApi.testModuleRef.componentFactoryResolver,
+          }
+        ];
+        // new injector so values with old zone can be re-hydrated with the correct one
+        testBedApi.testModuleRef.injector._r3Injector = createInjector(
+          testBedApi.compiler.testModuleType, parentInjector, additionalProviders, 'DynamicTestModule' );
+        // new ngZone that will use the new current:
         testBedApi.testModuleRef.injector._r3Injector.records.set(NgZone, { value: new NgZone({enableLongStackTrace: true})});
       }
       return testBedApi;
