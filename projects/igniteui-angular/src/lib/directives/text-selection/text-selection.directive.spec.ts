@@ -9,7 +9,6 @@ import { IgxTextSelectionModule} from './text-selection.directive';
 import { configureTestSuite } from '../../test-utils/configure-suite';
 
 describe('IgxSelection', () => {
-    configureTestSuite();
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [

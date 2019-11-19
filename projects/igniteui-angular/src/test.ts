@@ -8,12 +8,14 @@ import {
   BrowserDynamicTestingModule,
   platformBrowserDynamicTesting
 } from '@angular/platform-browser-dynamic/testing';
+import { HammerModule } from '@angular/platform-browser';
 
 declare const require: any;
 
 // First, initialize the Angular testing environment.
 getTestBed().initTestEnvironment(
-  BrowserDynamicTestingModule,
+  // D.P. HammerModule required for tests that simulate and expect recognizers to be active (host bound tap, etc)
+  [BrowserDynamicTestingModule, HammerModule],
   platformBrowserDynamicTesting()
 );
 // Then we find all the tests.
