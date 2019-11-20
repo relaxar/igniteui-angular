@@ -16,7 +16,7 @@ export const configureTestSuite = () => {
 
   beforeAll(() => {
     originReset = TestBed.resetTestingModule;
-    // TestBed.resetTestingModule();
+    TestBed.resetTestingModule();// angular reset on beforeEach, this runs first between suites
     TestBed.resetTestingModule = () => TestBed;
     originalConfigure = TestBed.configureTestingModule;
     TestBed.configureTestingModule = (moduleDef) => {
