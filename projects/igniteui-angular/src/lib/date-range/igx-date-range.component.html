@@ -13,7 +13,23 @@
     </div>
 </div>
 
-<ng-container *ngTemplateOutlet="this.start || this.end ? startEndTemplate : defTemplate"></ng-container>
+<ng-container *ngTemplateOutlet=" this.container ? containerTemplate :
+    this.start || this.end ? startEndTemplate : defTemplate"></ng-container>
+
+<ng-template #containerTemplate>
+    <div (click)="showCalendar($event)" class="content-wrap">
+        <igx-input-group>
+            <ng-container ngProjectAs="[igxInput]">
+                <!-- <input igxDateRangeStart igxInput type="text"> -->
+                <ng-container *ngTemplateOutlet="this.container.template"></ng-container>
+            </ng-container>
+            <igx-prefix> <igx-icon>today</igx-icon> </igx-prefix>
+        </igx-input-group>
+        <!-- <div>
+            <ng-container *ngTemplateOutlet="this.container.template"></ng-container>
+        </div> -->
+    </div>
+</ng-template>
 
 <ng-template #defTemplate>
     <!-- <div (click)="showCalendar($event)" class="content-wrap">

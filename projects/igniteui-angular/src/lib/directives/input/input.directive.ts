@@ -32,7 +32,7 @@ export class IgxInputDirective implements AfterViewInit, OnDestroy {
     private _statusChanges$: Subscription;
 
     constructor(
-        public inputGroup: IgxInputGroupBase,
+        @Optional() public inputGroup: IgxInputGroupBase,
         @Optional() @Self() @Inject(NgModel) protected ngModel: NgModel,
         @Optional() @Self() @Inject(FormControlName) protected formControl: FormControlName,
         protected element: ElementRef,
@@ -186,6 +186,9 @@ export class IgxInputDirective implements AfterViewInit, OnDestroy {
      *@hidden
      */
     ngAfterViewInit() {
+        if (!this.inputGroup) {
+            return;
+        }
         this.inputGroup.hasPlaceholder = this.nativeElement.hasAttribute('placeholder');
         this.inputGroup.disabled = this.inputGroup.disabled || this.nativeElement.hasAttribute('disabled');
         this.inputGroup.isRequired = this.nativeElement.hasAttribute('required');

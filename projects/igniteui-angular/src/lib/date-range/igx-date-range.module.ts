@@ -12,7 +12,7 @@ import { CommonModule } from '@angular/common';
 import { IgxButtonModule } from '../directives/button/button.directive';
 import { IgxInputGroupModule } from '../input-group/index';
 import { IgxIconModule } from '../icon/index';
-import { IgxDateStartComponent, IgxDateEndComponent } from './igx-date-range-inputs.common';
+import { IgxDateStartComponent, IgxDateEndComponent, IgxDateContainerComponent } from './igx-date-range-inputs.common';
 
 /**
  * @hidden
@@ -25,7 +25,8 @@ import { IgxDateStartComponent, IgxDateEndComponent } from './igx-date-range-inp
         IgxDateRangeEndDirective,
         IgxDateRangeDirective,
         IgxDateStartComponent,
-        IgxDateEndComponent
+        IgxDateEndComponent,
+        IgxDateContainerComponent
     ],
     imports: [
         CommonModule,
@@ -42,7 +43,8 @@ import { IgxDateStartComponent, IgxDateEndComponent } from './igx-date-range-inp
         IgxDateRangeEndDirective,
         IgxDateRangeDirective,
         IgxDateStartComponent,
-        IgxDateEndComponent
+        IgxDateEndComponent,
+        IgxDateContainerComponent
     ]
 })
 export class IgxDateRangeModule { }
