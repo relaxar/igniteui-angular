@@ -12,6 +12,7 @@ import { KEYS, isIE } from '../core/utils';
 import { IgxDateRangeStartDirective, IgxDateRangeEndDirective, IgxDateRangeDirective } from './igx-date-range.directives';
 import { PositionSettings } from '../services/overlay/utilities';
 import { fadeIn, fadeOut } from '../animations/fade';
+import { IgxDateStartComponent, IgxDateEndComponent } from './igx-date-range-inputs.common';
 
 /**
  * ** Ignite UI for Angular Range Date Picker **
@@ -182,6 +183,12 @@ export class IgxDateRangeComponent implements AfterViewInit, OnDestroy {
      */
     @ContentChild(IgxDateRangeEndDirective, { read: IgxDateRangeEndDirective, static: false })
     public endInput: IgxDateRangeEndDirective;
+
+    @ContentChild(IgxDateStartComponent, { read: IgxDateStartComponent, static: false })
+    public start: IgxDateStartComponent;
+
+    @ContentChild(IgxDateEndComponent, { read: IgxDateEndComponent, static: false })
+    public end: IgxDateEndComponent;
 
     /**
      * @hidden

@@ -72,16 +72,3 @@ export class IgxDateRangeDirective extends IgxDateRangeBaseDirective {
     }
 }
 
-@Directive({
-// tslint:disable-next-line: directive-selector
-    selector: 'igx-date-start'
-})
-export class IgxDateStartDirective  {
-}
-
-@Directive({
-// tslint:disable-next-line: directive-selector
-    selector: 'igx-date-end'
-})
-export class IgxDateEndDirective  {
-}

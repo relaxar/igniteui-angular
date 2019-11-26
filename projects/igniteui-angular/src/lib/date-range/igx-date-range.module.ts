@@ -4,9 +4,7 @@ import { IgxDateRangeBaseDirective } from './igx-date-range-base.directive';
 import {
     IgxDateRangeStartDirective,
     IgxDateRangeEndDirective,
-    IgxDateRangeDirective,
-    IgxDateStartDirective,
-    IgxDateEndDirective
+    IgxDateRangeDirective
 } from './igx-date-range.directives';
 import { IgxCalendarModule } from '../calendar/index';
 import { IgxToggleModule } from '../directives/toggle/toggle.directive';
@@ -14,6 +12,7 @@ import { CommonModule } from '@angular/common';
 import { IgxButtonModule } from '../directives/button/button.directive';
 import { IgxInputGroupModule } from '../input-group/index';
 import { IgxIconModule } from '../icon/index';
+import { IgxDateStartComponent, IgxDateEndComponent } from './igx-date-range-inputs.common';
 
 /**
  * @hidden
@@ -25,8 +24,8 @@ import { IgxIconModule } from '../icon/index';
         IgxDateRangeStartDirective,
         IgxDateRangeEndDirective,
         IgxDateRangeDirective,
-        IgxDateStartDirective,
-        IgxDateEndDirective
+        IgxDateStartComponent,
+        IgxDateEndComponent
     ],
     imports: [
         CommonModule,
@@ -41,7 +40,9 @@ import { IgxIconModule } from '../icon/index';
         IgxDateRangeBaseDirective,
         IgxDateRangeStartDirective,
         IgxDateRangeEndDirective,
-        IgxDateRangeDirective
+        IgxDateRangeDirective,
+        IgxDateStartComponent,
+        IgxDateEndComponent
     ]
 })
 export class IgxDateRangeModule { }
