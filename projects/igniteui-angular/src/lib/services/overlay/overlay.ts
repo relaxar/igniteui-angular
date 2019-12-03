@@ -227,22 +227,24 @@ export class IgxOverlayService implements OnDestroy {
      * ```
      */
     reposition(id: string) {
-        const overlayInfo = this.getOverlayById(id);
-        if (!overlayInfo || !overlayInfo.settings) {
-            console.error('Wrong id provided in overlay.reposition method. Id: ' + id);
-            return;
-        }
+        requestAnimationFrame(() => {
+            const overlayInfo = this.getOverlayById(id);
+            if (!overlayInfo || !overlayInfo.settings) {
+                console.error('Wrong id provided in overlay.reposition method. Id: ' + id);
+                return;
+            }
 
-        const contentElement = overlayInfo.elementRef.nativeElement.parentElement;
-        const contentElementRect = contentElement.getBoundingClientRect();
-        overlayInfo.settings.positionStrategy.position(
-            contentElement,
-            {
-                width: contentElementRect.width,
-                height: contentElementRect.height
-            },
-            this._document,
-            false);
+            const contentElement = overlayInfo.elementRef.nativeElement.parentElement;
+            const contentElementRect = contentElement.getBoundingClientRect();
+            overlayInfo.settings.positionStrategy.position(
+                contentElement,
+                {
+                    width: contentElementRect.width,
+                    height: contentElementRect.height
+                },
+                this._document,
+                false);
+        });
     }
 
     /**
@@ -255,7 +257,7 @@ export class IgxOverlayService implements OnDestroy {
         const info: OverlayInfo = this.getOverlayById(id);
 
         if (!info) {
-           return;
+            return;
         }
 
         info.transformX += deltaX;
