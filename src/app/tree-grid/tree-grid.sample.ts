@@ -1,6 +1,6 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { IgxTreeGridComponent, IgxExcelExporterService, IgxCsvExporterService,
-    IgxCsvExporterOptions, IgxExcelExporterOptions, CsvFileTypes } from 'igniteui-angular';
+    IgxCsvExporterOptions, IgxExcelExporterOptions, CsvFileTypes, GridSelectionMode } from 'igniteui-angular';
 import { HIERARCHICAL_SAMPLE_DATA } from '../shared/sample-data';
 
 @Component({
@@ -20,6 +20,8 @@ export class TreeGridSampleComponent implements OnInit {
 
     public density = '';
     public displayDensities;
+    public rowSelection = GridSelectionMode.none;
+    public rowDragging = false;
 
     constructor(private excelExporterService: IgxExcelExporterService,
         private csvExporterService: IgxCsvExporterService) {
@@ -32,10 +34,10 @@ export class TreeGridSampleComponent implements OnInit {
         ];
 
         this.columns = [
-            { field: 'ID', width: 150, resizable: true, movable: true, pinned: true },
-            { field: 'CompanyName', width: 150, resizable: true, movable: true },
+            { field: 'ID', width: 150, resizable: true, movable: true, pinned: false },
+            { field: 'CompanyName', width: 150, resizable: true, movable: true, summary: true },
             { field: 'ContactName', width: 150, resizable: true, movable: true },
-            { field: 'ContactTitle', width: 150, resizable: true, movable: true },
+            { field: 'ContactTitle', width: 150, resizable: true, movable: true, summary: true },
             { field: 'Address', width: 150, resizable: true, movable: true },
             { field: 'City', width: 150, resizable: true, movable: true },
             { field: 'Region', width: 150, resizable: true, movable: true },
@@ -107,5 +109,15 @@ export class TreeGridSampleComponent implements OnInit {
 
     public exportToCSV() {
         this.csvExporterService.export(this.grid1, new IgxCsvExporterOptions('TreeGrid', CsvFileTypes.CSV));
+    }
+
+    public changeGridSelection() {
+        if (this.rowSelection === GridSelectionMode.none) {
+            this.rowSelection = GridSelectionMode.single
+        } else if (this.rowSelection === GridSelectionMode.single) {
+            this.rowSelection = GridSelectionMode.multiple
+        } else {
+            this.rowSelection = GridSelectionMode.none;
+        }
     }
 }

@@ -3,7 +3,8 @@ import {
     IgxRowIslandComponent,
     IgxHierarchicalGridComponent,
     IPathSegment,
-    IGridCellEventArgs
+    IGridCellEventArgs,
+    GridSelectionMode
 } from 'igniteui-angular';
 
 @Component({
@@ -23,6 +24,8 @@ export class HierarchicalGridSampleComponent {
 
     public columns;
     public childColumns;
+    public rowSelection: GridSelectionMode = GridSelectionMode.none;
+    public rowDraggable = true;
 
     @ViewChild('layout1', { static: true })
     layout1: IgxRowIslandComponent;
@@ -133,6 +136,16 @@ export class HierarchicalGridSampleComponent {
 
     cellClick($evt: IGridCellEventArgs) {
         console.log('Cell Click', $evt);
+    }
+
+    public changeRowSelection() {
+        if (this.rowSelection === GridSelectionMode.none) {
+            this.rowSelection = GridSelectionMode.single;
+        } else if (this.rowSelection === GridSelectionMode.single) {
+            this.rowSelection = GridSelectionMode.multiple
+        } else {
+            this.rowSelection = GridSelectionMode.none;
+        }
     }
 
     public LoadMoreColumns() {

@@ -38,6 +38,8 @@ export class GridSelectionComponent implements AfterViewInit {
         this.grid1.verticalScrollContainer.scrollTo(parseInt(index, 10));
     }
 
+    public rowDraggable = true;
+
     handleRowSelection(args) {
         console.log('ONSELECTIONEVENTFIRED');
 /*         const targetCell = args.cell as IgxGridCellComponent;

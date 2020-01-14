@@ -14,13 +14,14 @@
             </igx-drop-down-item>
         </igx-drop-down>
     <div class="separator"></div>
-    <igx-grid #grid1 [data]="remote | async" [allowFiltering]='true' [primaryKey]="'ProductID'" (onSelection)="handleRowSelection($event)"
+    <igx-grid #grid1 [data]="remote | async" [allowFiltering]='true' [primaryKey]="'ProductID'" [rowDraggable]="rowDraggable" (onSelection)="handleRowSelection($event)"
             [width]="'800px'" [height]="'600px'"  (onRowSelectionChange)="log($event)">
         <igx-column [field]="'ProductID'" [editable]="true" [width]="'80%'"></igx-column>
         <igx-column [field]="'ProductName'"></igx-column>
         <igx-column [field]="'UnitsInStock'"></igx-column>
     </igx-grid>
 
+<button (click)="rowDraggable = !rowDraggable">draggable</button>
 <button (click)="selectRow()">Non Existing row</button>
 <button (click)="deleteSectedRow()">Delete Selected Row</button>
 <button (click)="selectCells()">Select Range throught API</button>
