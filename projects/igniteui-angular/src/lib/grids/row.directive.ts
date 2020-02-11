@@ -263,7 +263,7 @@ export class IgxRowDirective<T extends IgxGridBaseDirective & GridType> implemen
     /**
      * @hidden
      */
-    public focused = false;
+    public active = false;
 
     /**
      * @hidden

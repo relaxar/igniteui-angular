@@ -60,9 +60,8 @@ export class IgxHierarchicalGridCellComponent extends IgxGridCellComponent imple
      * @hidden
      * @internal
      */
-    @HostListener('focus', ['$event'])
-    onFocus(event) {
-        if (this.focused) {
+    onActive(event) {
+        if (this.active) {
             return;
         }
         this._clearAllHighlights();
@@ -82,7 +81,7 @@ export class IgxHierarchicalGridCellComponent extends IgxGridCellComponent imple
             const parentRowID = parentGrid.hgridAPI.getParentRowId(childGrid);
             parentGrid.highlightedRowID = parentRowID;
         }
-        super.onFocus(event);
+        super.onActive(event);
     }
 
     // TODO: Refactor

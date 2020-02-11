@@ -513,7 +513,14 @@ export class IgxGridCellComponent implements OnInit, OnChanges, OnDestroy {
      * @internal
      */
     @HostBinding('class.igx-grid__td--active')
-    public focused = false;
+    public get active() {
+        const active = this.selectionService.activeElement;
+        if (active) {
+            return this.selectionNode.row === active.row && this.selectionNode.column === active.column;
+        }
+        return false;
+      
+    }
 
     @ViewChild('defaultCell', { read: TemplateRef, static: true })
     protected defaultCellTemplate: TemplateRef<any>;
@@ -803,7 +810,7 @@ export class IgxGridCellComponent implements OnInit, OnChanges, OnDestroy {
             cell: this,
             event
         });
-        this.selectionService.activeElement = this.selectionNode;
+        this.onActive(event);
     }
 
     /**
@@ -822,16 +829,11 @@ export class IgxGridCellComponent implements OnInit, OnChanges, OnDestroy {
      * @hidden
      * @internal
      */
-    @HostListener('focus', ['$event'])
-    public onFocus(event: FocusEvent) {
-        if (this.focused) {
-            return;
-        }
-        this.focused = true;
-        this.row.focused = true;
+    public onActive(event) {
         const node = this.selectionNode;
         const shouldEmitSelection = !this.selectionService.isActiveNode(node);
 
+        this.selectionService.activeElement = this.selectionNode;
         if (this.selectionService.primaryButton) {
             this._updateCRUDStatus();
             this.selectionService.activeElement = node;
@@ -850,16 +852,6 @@ export class IgxGridCellComponent implements OnInit, OnChanges, OnDestroy {
         if (this.grid.isCellSelectable && shouldEmitSelection) {
             this.grid.onSelection.emit({ cell: this, event });
         }
-    }
-
-    /**
-     * @hidden
-     * @internal
-     */
-    @HostListener('blur')
-    public onBlur() {
-        this.focused = false;
-        this.row.focused = false;
     }
 
     protected handleAlt(key: string, event: KeyboardEvent) {

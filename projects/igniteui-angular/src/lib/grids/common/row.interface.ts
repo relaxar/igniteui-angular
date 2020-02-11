@@ -11,7 +11,7 @@ export interface RowType {
     added: boolean;
     deleted: boolean;
     selected: boolean;
-    focused: boolean;
+    active: boolean;
     expanded?: boolean;
     treeRow?: any;
 }
