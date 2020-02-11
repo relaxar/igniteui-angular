@@ -141,7 +141,11 @@ export class IgxGridNavigationService {
                     this.horizontalScroll(rowIndex).scrollTo(0);
                 }
             } else {
-                element.nextElementSibling.focus({ preventScroll: true });
+                selectedNode = {
+                    row: rowIndex,
+                    column: visibleColumnIndex + 1 
+                };
+                this.focusElem(element, selectedNode);
             }
         } else {
             this.performHorizontalScrollToCell(rowIndex, visibleColumnIndex + 1, isSummary);
@@ -161,7 +165,11 @@ export class IgxGridNavigationService {
         } else if (!this.isColumnLeftEdgeVisible(visibleColumnIndex - 1)) {
             this.performHorizontalScrollToCell(rowIndex, visibleColumnIndex - 1, isSummary);
         } else {
-            element.previousElementSibling.focus({ preventScroll: true });
+            selectedNode = {
+                row: rowIndex,
+                column: visibleColumnIndex - 1 
+            };
+            this.focusElem(element, selectedNode);
         }
 
     }
@@ -325,15 +333,23 @@ export class IgxGridNavigationService {
                 .subscribe(() => {
                     const tag = rowElement.tagName.toLowerCase();
                     rowElement = this.getRowByIndex(currentRowIndex, tag);
-                    this.focusPreviousElement(rowElement, visibleColumnIndex);
+                    selectedNode = {
+                        row: currentRowIndex - 1,
+                        column: visibleColumnIndex
+                    };
+                    this.focusPreviousElement(rowElement, selectedNode);
                 });
         } else {
-            this.focusPreviousElement(rowElement, visibleColumnIndex);
+            selectedNode = {
+                row: currentRowIndex - 1,
+                column: visibleColumnIndex
+            };
+            this.focusPreviousElement(rowElement, selectedNode);
         }
     }
 
-    protected focusPreviousElement(currentRowEl, visibleColumnIndex) {
-        this.focusElem(currentRowEl.previousElementSibling, visibleColumnIndex);
+    protected focusPreviousElement(currentRowEl, selectedNode) {
+        this.focusElem(currentRowEl.previousElementSibling, selectedNode);
     }
 
     public navigateDown(rowElement, selectedNode: ISelectionNode) {
@@ -356,27 +372,36 @@ export class IgxGridNavigationService {
             this.grid.verticalScrollContainer.onChunkLoad
                 .pipe(first())
                 .subscribe(() => {
-                    rowElement = this.getNextRowByIndex(nextIndex);
-                    this.focusElem(rowElement, visibleColumnIndex);
+                    selectedNode = {
+                        column: visibleColumnIndex,
+                        row: currentRowIndex + 1
+                    };
+                    this.focusElem(rowElement, selectedNode);
                 });
         } else {
-            this.focusNextElement(rowElement, visibleColumnIndex);
+            selectedNode = {
+                column: visibleColumnIndex,
+                row: currentRowIndex + 1
+            };
+            this.focusNextElement(rowElement, selectedNode);
         }
     }
 
-    protected focusElem(rowElement, visibleColumnIndex) {
+    protected focusElem(rowElement, selectedNode) {
         if (rowElement.tagName.toLowerCase() === 'igx-grid-groupby-row' || rowElement.className === 'igx-grid__tr-container') {
             rowElement.focus();
         } else {
             const isSummaryRow = rowElement.tagName.toLowerCase() === 'igx-grid-summary-row';
-            if (this.isColumnFullyVisible(visibleColumnIndex)) {
-                const cellSelector = this.getCellSelector(visibleColumnIndex, isSummaryRow);
-                const cell = rowElement.querySelector(`${cellSelector}[data-visibleIndex="${visibleColumnIndex}"]`);
-                cell.focus();
-                return cell;
+            if (this.isColumnFullyVisible(selectedNode.column)) {
+                // const cellSelector = this.getCellSelector(selectedNode.column, isSummaryRow);
+                // const cell = rowElement.querySelector(`${cellSelector}[data-visibleIndex="${selectedNode.column}"]`);
+                // cell.focus();
+                // return cell;
+               const target = (this.grid as any).gridAPI.get_cell_by_index(selectedNode.row, selectedNode.column);
+               target.onActive();
             }
             this.performHorizontalScrollToCell(parseInt(
-                rowElement.getAttribute('data-rowindex'), 10), visibleColumnIndex, isSummaryRow);
+                rowElement.getAttribute('data-rowindex'), 10), selectedNode.column, isSummaryRow);
         }
     }
 

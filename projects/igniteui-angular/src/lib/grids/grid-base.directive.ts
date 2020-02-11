@@ -25,12 +25,13 @@ import {
     InjectionToken,
     Optional,
     DoCheck,
-    Directive
+    Directive,
+    HostListener
 } from '@angular/core';
 import ResizeObserver from 'resize-observer-polyfill';
 import { Subject, combineLatest, pipe } from 'rxjs';
 import { takeUntil, first, filter, throttleTime, map } from 'rxjs/operators';
-import { cloneArray, isEdge, isNavigationKey, flatten, mergeObjects, isIE } from '../core/utils';
+import { cloneArray, isEdge, isNavigationKey, flatten, mergeObjects, isIE, SUPPORTED_KEYS, NAVIGATION_KEYS, ROW_COLLAPSE_KEYS, ROW_EXPAND_KEYS } from '../core/utils';
 import { DataType } from '../data-operations/data-util';
 import { FilteringLogic, IFilteringExpression } from '../data-operations/filtering-expression.interface';
 import { IGroupByRecord } from '../data-operations/groupby-record.interface';
@@ -6199,6 +6200,173 @@ export class IgxGridBaseDirective extends DisplayDensityBase implements
     }
 
     public viewDetachHandler(args: ICachedViewLoadedEventArgs) {
+    }
+
+    @HostListener('keydown', ['$event'])
+    dispatchEvent(event: KeyboardEvent) {
+        const key = event.key.toLowerCase();
+        const shift = event.shiftKey;
+        const ctrl = event.ctrlKey;
+        const node = this.selectionService.activeElement;
+        if(!node) return;
+        const rowStart = node.layout ? node.layout.rowStart : null; 
+
+        const cell = this.gridAPI.get_cell_by_index(node.row, node.column);
+
+        if (!SUPPORTED_KEYS.has(key)) {
+            return;
+        }
+        event.stopPropagation();
+
+        const keydownArgs = { targetType: 'dataCell', target: cell, event: event, cancel: false };
+
+        // This fixes IME editing issue(#6335) that happens only on IE
+        if (isIE() && keydownArgs.event.keyCode === 229 && event.key === 'Tab') {
+            return;
+        }
+
+        this.onGridKeydown.emit(keydownArgs);
+        if (keydownArgs.cancel) {
+            this.selectionService.clear();
+            this.selectionService.keyboardState.active = true;
+            return;
+        }
+
+        if (event.altKey) {
+            event.preventDefault();
+            this.handleAlt(key, event);
+            return;
+        }
+
+        this.selectionService.keyboardStateOnKeydown(node, shift, shift && key === 'tab');
+
+
+        if (key === 'tab') {
+            event.preventDefault();
+        }
+
+        if (cell.editMode) {
+            if (NAVIGATION_KEYS.has(key)) {
+                if (cell.column.inlineEditorTemplate) { return; }
+                if (['date', 'boolean'].indexOf(cell.column.dataType) > -1) { return; }
+                return;
+            }
+        }
+
+        if (NAVIGATION_KEYS.has(key)) {
+            event.preventDefault();
+        }
+
+        switch (key) {
+            case 'tab':
+                this.handleTab(shift);
+                break;
+            case 'end':
+                this.handleEnd(ctrl);
+                break;
+            case 'home':
+                this.handleHome(ctrl);
+                break;
+            case 'arrowleft':
+            case 'left':
+                if (ctrl) {
+                    (this.navigation as any).onKeydownHome(node.row, false, rowStart);
+                    break;
+                }
+                this.navigation.onKeydownArrowLeft(this.nativeElement, node);
+                break;
+            case 'arrowright':
+            case 'right':
+                if (ctrl) {
+                    (this.navigation as any).onKeydownEnd(node.row, false, rowStart);
+                    break;
+                }
+                this.navigation.onKeydownArrowRight(this.nativeElement, node);
+                break;
+            case 'arrowup':
+            case 'up':
+                if (ctrl) {
+                    this.navigation.navigateTop(node.column);
+                    break;
+                }
+                this.navigation.navigateUp(cell.row.nativeElement, node);
+                break;
+            case 'arrowdown':
+            case 'down':
+                if (ctrl) {
+                    this.navigation.navigateBottom(node.column);
+                    break;
+                }
+                this.navigation.navigateDown(cell.row.nativeElement, node);
+                break;
+            case 'enter':
+            case 'f2':
+                cell.onKeydownEnterEditMode();
+                break;
+            case 'escape':
+            case 'esc':
+                cell.onKeydownExitEditMode();
+                break;
+            case ' ':
+            case 'spacebar':
+            case 'space':
+                if (this.isRowSelectable) {
+                    cell.row.selected ? this.selectionService.deselectRow(cell.row.rowID, event) :
+                    this.selectionService.selectRowById(cell.row.rowID, false, event);
+                }
+                break;
+            default:
+                return;
+        }
+    }
+
+    protected handleAlt(key: string, event: KeyboardEvent) {
+        const row = this.gridAPI.get_row_by_index(this.selectionService.activeElement.row);
+        if (this.isToggleKey(key)) {
+            const collapse = (row as any).expanded && ROW_COLLAPSE_KEYS.has(key);
+            const expand = !(row as any).expanded && ROW_EXPAND_KEYS.has(key);
+            if (expand) {
+                this.gridAPI.set_row_expansion_state(row.rowID, true, event);
+            } else if (collapse) {
+                this.gridAPI.set_row_expansion_state(row.rowID, false, event);
+            }
+            this.notifyChanges();
+        }
+    }
+
+    protected handleTab(shift: boolean) {
+        const row = this.gridAPI.get_row_by_index(this.selectionService.activeElement.row);
+        if (shift) {
+            this.navigation.performShiftTabKey(row.nativeElement, this.selectionService.activeElement);
+        } else {
+            this.navigation.performTab(row.nativeElement, this.selectionService.activeElement);
+        }
+    }
+
+    protected handleEnd(ctrl: boolean) {
+        if (ctrl) {
+            this.navigation.goToLastCell();
+        } else {
+            (this.navigation as any).onKeydownEnd(
+                this.selectionService.activeElement.row,
+                false,
+                this.selectionService.activeElement.layout.rowStart);
+        }
+    }
+
+    protected handleHome(ctrl: boolean) {
+        if (ctrl) {
+            this.navigation.goToFirstCell();
+        } else {
+            (this.navigation as any).onKeydownHome(
+                this.selectionService.activeElement.row,
+                false,
+                this.selectionService.activeElement.layout.rowStart);
+        }
+    }
+
+    private isToggleKey(key: string): boolean {
+        return ROW_COLLAPSE_KEYS.has(key) || ROW_EXPAND_KEYS.has(key);
     }
 
     /**

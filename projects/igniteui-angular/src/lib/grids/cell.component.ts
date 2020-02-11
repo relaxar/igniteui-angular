@@ -834,6 +834,7 @@ export class IgxGridCellComponent implements OnInit, OnChanges, OnDestroy {
         const shouldEmitSelection = !this.selectionService.isActiveNode(node);
 
         this.selectionService.activeElement = this.selectionNode;
+        this.grid.nativeElement.focus();
         if (this.selectionService.primaryButton) {
             this._updateCRUDStatus();
             this.selectionService.activeElement = node;
@@ -854,42 +855,7 @@ export class IgxGridCellComponent implements OnInit, OnChanges, OnDestroy {
         }
     }
 
-    protected handleAlt(key: string, event: KeyboardEvent) {
-        if (this.isToggleKey(key)) {
-            const collapse = (this.row as any).expanded && ROW_COLLAPSE_KEYS.has(key);
-            const expand = !(this.row as any).expanded && ROW_EXPAND_KEYS.has(key);
-            if (expand) {
-                this.gridAPI.set_row_expansion_state(this.row.rowID, true, event);
-            } else if (collapse) {
-                this.gridAPI.set_row_expansion_state(this.row.rowID, false, event);
-            }
-            this.grid.notifyChanges();
-        }
-    }
-
-    protected handleTab(shift: boolean) {
-        if (shift) {
-            this.grid.navigation.performShiftTabKey(this.row.nativeElement, this.selectionNode);
-        } else {
-            this.grid.navigation.performTab(this.row.nativeElement, this.selectionNode);
-        }
-    }
-
-    protected handleEnd(ctrl: boolean) {
-        if (ctrl) {
-            this.grid.navigation.goToLastCell();
-        } else {
-            this.grid.navigation.onKeydownEnd(this.rowIndex, false, this.rowStart);
-        }
-    }
-
-    protected handleHome(ctrl: boolean) {
-        if (ctrl) {
-            this.grid.navigation.goToFirstCell();
-        } else {
-            this.grid.navigation.onKeydownHome(this.rowIndex, false, this.rowStart);
-        }
-    }
+   
 
     // TODO: Refactor
     /**
@@ -898,118 +864,7 @@ export class IgxGridCellComponent implements OnInit, OnChanges, OnDestroy {
      * @internal
      */
     @HostListener('keydown', ['$event'])
-    dispatchEvent(event: KeyboardEvent) {
-        const key = event.key.toLowerCase();
-        const shift = event.shiftKey;
-        const ctrl = event.ctrlKey;
-        const node = this.selectionNode;
-
-        if (!SUPPORTED_KEYS.has(key)) {
-            return;
-        }
-        event.stopPropagation();
-
-        const keydownArgs = { targetType: 'dataCell', target: this, event: event, cancel: false };
-
-        // This fixes IME editing issue(#6335) that happens only on IE
-        if (isIE() && keydownArgs.event.keyCode === 229 && event.key === 'Tab') {
-            return;
-        }
-
-        this.grid.onGridKeydown.emit(keydownArgs);
-        if (keydownArgs.cancel) {
-            this.selectionService.clear();
-            this.selectionService.keyboardState.active = true;
-            return;
-        }
-
-        if (event.altKey) {
-            event.preventDefault();
-            this.handleAlt(key, event);
-            return;
-        }
-
-        this.selectionService.keyboardStateOnKeydown(node, shift, shift && key === 'tab');
-
-
-        if (key === 'tab') {
-            event.preventDefault();
-        }
-
-        if (this.editMode) {
-            if (NAVIGATION_KEYS.has(key)) {
-                if (this.column.inlineEditorTemplate) { return; }
-                if (['date', 'boolean'].indexOf(this.column.dataType) > -1) { return; }
-                return;
-            }
-        }
-
-        if (NAVIGATION_KEYS.has(key)) {
-            event.preventDefault();
-        }
-
-        switch (key) {
-            case 'tab':
-                this.handleTab(shift);
-                break;
-            case 'end':
-                this.handleEnd(ctrl);
-                break;
-            case 'home':
-                this.handleHome(ctrl);
-                break;
-            case 'arrowleft':
-            case 'left':
-                if (ctrl) {
-                    this.grid.navigation.onKeydownHome(node.row, false, this.rowStart);
-                    break;
-                }
-                this.grid.navigation.onKeydownArrowLeft(this.nativeElement, this.selectionNode);
-                break;
-            case 'arrowright':
-            case 'right':
-                if (ctrl) {
-                    this.grid.navigation.onKeydownEnd(node.row, false, this.rowStart);
-                    break;
-                }
-                this.grid.navigation.onKeydownArrowRight(this.nativeElement, this.selectionNode);
-                break;
-            case 'arrowup':
-            case 'up':
-                if (ctrl) {
-                    this.grid.navigation.navigateTop(this.visibleColumnIndex);
-                    break;
-                }
-                this.grid.navigation.navigateUp(this.row.nativeElement, this.selectionNode);
-                break;
-            case 'arrowdown':
-            case 'down':
-                if (ctrl) {
-                    this.grid.navigation.navigateBottom(this.visibleColumnIndex);
-                    break;
-                }
-                this.grid.navigation.navigateDown(this.row.nativeElement, this.selectionNode);
-                break;
-            case 'enter':
-            case 'f2':
-                this.onKeydownEnterEditMode();
-                break;
-            case 'escape':
-            case 'esc':
-                this.onKeydownExitEditMode();
-                break;
-            case ' ':
-            case 'spacebar':
-            case 'space':
-                if (this.grid.isRowSelectable) {
-                    this.row.selected ? this.selectionService.deselectRow(this.row.rowID, event) :
-                    this.selectionService.selectRowById(this.row.rowID, false, event);
-                }
-                break;
-            default:
-                return;
-        }
-    }
+    
 
     /**
      * @hidden
@@ -1082,7 +937,5 @@ export class IgxGridCellComponent implements OnInit, OnChanges, OnDestroy {
             .map((child) => getNodeSizeViaRange(range, child)));
     }
 
-    private isToggleKey(key: string): boolean {
-        return ROW_COLLAPSE_KEYS.has(key) || ROW_EXPAND_KEYS.has(key);
-    }
+
 }
