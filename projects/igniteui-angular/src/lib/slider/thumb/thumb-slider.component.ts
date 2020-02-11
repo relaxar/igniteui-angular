@@ -36,9 +36,6 @@ export class IgxSliderThumbComponent implements OnInit, OnDestroy {
     public isActive = false;
 
     @Input()
-    public value: number;
-
-    @Input()
     public continuous: boolean;
 
     @Input()
@@ -55,12 +52,6 @@ export class IgxSliderThumbComponent implements OnInit, OnDestroy {
 
     @Input()
     public step: number;
-
-    @Input()
-    public templateRef: TemplateRef<any>;
-
-    @Input()
-    public context: any;
 
     @Input()
     public type: SliderHandle;

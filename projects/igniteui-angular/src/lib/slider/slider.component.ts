@@ -32,6 +32,7 @@ import { IgxThumbLabelComponent } from './label/thumb-label.component';
 import { IgxTicksComponent } from './ticks/ticks.component';
 import { IgxTickLabelsPipe } from './ticks/tick.pipe';
 import { resizeObservable } from '../core/utils';
+import { IgxDirectionality } from '../services/direction/directionality';
 
 const noop = () => {
 };
@@ -86,7 +87,8 @@ export class IgxSliderComponent implements
     private _primaryTicks = 0;
     private _secondaryTicks = 0;
 
-    private _labels = new Array<number|string|boolean|null|undefined>();
+
+    private _labels = new Array();
     private _type = SliderType.SLIDER;
 
     private _destroyer$ = new Subject<boolean>();
@@ -115,19 +117,23 @@ export class IgxSliderComponent implements
     private labelRefs: QueryList<IgxThumbLabelComponent> = new QueryList<IgxThumbLabelComponent>();
 
     private get thumbFrom(): IgxSliderThumbComponent {
-        return this.thumbs.find(thumb => thumb.type === SliderHandle.FROM);
+        const switchThumb = this.rtl ? SliderHandle.TO : SliderHandle.FROM;
+        return this.thumbs.find(thumb => thumb.type === switchThumb);
     }
 
     private get thumbTo(): IgxSliderThumbComponent {
-        return this.thumbs.find(thumb => thumb.type === SliderHandle.TO);
+        const switchThumb = this.rtl ? SliderHandle.FROM : SliderHandle.TO;
+        return this.thumbs.find(thumb => thumb.type === switchThumb);
     }
 
     private get labelFrom(): IgxThumbLabelComponent {
-        return this.labelRefs.find(label => label.type === SliderHandle.FROM);
+        const switchLabel = this.rtl ? SliderHandle.FROM : SliderHandle.TO;
+        return this.labelRefs.find(label => label.type === switchLabel);
     }
 
     private get labelTo(): IgxThumbLabelComponent {
-        return this.labelRefs.find(label => label.type === SliderHandle.TO);
+        const switchLabel = this.rtl ? SliderHandle.FROM : SliderHandle.TO;
+        return this.labelRefs.find(label => label.type === switchLabel);
     }
 
     /**
@@ -413,11 +419,8 @@ export class IgxSliderComponent implements
      *```
      */
     public get minValue(): number {
-        if (this.labelsViewEnabled) {
-            return 0;
-        }
-
-        return this._minValue;
+        const min = this.labelsViewEnabled ? 0 : this._minValue;
+        return this.rtl ? this._maxValue : min;
     }
 
     /**
@@ -461,9 +464,10 @@ export class IgxSliderComponent implements
      * ```
      */
     public get maxValue(): number {
-        return this.labelsViewEnabled ?
+        const max = this.labelsViewEnabled ?
             this.labels.length - 1 :
             this._maxValue;
+        return this.rtl ? this._minValue : max;
     }
 
     /**
@@ -508,7 +512,8 @@ export class IgxSliderComponent implements
      */
     public get lowerBound(): number {
         if (!Number.isNaN(this._lowerBound) && this._lowerBound !== undefined) {
-            return this.valueInRange(this._lowerBound, this.minValue, this.maxValue);
+            return this.rtl ? this.valueInRange(this._lowerBound, this.maxValue, this.minValue) :
+                this.valueInRange(this._lowerBound, this.minValue, this.maxValue);
         }
 
         return this.minValue;
@@ -523,14 +528,21 @@ export class IgxSliderComponent implements
      */
     @Input()
     public set lowerBound(value: number) {
-        if (value >= this.upperBound || (this.labelsViewEnabled && value < 0)) {
+        const validateValBoundaries = this.rtl ? value >= this.lowerBound : value >= this.upperBound;
+        const validateLabelsLength = this.rtl ? value > this.labels.length - 1 : value < 0;
+        if (validateValBoundaries || (this.labelsViewEnabled && validateLabelsLength)) {
             return;
         }
-
-        this._lowerBound = this.valueInRange(value, this.minValue, this.maxValue);
+        debugger;
+        if (this.rtl) {
+            this._upperBound = this.valueInRange(value, this.maxValue, this.minValue);
+            this._pMax = this.valueToFraction(this._upperBound, 0, 1);
+        } else {
+            this._lowerBound = this.valueInRange(value, this.minValue, this.maxValue);
+            this._pMin = this.valueToFraction(this._lowerBound, 0, 1);
+        }
 
         // Refresh min travel zone.
-        this._pMin = this.valueToFraction(this._lowerBound, 0, 1);
         this.positionHandlersAndUpdateTrack();
     }
 
@@ -546,7 +558,8 @@ export class IgxSliderComponent implements
      */
     public get upperBound(): number {
         if (!Number.isNaN(this._upperBound) && this._upperBound !== undefined) {
-            return this.valueInRange(this._upperBound, this.minValue, this.maxValue);
+            return this.rtl ? this.valueInRange(this._upperBound, this.maxValue, this.minValue) :
+                this.valueInRange(this._upperBound, this.minValue, this.maxValue);
         }
 
         return this.maxValue;
@@ -561,13 +574,21 @@ export class IgxSliderComponent implements
      */
     @Input()
     public set upperBound(value: number) {
-        if (value <= this.lowerBound || (this.labelsViewEnabled && value > this.labels.length - 1)) {
+        const validateValBoundaries = this.rtl ? value <= this.upperBound : value <= this.lowerBound;
+        const validateLabelsLength = this.rtl ? value < 0 : value > this.labels.length - 1;
+        if (validateValBoundaries || (this.labelsViewEnabled && validateLabelsLength)) {
             return;
         }
+        debugger;
+        if (this.rtl) {
+            this._lowerBound = this.valueInRange(value, this.maxValue, this.minValue);
+            this._pMin = this.valueToFraction(this._lowerBound, 0, 1);
+        } else {
+            this.valueInRange(value, this.minValue, this.maxValue);
+            this._pMax = this.valueToFraction(this._upperBound, 0, 1);
+        }
 
-        this._upperBound = this.valueInRange(value, this.minValue, this.maxValue);
-        // Refresh time travel zone.
-        this._pMax = this.valueToFraction(this._upperBound, 0, 1);
+            // Refresh time travel zone.
         this.positionHandlersAndUpdateTrack();
     }
 
@@ -584,12 +605,17 @@ export class IgxSliderComponent implements
      */
     public get value(): number | IRangeSliderValue {
         if (this.isRange) {
-            return {
+            const val = this.rtl ? {
+                lower: this.valueInRange(this.lowerValue, this.upperBound, this.lowerBound),
+                upper: this.valueInRange(this.upperValue, this.upperBound, this.lowerBound)
+            } : {
                 lower: this.valueInRange(this.lowerValue, this.lowerBound, this.upperBound),
                 upper: this.valueInRange(this.upperValue, this.lowerBound, this.upperBound)
             };
+            return val;
         } else {
-            return this.valueInRange(this.upperValue, this.lowerBound, this.upperBound);
+            return this.rtl ? this.valueInRange(this.upperValue, this.upperBound, this.lowerBound) :
+                this.valueInRange(this.upperValue, this.lowerBound, this.upperBound);
         }
     }
 
@@ -768,12 +794,23 @@ export class IgxSliderComponent implements
     @Output()
     public onValueChanged = new EventEmitter<number | IRangeSliderValue>();
 
+    /**
+     */
+    public get rtl(): boolean {
+        return this._directionality.rtl;
+    }
+
+    public getType(type: SliderHandle) {
+        return this.isRange && this.rtl && type ? 0 : 1;
+    }
+
 
     constructor(
         private renderer: Renderer2,
         private _el: ElementRef,
         private _cdr: ChangeDetectorRef,
-        private _ngZone: NgZone) { }
+        private _ngZone: NgZone,
+        private _directionality: IgxDirectionality) { }
 
     /**
      * @hidden
@@ -851,8 +888,10 @@ export class IgxSliderComponent implements
      *```
      */
     public get lowerValue(): number {
-        if (!Number.isNaN(this._lowerValue) && this._lowerValue !== undefined && this._lowerValue >= this.lowerBound) {
-            return this._lowerValue;
+        const lower = this.rtl ? this._upperValue : this._lowerValue;
+        const validate = this.rtl ? lower <= this.lowerBound : lower >= this.lowerBound;
+        if (!Number.isNaN(lower) && lower !== undefined && validate) {
+            return lower;
         }
 
         return this.lowerBound;
@@ -869,8 +908,14 @@ export class IgxSliderComponent implements
      *```
      */
     public set lowerValue(value: number) {
-        value = this.valueInRange(value, this.lowerBound, this.upperBound);
-        this._lowerValue = value;
+        value = this.rtl ? this.valueInRange(value, this.upperBound, this.lowerBound) :
+            this.valueInRange(value, this.lowerBound, this.upperBound);
+
+        if (this.rtl) {
+            this._upperValue = value;
+        } else {
+            this._lowerValue = value;
+        }
 
     }
 
@@ -885,8 +930,10 @@ export class IgxSliderComponent implements
      *```
      */
     public get upperValue() {
-        if (!Number.isNaN(this._upperValue) && this._upperValue !== undefined && this._upperValue <= this.upperBound) {
-            return this._upperValue;
+        const upper = this.rtl ? this._lowerValue : this._upperValue;
+        const validate = this.rtl ? upper >= this.upperBound : upper <= this.upperBound;
+        if (!Number.isNaN(upper) && upper !== undefined && validate) {
+            return upper;
         }
 
         return this.upperBound;
@@ -903,8 +950,14 @@ export class IgxSliderComponent implements
      *```
      */
     public set upperValue(value: number) {
-        value = this.valueInRange(value, this.lowerBound, this.upperBound);
-        this._upperValue = value;
+        value = this.rtl ? this.valueInRange(value, this.upperBound, this.lowerBound) :
+            this.valueInRange(value, this.lowerBound, this.upperBound);
+
+        if (this.rtl) {
+            this._lowerValue = value;
+        } else {
+            this._upperValue = value;
+        }
     }
 
     /**
@@ -971,8 +1024,8 @@ export class IgxSliderComponent implements
         this.sliderSetup();
 
         // Set track travel zone
-        this._pMin = this.valueToFraction(this.lowerBound) || 0;
-        this._pMax = this.valueToFraction(this.upperBound) || 1;
+        // this._pMin = this.rtl ? this.valueToFraction(this.upperBound) : this.valueToFraction(this.lowerBound) || 0;
+        // this._pMax = this.rtl ? this.valueToFraction(this.lowerBound) : this.valueToFraction(this.upperBound) || 1;
     }
 
     public ngOnChanges(changes) {
@@ -987,6 +1040,7 @@ export class IgxSliderComponent implements
      * @hidden
      */
     public ngAfterViewInit() {
+        debugger;
         this._hasViewInit = true;
         this.positionHandlersAndUpdateTrack();
         this.setTickInterval();
@@ -1199,15 +1253,15 @@ export class IgxSliderComponent implements
         )` : interval;
     }
 
-    private positionHandler(thumbHandle: ElementRef, labelHandle: ElementRef, position: number) {
+    private positionHandler(thumbHandler: ElementRef, labelHandler: ElementRef, position: number) {
         const positionLeft = `${this.valueToFraction(position) * 100}%`;
 
-        if (thumbHandle) {
-            thumbHandle.nativeElement.style.left = positionLeft;
+        if (thumbHandler) {
+            thumbHandler.nativeElement.style.right = positionLeft;
         }
 
-        if (labelHandle) {
-            labelHandle.nativeElement.style.left = positionLeft;
+        if (labelHandler) {
+            labelHandler.nativeElement.style.right = positionLeft;
         }
     }
 
@@ -1323,7 +1377,8 @@ export class IgxSliderComponent implements
     }
 
     private valueToFraction(value: number, pMin = this._pMin, pMax = this._pMax) {
-        return this.valueInRange((value - this.minValue) / (this.maxValue - this.minValue), pMin, pMax);
+        return this.rtl ? this.valueInRange((value - this.maxValue) / (this.minValue - this.maxValue), pMin, pMax) :
+            this.valueInRange((value - this.minValue) / (this.maxValue - this.minValue), pMin, pMax);
     }
 
     /**

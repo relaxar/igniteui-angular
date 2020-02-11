@@ -35,7 +35,7 @@
         *ngIf="isRange"
         [type]="0"
         [value]="lowerLabel"
-        [templateRef]="thumbFromTemplateRef"
+        [templateRef]="rtl ? thumbToTemplateRef : thumbFromTemplateRef"
         [continuous]="continuous"
         [context]="context"
         [deactiveState]="deactivateThumbLabel"></igx-thumb-label>
@@ -44,14 +44,11 @@
         *ngIf="isRange"
         #thumbFrom
         [type]="0"
-        [value]="lowerLabel"
         [disabled]="disabled"
         [continuous]="continuous"
         [onPan]="onPan"
         [stepDistance]="stepDistance"
         [step]="step"
-        [templateRef]="thumbFromTemplateRef"
-        [context]="context"
         (onChange)="onThumbChange()"
         (onHoverChange)="onHoverChange($event)"
         [deactiveState]="deactivateThumbLabel"
@@ -60,7 +57,7 @@
     <igx-thumb-label
         [value]="upperLabel"
         [type]="1"
-        [templateRef]="thumbToTemplateRef"
+        [templateRef]="rtl ? thumbFromTemplateRef : thumbToTemplateRef"
         [continuous]="continuous"
         [context]="context"
         [deactiveState]="deactivateThumbLabel"></igx-thumb-label>
@@ -68,14 +65,11 @@
     <igx-thumb
         #thumbTo
         [type]="1"
-        [value]="upperLabel"
         [disabled]="disabled"
         [continuous]="continuous"
         [onPan]="onPan"
         [stepDistance]="stepDistance"
         [step]="step"
-        [templateRef]="thumbToTemplateRef"
-        [context]="context"
         (onChange)="onThumbChange()"
         (onHoverChange)="onHoverChange($event)"
         [deactiveState]="deactivateThumbLabel"
