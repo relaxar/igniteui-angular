@@ -348,8 +348,8 @@ export class IgxGridCellComponent implements OnInit, OnChanges, OnDestroy {
      * ```
      * @memberof IgxGridCellComponent
      */
-    @HostBinding('attr.tabindex')
-    public tabindex = 0;
+    // @HostBinding('attr.tabindex')
+    // public tabindex = 0;
 
     /**
      * Sets/get the `role` property of the cell.
@@ -435,6 +435,11 @@ export class IgxGridCellComponent implements OnInit, OnChanges, OnDestroy {
     @HostBinding('class.igx-grid__td--selected')
     get selected() {
         return this.selectionService.selected(this.selectionNode);
+    }
+
+    @HostBinding('attr.id')
+    get id() {
+        return this.cellID.rowIndex + '_' + this.cellID.columnID;
     }
 
     /**
@@ -738,6 +743,7 @@ export class IgxGridCellComponent implements OnInit, OnChanges, OnDestroy {
             return;
         }
         this.selectionService.pointerDown(this.selectionNode, event.shiftKey, event.ctrlKey);
+        
     }
 
     /**
@@ -797,6 +803,7 @@ export class IgxGridCellComponent implements OnInit, OnChanges, OnDestroy {
             cell: this,
             event
         });
+        this.selectionService.activeElement = this.selectionNode;
     }
 
     /**

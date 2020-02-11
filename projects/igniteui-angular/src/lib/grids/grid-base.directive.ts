@@ -2193,6 +2193,15 @@ export class IgxGridBaseDirective extends DisplayDensityBase implements
     @HostBinding('attr.tabindex')
     public tabindex = 0;
 
+    @HostBinding('attr.aria-activedescendant')
+    get activeDescendant() {
+        const activeElem = this.selectionService.activeElement;
+        if (activeElem) {
+            return activeElem.row + '_' + activeElem.column;
+        }
+        return null;
+    }
+
     /**
      * @hidden
      */
