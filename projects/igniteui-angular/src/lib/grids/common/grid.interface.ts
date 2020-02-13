@@ -28,7 +28,6 @@ export interface GridType extends IGridDataBindable {
     filterMode: FilterMode;
 
     selectionService: any;
-    navigation: any;
     filteringService: any;
     outletDirective: any;
 

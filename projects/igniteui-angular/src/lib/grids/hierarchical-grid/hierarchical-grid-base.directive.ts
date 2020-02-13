@@ -129,7 +129,6 @@ export class IgxHierarchicalGridBaseDirective extends IgxGridBaseDirective {
             resolver,
             differs,
             viewRef,
-            navigation,
             filteringService,
             overlayService,
             summaryService,
