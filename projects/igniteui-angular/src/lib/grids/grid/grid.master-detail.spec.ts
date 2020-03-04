@@ -187,7 +187,7 @@ describe('IgxGrid Master Detail #grid', () => {
             fix.detectChanges();
 
             GridFunctions.toggleMasterRow(fix, grid.rowList.last);
-            await wait();
+            await wait(DEBOUNCETIME);
             fix.detectChanges();
 
             const lastRowDetail = GridFunctions.getMasterRowDetail(grid.rowList.last);
